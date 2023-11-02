@@ -94,10 +94,10 @@ Click to "Use This Template" button to create a new repository using this templa
 Go to the [Documentation page](https://docs.multiplatformkickstarter.com) for all the information.
 
 
-Advanced Template
+PRO Template
 -----------------
 
-Do you need more? The Basic template is a good start but the **Advanced template** have all you need to create professional apps without a hassle.
+Do you need more? The Basic template is a good start but the **Pro template** have all you need to create professional apps without a hassle.
 It includes more features, screens and components. Like:
 
 - OnBoarding Carousel
