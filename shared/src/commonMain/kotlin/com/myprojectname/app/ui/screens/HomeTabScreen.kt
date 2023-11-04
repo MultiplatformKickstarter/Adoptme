@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalLayoutApi::class, ExperimentalResourceApi::class, ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalResourceApi::class, ExperimentalMaterial3Api::class)
 
 package com.myprojectname.app.ui.screens
 
@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -41,7 +40,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
@@ -51,10 +49,10 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.myprojectname.app.common.model.PetCategory
 import com.myprojectname.app.feature.debugmenu.getDebug
 import com.myprojectname.app.localization.Localization
+import com.myprojectname.app.localization.SetLanguage
 import com.myprojectname.app.localization.getCurrentLanguage
 import com.myprojectname.app.localization.getCurrentLocalization
 import com.myprojectname.app.localization.getLocalizedModelName
-import com.myprojectname.app.localization.SetLanguage
 import com.myprojectname.app.platform.Resources
 import com.myprojectname.app.ui.components.EmptyLayout
 import com.myprojectname.app.ui.components.PetCardSmall
@@ -83,6 +81,7 @@ class HomeTabScreen : Screen {
         HomeScreenView(viewModel)
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun HomeScreenView(viewModel: HomeScreenViewModel) {
         val scrollState = rememberScrollState()
@@ -136,10 +135,7 @@ class HomeTabScreen : Screen {
                 )
             }
         ) { paddingValues ->
-
             BoxWithConstraints(Modifier.fillMaxSize().padding(paddingValues), propagateMinConstraints = true) {
-                val maxWidth = this.maxWidth
-
                 Column(
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -157,13 +153,14 @@ class HomeTabScreen : Screen {
                         BannerHeader(viewModel, localization)
                         CategoriesCarousel(viewModel, localization)
                         LastSearchCarousel(viewModel, localization, state)
-                        NearMeListView(viewModel, state, localization, maxWidth)
+                        NearMeListView(viewModel, state, localization)
                     }
                 }
             }
         }
     }
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     fun BannerHeader(viewModel: HomeScreenViewModel, localization: Localization) {
         Box(
@@ -218,9 +215,9 @@ class HomeTabScreen : Screen {
         LazyRow(
             modifier = Modifier.fillMaxWidth()
         ) {
-            items(PetCategory.entries.size) { index ->
+            items(PetCategory.entries) { petItem ->
                 Text(
-                    text = getLocalizedModelName(PetCategory.entries[index].name),
+                    text = getLocalizedModelName(petItem.name),
                     style = Typography.get().bodyMedium,
                     modifier = Modifier
                         .padding(start = 16.dp)
@@ -228,12 +225,12 @@ class HomeTabScreen : Screen {
                         .background(MaterialTheme.colorScheme.primaryContainer)
                         .padding(start = 24.dp, end = 24.dp, top = 4.dp, bottom = 4.dp)
                         .clickable {
-                            viewModel.onCategoryClicked(PetCategory.entries[index])
+                            viewModel.onCategoryClicked(petItem)
                         },
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     textAlign = TextAlign.Center
                 )
-                if (index == PetCategory.entries.size - 1) {
+                if (PetCategory.entries.indexOf(petItem) == PetCategory.entries.size - 1) {
                     Spacer(modifier = Modifier.size(16.dp))
                 }
             }
@@ -265,11 +262,11 @@ class HomeTabScreen : Screen {
             LazyRow(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                items(state.lastSearchAds.size) { index ->
-                    PetCardSmall(state.lastSearchAds[index], 160.dp, 180.dp) {
-                        viewModel.onPetDetailClicked(state.lastSearchAds[index].id)
+                items(state.lastSearchAds.shuffled()) { lastSearchedPet ->
+                    PetCardSmall(lastSearchedPet) {
+                        viewModel.onPetDetailClicked(lastSearchedPet.id)
                     }
-                    if (index == state.lastSearchAds.size - 1) {
+                    if (state.lastSearchAds.indexOf(lastSearchedPet) == state.lastSearchAds.size - 1) {
                         Spacer(modifier = Modifier.size(16.dp))
                     }
                 }
@@ -278,29 +275,28 @@ class HomeTabScreen : Screen {
     }
 
     @Composable
-    fun NearMeListView(viewModel: HomeScreenViewModel, state: HomeScreenState, localization: Localization, maxWidth: Dp) {
+    fun NearMeListView(viewModel: HomeScreenViewModel, state: HomeScreenState, localization: Localization) {
         Text(
             text = localization.homePetsNearYou,
             style = Typography.get().titleMedium,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)
         )
         if (state.nearMeAds.isNotEmpty()) {
-            val itemSize: Dp = (maxWidth / 2) - 8.dp
-            FlowRow(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                maxItemsInEachRow = 2
+            LazyRow(
+                modifier = Modifier.fillMaxWidth()
             ) {
-                state.nearMeAds.map { item ->
-                    PetCardSmall(item = item, itemSize, itemSize) {
-                        viewModel.onPetDetailClicked(item.id)
+                items(state.nearMeAds.shuffled()) { nearMePet ->
+                    PetCardSmall(nearMePet) {
+                        viewModel.onPetDetailClicked(nearMePet.id)
+                    }
+                    if (state.nearMeAds.indexOf(nearMePet) == state.lastSearchAds.size - 1) {
+                        Spacer(modifier = Modifier.size(16.dp))
                     }
                 }
-            }
-            if (state.nearMeAds.isNotEmpty()) {
-                Spacer(modifier = Modifier.size(100.dp))
             }
         } else {
             EmptyLayout(localization = localization) {}
         }
+        Spacer(modifier = Modifier.size(100.dp))
     }
 }

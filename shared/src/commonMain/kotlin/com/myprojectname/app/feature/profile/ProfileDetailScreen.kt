@@ -35,7 +35,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
@@ -79,14 +78,13 @@ class ProfileDetailScreen(val userId: Int) : Screen {
         }
     }
 
+    @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
     @Composable
     fun ProfileDetailView(viewModel: ProfileDetailViewModel, localization: Localization, onClose: () -> Unit) {
         val scrollState = rememberScrollState()
         val state by viewModel.state.collectAsState()
 
         BoxWithConstraints(Modifier.fillMaxSize(), propagateMinConstraints = true) {
-            val maxWidth = this.maxWidth
-
             Scaffold(
                 topBar = {
                     Column(
@@ -209,13 +207,12 @@ class ProfileDetailScreen(val userId: Int) : Screen {
                     )
 
                     if (state.pets.isNotEmpty()) {
-                        val itemSize: Dp = (maxWidth / 2) - 8.dp
                         FlowRow(
                             horizontalArrangement = Arrangement.SpaceEvenly,
                             maxItemsInEachRow = 2
                         ) {
                             state.pets.map { item ->
-                                PetCardSmall(item = item, itemSize, itemSize) {
+                                PetCardSmall(item = item) {
                                     viewModel.onPetDetailClicked(item.id)
                                 }
                             }

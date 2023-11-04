@@ -6,10 +6,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -25,7 +27,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.myprojectname.app.common.model.PetModel
 import com.myprojectname.app.platform.shimmerLoadingAnimation
@@ -34,11 +35,10 @@ import com.myprojectname.app.ui.theme.Typography
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PetCardSmall(
     item: PetModel,
-    width: Dp,
-    height: Dp,
     onClick: () -> Unit
 ) {
     val imageHeight = 70.dp
@@ -46,7 +46,7 @@ fun PetCardSmall(
 
     Card(
         onClick = { onClick() },
-        modifier = Modifier.size(width, height).padding(start = 16.dp, top = 16.dp),
+        modifier = Modifier.width(200.dp).padding(start = 16.dp, top = 16.dp),
         shape = RoundedCornerShape(roundedCornerSize),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.background,
@@ -60,9 +60,9 @@ fun PetCardSmall(
                 contentDescription = "image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .clip(RoundedCornerShape(roundedCornerSize))
-                    .height(imageHeight),
+                    .height(200.dp),
                 onLoading = {
                     Box(
                         modifier = Modifier
@@ -91,18 +91,23 @@ fun PetCardSmall(
                     }
                 }
             )
-            Text(
-                modifier = Modifier.padding(top = 6.dp),
-                text = item.title,
-                style = Typography.get().titleSmall,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = item.description,
-                style = Typography.get().bodySmall,
-                overflow = TextOverflow.Ellipsis
-            )
+
+            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
+                Text(
+                    modifier = Modifier.padding(top = 6.dp),
+                    text = item.title,
+                    style = Typography.get().titleSmall,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = item.description,
+                    style = Typography.get().bodySmall,
+                    maxLines = 2,
+                    minLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
 }

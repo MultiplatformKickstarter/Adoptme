@@ -25,8 +25,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -55,14 +53,13 @@ class MyPetsScreen : Screen {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyPetsScreenView(viewModel: MyPetsViewModel, localization: Localization, onClose: () -> Unit) {
     val currentNavigator = LocalNavigator.currentOrThrow
     val scrollState = rememberScrollState()
 
     BoxWithConstraints(Modifier.fillMaxSize(), propagateMinConstraints = true) {
-        val maxWidth = this.maxWidth
-
         Scaffold(
             topBar = {
                 Column(
@@ -95,13 +92,12 @@ fun MyPetsScreenView(viewModel: MyPetsViewModel, localization: Localization, onC
                     .background(MaterialTheme.colorScheme.background)
             ) {
                 if (viewModel.state.value.ads.isNotEmpty()) {
-                    val itemSize: Dp = (maxWidth / 2) - 8.dp
                     FlowRow(
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         maxItemsInEachRow = 2
                     ) {
                         viewModel.state.value.ads.map { item ->
-                            PetCardSmall(item = item, itemSize, itemSize) {
+                            PetCardSmall(item = item) {
                                 currentNavigator.push(PetDetailScreen(item.id))
                             }
                         }

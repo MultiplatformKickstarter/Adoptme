@@ -6,8 +6,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,20 +33,18 @@ import com.myprojectname.app.ui.theme.Typography
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PetCardBig(
     item: PetModel,
     onClick: () -> Unit
 ) {
-    val imageHeight = 120.dp
-    val roundedCornerSize = 10.dp
-
     Card(
         onClick = { onClick() },
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(roundedCornerSize),
+        shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.background,
             contentColor = MaterialTheme.colorScheme.onBackground
@@ -59,15 +57,13 @@ fun PetCardBig(
                 contentDescription = "image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(roundedCornerSize))
-                    .height(imageHeight),
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(10.dp)),
                 onLoading = {
                     Box(
                         modifier = Modifier
-                            .clip(shape = RoundedCornerShape(roundedCornerSize))
+                            .clip(shape = RoundedCornerShape(10.dp))
                             .background(color = MaterialTheme.colorScheme.primaryContainer)
-                            .height(imageHeight)
                             .fillMaxWidth()
                             .shimmerLoadingAnimation(isLoadingCompleted = false)
                     )
@@ -75,9 +71,8 @@ fun PetCardBig(
                 onFailure = {
                     Box(
                         modifier = Modifier
-                            .clip(shape = RoundedCornerShape(roundedCornerSize))
+                            .clip(shape = RoundedCornerShape(10.dp))
                             .background(color = MaterialTheme.colorScheme.primaryContainer)
-                            .height(imageHeight)
                             .fillMaxWidth(),
                         contentAlignment = Alignment.Center
                     ) {

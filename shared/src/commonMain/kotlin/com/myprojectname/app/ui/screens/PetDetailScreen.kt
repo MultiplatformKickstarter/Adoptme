@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,6 +30,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -57,6 +59,7 @@ class PetDetailScreen(private val petId: Int) : Screen {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PetDetailView(petModel: PetModel, onClose: () -> Unit) {
     val scrollState = rememberScrollState()
@@ -73,7 +76,13 @@ fun PetDetailView(petModel: PetModel, onClose: () -> Unit) {
                         )
                     }
                 },
-                title = {},
+                title = {
+                    Text(
+                        text = "Back",
+                        style = Typography.get().titleMedium,
+                        color = Color.DarkGray
+                    )
+                },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 )
@@ -82,16 +91,19 @@ fun PetDetailView(petModel: PetModel, onClose: () -> Unit) {
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 16.dp)
                 .verticalScroll(scrollState)
+                .fillMaxSize()
+                .padding(top = it.calculateTopPadding(), bottom = 16.dp)
                 .background(MaterialTheme.colorScheme.background)
         ) {
             KamelImage(
                 resource = asyncPainterResource(data = petModel.images[0]),
                 contentDescription = petModel.title,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxWidth().height(250.dp),
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(all = 18.dp)
+                    .clip(RoundedCornerShape(16.dp)),
                 onLoading = {
                     Box(
                         modifier = Modifier
@@ -131,37 +143,26 @@ fun PetDetailView(petModel: PetModel, onClose: () -> Unit) {
                     style = Typography.get().bodyMedium,
                     color = Color.DarkGray
                 )
-            }
-            Button(
-                onClick = {
-                },
-                colors = ButtonDefaults.buttonColors(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .size(50.dp)
-                    .padding(start = 16.dp, end = 16.dp),
-                contentPadding = PaddingValues(0.dp),
-                shape = RoundedCornerShape(10)
-            ) {
-                Text(
-                    text = localization.detailAdopt,
-                    style = Typography.get().titleMedium,
-                    modifier = Modifier.padding(8.dp)
-                )
+
+                Spacer(modifier = Modifier.size(24.dp))
+
+                Button(
+                    onClick = {
+                    },
+                    colors = ButtonDefaults.buttonColors(),
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(0.dp),
+                    shape = RoundedCornerShape(10)
+                ) {
+                    Text(
+                        text = localization.detailAdopt,
+                        style = Typography.get().titleMedium,
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.size(100.dp))
             }
         }
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PlanDetailPreview() {
-    val featuredAdsRepository = NearMeAdsMockRepository()
-    val planModel = featuredAdsRepository.getFeaturedAd("0")
-
-    MyProjectNameTheme {
-        AdDetailView(planModel!!) {}
-    }
-}
- */
