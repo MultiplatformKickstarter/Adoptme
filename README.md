@@ -4,7 +4,7 @@
   Author: Multiplatform Kickstarter
   -->
 
-❗ **IMPORTANT** ❗ This is only a **PREVIEW**. This template is still under development. It's possible it has bugs and some things could not work properly. 
+❗ **IMPORTANT** ❗ This is only a **PREVIEW**. This template is still under development. It's possible it has bugs and some things could not work properly. **For now, we are not open for contribution until the preview is over.** 
 
 
 
@@ -25,7 +25,7 @@ The first Open Source Template with all boilerplate code needed to quickly creat
 |
 <b><a href="#usage">Usage</a></b>
 |
-<b><a href="#advanced-template">Advanced Template</a></b>
+<b><a href="#pro-template">PRO Template</a></b>
 |
 <b><a href="#who-made-this">Who Made This</a></b>
 |
@@ -49,8 +49,8 @@ Multiplatform Kickstarter is an opinionated template based in Kotlin Multiplatfo
 Comes with this stack built-in:
 
 - **Shared UI and Logic for all platforms**
-- **Kotlin** 1.9.10
-- **Compose Multiplatform** 1.5.10-rc02
+- **Kotlin**
+- **Compose Multiplatform**
 - **Kotlin Coroutines**
 - **Kotlin Serialization**
 - **Kotlin Datetime**
