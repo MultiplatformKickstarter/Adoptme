@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "android-app",
+            "name": "Android-app configuration",
+            "module": "My_Project_Name.androidApp.main",
+            "destination": "Pixel 7 API 33",
+        },
+        
+    ]
+}
