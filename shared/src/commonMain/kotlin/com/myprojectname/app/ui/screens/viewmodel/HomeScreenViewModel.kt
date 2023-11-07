@@ -19,6 +19,7 @@ import com.myprojectname.app.feature.search.repositories.LastSearchesRepository
 import com.myprojectname.app.localization.AvailableLanguages
 import com.myprojectname.app.localization.Localization
 import com.myprojectname.app.platform.RootNavigatorRepository
+import com.myprojectname.app.ui.screens.OnboardingScreen
 import com.myprojectname.app.ui.screens.PetDetailScreen
 import com.myprojectname.app.ui.screens.SearchListingScreen
 import kotlinx.coroutines.channels.Channel
@@ -64,6 +65,8 @@ class HomeScreenViewModel(
                 navigator.push(LoginSignUpLandingScreen())
             }
         }
+
+        navigator.push(OnboardingScreen())
     }
 
     private fun getGreeting(): String {

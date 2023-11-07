@@ -1,10 +1,22 @@
-@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
 
 package com.myprojectname.app.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -19,86 +31,84 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.myprojectname.app.ui.theme.Typography
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 
 
-class OnBoardingComponent(carouselItems: List<CarouselItem>, private val action: () -> Unit) {
-    /*private val carouselContent: List<CarouselItem> = listOf(
-        CarouselItem(R.drawable.img, resources.getResourceName(R.string.carousel_first_page_text)),
-        CarouselItem(R.drawable.mklogo, resources.getResourceName(R.string.carousel_first_page_text)),
-        CarouselItem(R.drawable.img, resources.getResourceName(R.string.carousel_first_page_text)),
-        )*/
+class OnBoardingComponent(private val carouselItems: List<CarouselItem>, private val action: () -> Unit) {
 
     @Composable
     fun DrawCarousel() {
-        val state = rememberPagerState()
-
-        Carousel(state, carouselItems, action)
-        Spacer(modifier = Modifier.padding(4.dp))
-        DotsIndicator(
-            totalDots = carouselItems.size,
-            selectedIndex = state.currentPage,
-            selectedColor = Color.DarkGray,
-            unSelectedColor = Color.Gray
+        val state = rememberPagerState(
+            initialPage = 0,
+            initialPageOffsetFraction = 0f,
+            pageCount = { carouselItems.size }
         )
+
+        Column {
+            Carousel(state, carouselItems, action)
+            Spacer(modifier = Modifier.padding(4.dp))
+            DotsIndicator(
+                totalDots = carouselItems.size,
+                selectedIndex = state.currentPage,
+                selectedColor = Color.DarkGray,
+                unSelectedColor = Color.Gray
+            )
+        }
+        
     }
 }
 
-
 @Composable
 fun Carousel(state: PagerState, carouselItemsList: List<CarouselItem>, action: () -> Unit) {
-    HorizontalPager(pageCount = carouselItemsList.size, state = state) { page ->
-        Row {
-            Card(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
+    HorizontalPager(
+        state = state,
+        modifier = Modifier.fillMaxSize()
+    ) {
+            Row {
+                Card(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
                 ) {
-                    /*
-                    Image(
-                        painterResource(id = carouselItemsList[page].imageResId),
-                        "",
-                        modifier = Modifier
-                            .fillMaxHeight(0.87f)
-                            .fillMaxWidth(),
-                        contentScale = ContentScale.Crop
-                    )*/
-                    //
-                    Text(
-                        text = carouselItemsList[page].text,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        fontSize = 16.sp,
-                        fontFamily = FontFamily.Monospace,
-                        modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 10.dp)
-                    )
-
-                    Spacer(modifier = Modifier.padding(vertical = 8.dp))
-
-                    Button(
-                        onClick = { action.invoke() },
-                        modifier = Modifier.alpha(changeVisibilityIfLastPage(currentPage, carouselItemsList.size - 1))
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(
-                            text = "Aceptar",
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            fontSize = 16.sp,
-                            fontFamily = FontFamily.Monospace,
-                            modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 10.dp),
-                            color = Color.Black
+                        Image(
+                            painterResource(carouselItemsList[it].imageResource),
+                            "",
+                            modifier = Modifier
+                                .fillMaxHeight(0.87f)
+                                .fillMaxWidth(),
+                            contentScale = ContentScale.Crop
                         )
+
+                        Text(
+                            modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 10.dp),
+                            text = carouselItemsList[it].text,
+                            style = Typography.get().headlineSmall
+                        )
+
+                        Spacer(modifier = Modifier.padding(vertical = 8.dp))
+
+                        Button(
+                            onClick = { action.invoke() },
+                            modifier = Modifier.alpha(changeVisibilityIfLastPage(it, carouselItemsList.size - 1))
+                        ) {
+                            Text(
+                                modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 10.dp),
+                                text = carouselItemsList[it].text,
+                                style = Typography.get().headlineSmall
+                            )
+                        }
                     }
                 }
             }
         }
-    }
+
 }
 
 private fun changeVisibilityIfLastPage(currentPage: Int, carouselItemsListSize: Int): Float {
@@ -121,7 +131,8 @@ fun DotsIndicator(
         modifier = Modifier
             .wrapContentWidth()
             .wrapContentHeight()
-
+            .background(Color.Black),
+        horizontalArrangement = Arrangement.Center
     ) {
 
         items(totalDots) { index ->
@@ -148,4 +159,4 @@ fun DotsIndicator(
     }
 }
 
-data class CarouselItem(val imageResId: Int, val text: String)
+data class CarouselItem(val imageResource: String, val text: String)

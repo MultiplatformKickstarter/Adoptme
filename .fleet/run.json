@@ -6,6 +6,15 @@
             "module": "My_Project_Name.androidApp.main",
             "destination": "Pixel 7 API 33",
         },
-        
+        {
+            "type": "xcode-app",
+            "name": "Xcode-app configuration",
+            "buildTarget": {
+                "project": "iosApp",
+                "target": "iosApp",
+            },
+            "configuration": "Debug",
+            "destination": "iPhone 15 | iOS 17.0",
+        }
     ]
 }
