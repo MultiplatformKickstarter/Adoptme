@@ -32,14 +32,19 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import com.myprojectname.app.ui.theme.Typography
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
+private val defaultAction = {}
 
-class OnBoardingComponent(private val carouselItems: List<CarouselItem>, private val action: () -> Unit) {
-
+class OnBoardingComponent(
+    private val carouselItems: List<CarouselItem>,
+    private val actionText: String?,
+    private val action: () -> Unit = defaultAction
+) {
     @Composable
     fun DrawCarousel() {
         val state = rememberPagerState(
@@ -48,9 +53,14 @@ class OnBoardingComponent(private val carouselItems: List<CarouselItem>, private
             pageCount = { carouselItems.size }
         )
 
-        Column {
-            Carousel(state, carouselItems, action)
-            Spacer(modifier = Modifier.padding(4.dp))
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Box(
+                modifier = Modifier.weight(1f)
+            ) {
+                Carousel(state, carouselItems, action)
+            }
             DotsIndicator(
                 totalDots = carouselItems.size,
                 selectedIndex = state.currentPage,
@@ -58,105 +68,105 @@ class OnBoardingComponent(private val carouselItems: List<CarouselItem>, private
                 unSelectedColor = Color.Gray
             )
         }
-        
     }
-}
 
-@Composable
-fun Carousel(state: PagerState, carouselItemsList: List<CarouselItem>, action: () -> Unit) {
-    HorizontalPager(
-        state = state,
-        modifier = Modifier.fillMaxSize()
-    ) {
+    @Composable
+    fun Carousel(state: PagerState, carouselItemsList: List<CarouselItem>, action: () -> Unit) {
+        HorizontalPager(
+            state = state,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)
+        ) {
+            val item = carouselItemsList[it]
             Row {
                 Card(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
+                        .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                 ) {
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceBetween
                     ) {
                         Image(
-                            painterResource(carouselItemsList[it].imageResource),
+                            painterResource(item.imageResource),
                             "",
                             modifier = Modifier
-                                .fillMaxHeight(0.87f)
+                                .fillMaxHeight(0.6f)
                                 .fillMaxWidth(),
                             contentScale = ContentScale.Crop
                         )
-
                         Text(
-                            modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 10.dp),
-                            text = carouselItemsList[it].text,
+                            modifier = Modifier.padding(16.dp),
+                            text = item.text,
                             style = Typography.get().headlineSmall
                         )
-
-                        Spacer(modifier = Modifier.padding(vertical = 8.dp))
-
-                        Button(
-                            onClick = { action.invoke() },
-                            modifier = Modifier.alpha(changeVisibilityIfLastPage(it, carouselItemsList.size - 1))
-                        ) {
-                            Text(
-                                modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 10.dp),
-                                text = carouselItemsList[it].text,
-                                style = Typography.get().headlineSmall
-                            )
+                        if (action != defaultAction) {
+                            Button(
+                                onClick = { action.invoke() },
+                                modifier = Modifier.alpha(changeVisibilityIfLastPage(it, carouselItemsList.size - 1))
+                            ) {
+                                actionText?.let{
+                                    Text(
+                                        modifier = Modifier.padding(8.dp),
+                                        text = actionText,
+                                        style = Typography.get().headlineSmall
+                                    )
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-
-}
-
-private fun changeVisibilityIfLastPage(currentPage: Int, carouselItemsListSize: Int): Float {
-    return if (currentPage == carouselItemsListSize) {
-        1f
-    } else {
-        0f
     }
-}
 
-@Composable
-fun DotsIndicator(
-    totalDots : Int,
-    selectedIndex : Int,
-    selectedColor: Color,
-    unSelectedColor: Color,
+    private fun changeVisibilityIfLastPage(currentPage: Int, carouselItemsListSize: Int): Float {
+        return if (currentPage == carouselItemsListSize) {
+            1f
+        } else {
+            0f
+        }
+    }
+
+    @Composable
+    fun DotsIndicator(
+        totalDots : Int,
+        selectedIndex : Int,
+        selectedColor: Color,
+        unSelectedColor: Color,
     ){
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            items(totalDots) { index ->
+                if (index == selectedIndex) {
+                    Box(
+                        modifier = Modifier
+                            .size(10.dp)
+                            .clip(CircleShape)
+                            .background(selectedColor)
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .size(10.dp)
+                            .clip(CircleShape)
+                            .background(unSelectedColor)
+                    )
+                }
 
-    LazyRow(
-        modifier = Modifier
-            .wrapContentWidth()
-            .wrapContentHeight()
-            .background(Color.Black),
-        horizontalArrangement = Arrangement.Center
-    ) {
-
-        items(totalDots) { index ->
-            if (index == selectedIndex) {
-                Box(
-                    modifier = Modifier
-                        .size(5.dp)
-                        .clip(CircleShape)
-                        .background(selectedColor)
-                )
-            } else {
-                Box(
-                    modifier = Modifier
-                        .size(5.dp)
-                        .clip(CircleShape)
-                        .background(unSelectedColor)
-                )
-            }
-
-            if (index != totalDots - 1) {
-                Spacer(modifier = Modifier.padding(horizontal = 2.dp))
+                if (index != totalDots - 1) {
+                    Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+                }
             }
         }
     }
 }
 
-data class CarouselItem(val imageResource: String, val text: String)
+data class CarouselItem(val imageResource: String, val text: AnnotatedString)

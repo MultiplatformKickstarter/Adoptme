@@ -150,6 +150,10 @@ interface Localization {
     val emailSignUpTermsAndConditions: String
 
     val debugMenuTitle: String
+
+    val onboardingPromoLine1: String
+    val onboardingPromoLine2: String
+    val onboardingPromoLine3: String
 }
 
 enum class AvailableLanguages {

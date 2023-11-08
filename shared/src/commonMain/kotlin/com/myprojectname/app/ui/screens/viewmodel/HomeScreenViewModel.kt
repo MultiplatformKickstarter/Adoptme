@@ -66,7 +66,7 @@ class HomeScreenViewModel(
             }
         }
 
-        navigator.push(OnboardingScreen())
+        rootNavigatorRepository.navigator.push(OnboardingScreen())
     }
 
     private fun getGreeting(): String {
