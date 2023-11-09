@@ -3,8 +3,8 @@
   Description: The first Open Source Template with all boilerplate code needed to quickly create Kotlin Multiplatform Applications.
   Author: Multiplatform Kickstarter
   -->
- **ROADMAP**: Checkout the board with the progress done for the template [here](https://github.com/orgs/MultiplatformKickstarter/projects/6). 
-
+ **ROADMAP**: Checkout the board with the progress done for the template [here](https://github.com/orgs/MultiplatformKickstarter/projects/6).
+ <br><br>
 
 <img src="config/images/multiplatform-kickstarter-logo.png" align="left" height="128px" />
 <img align="left" width="0" height="128px" hspace="10" />
