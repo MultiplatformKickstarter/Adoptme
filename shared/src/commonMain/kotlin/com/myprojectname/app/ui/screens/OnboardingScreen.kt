@@ -57,8 +57,8 @@ class OnboardingScreen : Screen {
 
             val carouselItems: List<CarouselItem> = listOf(
                 CarouselItem(Resources.Drawables.mkLogo, onboardingPromoTitle1, onboardingPromoLine1, localization.next),
-                CarouselItem(Resources.Drawables.catAndDog, onboardingPromoTitle2, localization.onboardingPromoLine2.toAnnotatedString(), localization.next),
-                CarouselItem(Resources.Drawables.catAndDog, onboardingPromoTitle3, onboardingPromoLine3, localization.close) { navigator.pop() },
+                CarouselItem(Resources.Drawables.features, onboardingPromoTitle2, localization.onboardingPromoLine2.toAnnotatedString(), localization.next),
+                CarouselItem(Resources.Drawables.productQuality, onboardingPromoTitle3, onboardingPromoLine3, localization.close) { navigator.pop() },
             )
             val onboardingComponent = OnboardingComponent(carouselItems)
             onboardingComponent.DrawCarousel()
