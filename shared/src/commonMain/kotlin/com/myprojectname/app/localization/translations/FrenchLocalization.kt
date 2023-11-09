@@ -55,8 +55,8 @@ internal object FrenchLocalization : Localization {
     override val start = "COMMENÇONS !"
     override val insertAdBannerTrait = "Laissez-nous vous aider à trouver une famille pour votre animal de compagnie. Si votre chat vient d'avoir des petits, vous pouvez utiliser notre plateforme pour trouver la bonne personne pour les adopter. C'est vraiment facile !"
 
-    override val emptyScreenTitle = "Écran en construction"
-    override val emptyScreenSubtitle = "Cet écran est encore en construction. Ce modèle vous aidera à créer des applications multiplateformes en un rien de temps."
+    override val proFeatureScreenTitle = "Écran en construction"
+    override val proFeatureScreenDescription = "Cet écran est encore en construction. Ce modèle vous aidera à créer des applications multiplateformes en un rien de temps."
     override val homeFeaturedViewAll = "Voir tout >"
     override val homePetsNearYou = "Animaux près de chez vous"
     override val homeMyLastSearch = "Ma dernière recherche"

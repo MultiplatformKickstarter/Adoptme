@@ -55,8 +55,8 @@ internal object EnglishLocalization : Localization {
     override val start = "LET\'S START!"
     override val insertAdBannerTrait = "Let us help you find a family for your pet. If your cat have just got little puppies you can use our platform to find the right person to adopt them. It\'s really easy!"
 
-    override val emptyScreenTitle = "Screen under construction"
-    override val emptyScreenSubtitle = "This screen is still under construction. This Template will help you create Multiplatform Apps in no time"
+    override val proFeatureScreenTitle = "PRO Template Feature"
+    override val proFeatureScreenDescription = "This screen is available on the **Pro Template**. Find more information about the features at "
     override val homeFeaturedViewAll = "See all >"
     override val homePetsNearYou = "Pets near you"
     override val homeMyLastSearch = "My last search"
