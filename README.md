@@ -4,6 +4,10 @@
   Author: Multiplatform Kickstarter
   -->
 
+❗ **IMPORTANT** ❗ This template is still under development. It's possible it has bugs and some things could not work properly. **For now, we are not open for contribution.** 
+
+
+
 <img src="config/images/multiplatform-kickstarter-logo.png" align="left" height="128px" />
 <img align="left" width="0" height="128px" hspace="10" />
 
