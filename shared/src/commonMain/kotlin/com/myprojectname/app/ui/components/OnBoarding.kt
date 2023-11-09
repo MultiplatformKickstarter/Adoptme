@@ -112,8 +112,8 @@ class OnboardingComponent(
                         painterResource(item.imageResource),
                         "",
                         modifier = Modifier
-                            .fillMaxHeight(0.6f)
                             .fillMaxWidth()
+                            .weight(0.5f)
                             .padding(start = 24.dp, end = 24.dp),
                         contentScale = ContentScale.FillWidth
                     )
