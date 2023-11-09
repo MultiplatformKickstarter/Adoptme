@@ -7,6 +7,7 @@ internal object FrenchLocalization : Localization {
 
     override val actionSettings = "Paramètres"
     override val next = "Suivant"
+    override val close = "Close"
     override val previous = "Précédent"
 
     override val promptEmail = "E-mail"

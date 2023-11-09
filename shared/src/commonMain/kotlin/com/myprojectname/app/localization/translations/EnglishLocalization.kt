@@ -7,6 +7,7 @@ internal object EnglishLocalization : Localization {
 
     override val actionSettings = "Settings"
     override val next = "Next"
+    override val close = "Close"
     override val previous = "Previous"
 
     override val promptEmail = "Email"
@@ -145,10 +146,10 @@ internal object EnglishLocalization : Localization {
     override val debugMenuTitle = "Debug Menu"
 
     override val onboardingPromoTitle1 = "Multiplatform Kickstarter"
-    override val onboardingPromoTitle2 = ""
-    override val onboardingPromoTitle3 = ""
+    override val onboardingPromoTitle2 = "Features"
+    override val onboardingPromoTitle3 = "PRO Template"
 
-    override val onboardingPromoLine1 = "! This is the onboarding component that will showcase all the features you'll find in this application."
+    override val onboardingPromoLine1 = "! This is the onboarding component that showcases all the features you'll find in this application."
     override val onboardingPromoLine2 = "This template has all the needed to kickstart your own applications in no time. From Navigation to Dependency Injection to Server API."
-    override val onboardingPromoLine3 = "If you need more, like Saved Searches, Geolocation, Followers, Rating or a Marketplace you only need to download our Pro Template you'll find at "
+    override val onboardingPromoLine3 = "If you need more, like Saved Searches, Geolocation, Followers, Rating or Marketplace features you only need to download our **Pro Template** you'll find at "
 }

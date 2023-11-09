@@ -1,7 +1,6 @@
 package com.myprojectname.app.ui.screens
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -13,7 +12,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.myprojectname.app.localization.getCurrentLocalization
 import com.myprojectname.app.platform.Resources
 import com.myprojectname.app.ui.components.CarouselItem
-import com.myprojectname.app.ui.components.OnBoardingComponent
+import com.myprojectname.app.ui.components.OnboardingComponent
 import com.myprojectname.app.ui.theme.MyProjectNameTheme
 
 class OnboardingScreen : Screen {
@@ -24,12 +23,29 @@ class OnboardingScreen : Screen {
         val navigator = LocalNavigator.currentOrThrow
         
         MyProjectNameTheme {
+            val onboardingPromoTitle1 = buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(localization.onboardingPromoTitle1)
+                }
+            }
             val onboardingPromoLine1 = buildAnnotatedString {
                 append("Welcome to ")
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                     append("Multiplatform Kickstarter")
                 }
                 append(localization.onboardingPromoLine1)
+            }
+
+            val onboardingPromoTitle2 = buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(localization.onboardingPromoTitle2)
+                }
+            }
+
+            val onboardingPromoTitle3 = buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(localization.onboardingPromoTitle3)
+                }
             }
 
             val onboardingPromoLine3 = buildAnnotatedString {
@@ -40,14 +56,12 @@ class OnboardingScreen : Screen {
             }
 
             val carouselItems: List<CarouselItem> = listOf(
-                CarouselItem(Resources.Drawables.catAndDog, localization.onboardingPromoTitle1.toAnnotatedString(), onboardingPromoLine1),
-                CarouselItem(Resources.Drawables.catAndDog, localization.onboardingPromoTitle2.toAnnotatedString(), localization.onboardingPromoLine2.toAnnotatedString()),
-                CarouselItem(Resources.Drawables.catAndDog, localization.onboardingPromoTitle3.toAnnotatedString(), onboardingPromoLine3),
-                )
-            val onBoardingComponent = OnBoardingComponent(carouselItems, localization.actionSignIn) {
-                navigator.pop()
-            }
-            onBoardingComponent.DrawCarousel()
+                CarouselItem(Resources.Drawables.mkLogo, onboardingPromoTitle1, onboardingPromoLine1, localization.next),
+                CarouselItem(Resources.Drawables.catAndDog, onboardingPromoTitle2, localization.onboardingPromoLine2.toAnnotatedString(), localization.next),
+                CarouselItem(Resources.Drawables.catAndDog, onboardingPromoTitle3, onboardingPromoLine3, localization.close) { navigator.pop() },
+            )
+            val onboardingComponent = OnboardingComponent(carouselItems)
+            onboardingComponent.DrawCarousel()
         }
     }
 }

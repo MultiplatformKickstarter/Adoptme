@@ -12,6 +12,7 @@ interface Localization {
 
     val actionSettings: String
     val next: String
+    val close: String
     val previous: String
 
     val promptEmail: String

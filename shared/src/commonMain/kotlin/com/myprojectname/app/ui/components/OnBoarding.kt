@@ -8,7 +8,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -26,27 +24,28 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.myprojectname.app.ui.theme.Typography
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 private val defaultAction = {}
 
-class OnBoardingComponent(
-    private val carouselItems: List<CarouselItem>,
-    private val actionText: String?,
-    private val action: () -> Unit = defaultAction
+class OnboardingComponent(
+    private val carouselItems: List<CarouselItem>
 ) {
     @Composable
     fun DrawCarousel() {
+        val coroutineScope = rememberCoroutineScope()
         val state = rememberPagerState(
             initialPage = 0,
             initialPageOffsetFraction = 0f,
@@ -54,13 +53,34 @@ class OnBoardingComponent(
         )
 
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
         ) {
             Box(
                 modifier = Modifier.weight(1f)
             ) {
-                Carousel(state, carouselItems, action)
+                Carousel(state, carouselItems)
             }
+            Spacer(modifier = Modifier.size(16.dp))
+            state.currentPage.let {
+                val item = carouselItems[it]
+                Button(
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    onClick = {
+                        if (item.action != defaultAction) {
+                            item.action.invoke()
+                        } else {
+                            coroutineScope.launch { state.animateScrollToPage(state.currentPage + 1) }
+                        }
+                    },
+                ) {
+                    Text(
+                        modifier = Modifier.padding(4.dp),
+                        text = item.actionText,
+                        style = Typography.get().bodyMedium
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.size(4.dp))
             DotsIndicator(
                 totalDots = carouselItems.size,
                 selectedIndex = state.currentPage,
@@ -71,7 +91,7 @@ class OnBoardingComponent(
     }
 
     @Composable
-    fun Carousel(state: PagerState, carouselItemsList: List<CarouselItem>, action: () -> Unit) {
+    fun Carousel(state: PagerState, carouselItemsList: List<CarouselItem>) {
         HorizontalPager(
             state = state,
             modifier = Modifier
@@ -79,54 +99,41 @@ class OnBoardingComponent(
                 .padding(top = 16.dp)
         ) {
             val item = carouselItemsList[it]
-            Row {
-                Card(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+            Card(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Image(
-                            painterResource(item.imageResource),
-                            "",
-                            modifier = Modifier
-                                .fillMaxHeight(0.6f)
-                                .fillMaxWidth(),
-                            contentScale = ContentScale.Crop
-                        )
+                    Image(
+                        painterResource(item.imageResource),
+                        "",
+                        modifier = Modifier
+                            .fillMaxHeight(0.6f)
+                            .fillMaxWidth(),
+                        contentScale = ContentScale.Crop
+                    )
+                    item.title?.let { title ->
                         Text(
                             modifier = Modifier.padding(16.dp),
-                            text = item.text,
-                            style = Typography.get().headlineSmall
+                            text = title,
+                            textAlign = TextAlign.Center,
+                            style = Typography.get().headlineMedium
                         )
-                        if (action != defaultAction) {
-                            Button(
-                                onClick = { action.invoke() },
-                                modifier = Modifier.alpha(changeVisibilityIfLastPage(it, carouselItemsList.size - 1))
-                            ) {
-                                actionText?.let{
-                                    Text(
-                                        modifier = Modifier.padding(8.dp),
-                                        text = actionText,
-                                        style = Typography.get().headlineSmall
-                                    )
-                                }
-                            }
-                        }
+                    }
+                    item.description?.let { description ->
+                        Text(
+                            modifier = Modifier.padding(16.dp),
+                            text = description,
+                            textAlign = TextAlign.Center,
+                            style = Typography.get().bodyLarge
+                        )
                     }
                 }
             }
-        }
-    }
-
-    private fun changeVisibilityIfLastPage(currentPage: Int, carouselItemsListSize: Int): Float {
-        return if (currentPage == carouselItemsListSize) {
-            1f
-        } else {
-            0f
         }
     }
 
@@ -169,4 +176,10 @@ class OnBoardingComponent(
     }
 }
 
-data class CarouselItem(val imageResource: String, val text: AnnotatedString)
+data class CarouselItem(
+    val imageResource: String,
+    val title: AnnotatedString?,
+    val description: AnnotatedString?,
+    val actionText: String,
+    val action: () -> Unit = defaultAction
+)

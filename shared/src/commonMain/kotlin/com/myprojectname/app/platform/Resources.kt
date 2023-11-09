@@ -14,5 +14,6 @@ object Resources {
         const val noData = "drawable/no_data_cuate.xml"
         const val login = "drawable/authentication_rafiki.xml"
         const val catAndDog = "drawable/cat_dog.xml"
+        const val mkLogo = "drawable/mklogo.xml"
     }
 }
