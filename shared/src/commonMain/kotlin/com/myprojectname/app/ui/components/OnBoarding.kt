@@ -113,8 +113,9 @@ class OnboardingComponent(
                         "",
                         modifier = Modifier
                             .fillMaxHeight(0.6f)
-                            .fillMaxWidth(),
-                        contentScale = ContentScale.Crop
+                            .fillMaxWidth()
+                            .padding(start = 24.dp, end = 24.dp),
+                        contentScale = ContentScale.FillWidth
                     )
                     item.title?.let { title ->
                         Text(
