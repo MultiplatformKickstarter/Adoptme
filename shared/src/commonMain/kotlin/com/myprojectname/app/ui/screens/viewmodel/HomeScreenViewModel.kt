@@ -19,8 +19,10 @@ import com.myprojectname.app.feature.search.repositories.LastSearchesRepository
 import com.myprojectname.app.localization.AvailableLanguages
 import com.myprojectname.app.localization.Localization
 import com.myprojectname.app.platform.RootNavigatorRepository
+import com.myprojectname.app.ui.screens.OnboardingScreen
 import com.myprojectname.app.ui.screens.PetDetailScreen
 import com.myprojectname.app.ui.screens.SearchListingScreen
+import com.russhwolf.settings.Settings
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,6 +34,8 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
+private const val ONBOARDING_VIEWED_KEY = "onboarding_viewed_key"
+
 class HomeScreenViewModel(
     private var navigator: Navigator,
     private val getNearMeAdsUseCase: GetNearMeAdsUseCase,
@@ -41,7 +45,8 @@ class HomeScreenViewModel(
     private val localization: Localization,
     private val rootNavigatorRepository: RootNavigatorRepository,
     private val lastSearchesRepository: LastSearchesRepository,
-    private val globalAppSettingsRepository: GlobalAppSettingsRepository
+    private val globalAppSettingsRepository: GlobalAppSettingsRepository,
+    private val settings: Settings
 ) : ScreenModel {
     private val _sideEffects = Channel<HomeScreenSideEffects>()
     val sideEffects: Flow<HomeScreenSideEffects> = _sideEffects.receiveAsFlow()
@@ -63,6 +68,11 @@ class HomeScreenViewModel(
             if (!sessionRepository.isLoggedIn()) {
                 navigator.push(LoginSignUpLandingScreen())
             }
+        }
+
+        if (!settings.getBoolean(ONBOARDING_VIEWED_KEY, false)) {
+            settings.putBoolean(ONBOARDING_VIEWED_KEY, true)
+            rootNavigatorRepository.navigator.push(OnboardingScreen())
         }
     }
 

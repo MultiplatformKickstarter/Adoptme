@@ -7,6 +7,7 @@ internal object FrenchLocalization : Localization {
 
     override val actionSettings = "Paramètres"
     override val next = "Suivant"
+    override val close = "Fermer"
     override val previous = "Précédent"
 
     override val promptEmail = "E-mail"
@@ -54,8 +55,8 @@ internal object FrenchLocalization : Localization {
     override val start = "COMMENÇONS !"
     override val insertAdBannerTrait = "Laissez-nous vous aider à trouver une famille pour votre animal de compagnie. Si votre chat vient d'avoir des petits, vous pouvez utiliser notre plateforme pour trouver la bonne personne pour les adopter. C'est vraiment facile !"
 
-    override val emptyScreenTitle = "Écran en construction"
-    override val emptyScreenSubtitle = "Cet écran est encore en construction. Ce modèle vous aidera à créer des applications multiplateformes en un rien de temps."
+    override val proFeatureScreenTitle = "Écran en construction"
+    override val proFeatureScreenDescription = "Cet écran est encore en construction. Ce modèle vous aidera à créer des applications multiplateformes en un rien de temps."
     override val homeFeaturedViewAll = "Voir tout >"
     override val homePetsNearYou = "Animaux près de chez vous"
     override val homeMyLastSearch = "Ma dernière recherche"
@@ -143,4 +144,12 @@ internal object FrenchLocalization : Localization {
     override val emailSignUpTermsAndConditions = "En m'inscrivant, j'accepte les termes et conditions ainsi que la politique de confidentialité des données."
 
     override val debugMenuTitle = "Menu de Débogage"
+
+    override val onboardingPromoTitle1 = "Multiplatform Kickstarter"
+    override val onboardingPromoTitle2 = "Caractéristiques"
+    override val onboardingPromoTitle3 = "Pro Template"
+
+    override val onboardingPromoLine1 = "Bienvenue à Multiplatform Kickstarter! Il s'agit du composant d'intégration qui présentera toutes les fonctionnalités que vous trouverez dans cette application."
+    override val onboardingPromoLine2 = "Ce modèle contient tout le nécessaire pour démarrer vos propres applications en un rien de temps. De la navigation à l’injection de dépendances vers l’API serveur."
+    override val onboardingPromoLine3 = "Si vous avez besoin de plus, comme des recherches enregistrées, la géolocalisation, les abonnés, l'évaluation ou une place de marché, il vous suffit de télécharger notre modèle Pro que vous trouverez sur multiplatformkickstarter.com"
 }

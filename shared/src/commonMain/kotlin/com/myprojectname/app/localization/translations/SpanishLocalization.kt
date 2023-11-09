@@ -7,6 +7,7 @@ internal object SpanishLocalization : Localization {
 
     override val actionSettings = "Configuración"
     override val next = "Siguiente"
+    override val close = "Cerrar"
     override val previous = "Anterior"
 
     override val promptEmail = "Correo electrónico"
@@ -54,8 +55,8 @@ internal object SpanishLocalization : Localization {
     override val start = "¡EMPECEMOS!"
     override val insertAdBannerTrait = "Permítenos ayudarte a encontrar una familia para tu mascota. Si tu gato acaba de tener cachorros, puedes usar nuestra plataforma para encontrar a la persona adecuada para adoptarlos. ¡Es muy fácil!"
 
-    override val emptyScreenTitle = "Pantalla en construcción"
-    override val emptyScreenSubtitle = "Esta pantalla aún está en construcción. Esta plantilla te ayudará a crear aplicaciones multiplataforma en poco tiempo."
+    override val proFeatureScreenTitle = "Pantalla en construcción"
+    override val proFeatureScreenDescription = "Esta pantalla aún está en construcción. Esta plantilla te ayudará a crear aplicaciones multiplataforma en poco tiempo."
     override val homeFeaturedViewAll = "Ver todo >"
     override val homePetsNearYou = "Mascotas cerca de ti"
     override val homeMyLastSearch = "Mi última búsqueda"
@@ -143,4 +144,12 @@ internal object SpanishLocalization : Localization {
     override val emailSignUpTermsAndConditions = "Al registrarme, acepto los términos y condiciones y la política de privacidad de datos."
 
     override val debugMenuTitle = "Menú de Depuración"
+
+    override val onboardingPromoTitle1 = "Multiplatform Kickstarter"
+    override val onboardingPromoTitle2 = "Funcionalidades"
+    override val onboardingPromoTitle3 = "Pro Template"
+
+    override val onboardingPromoLine1 = "Bienvenido a Multiplatform Kickstarter! Este es el componente de Onboarding que mostrará todas las funciones que encontrará en esta aplicación."
+    override val onboardingPromoLine2 = "Esta plantilla tiene todo lo necesario para iniciar sus propias aplicaciones en poco tiempo. De la navegación a la inyección de dependencias y a la API del servidor."
+    override val onboardingPromoLine3 = "Si necesita más, como búsquedas guardadas, geolocalización, seguidores, calificación o un mercado, solo necesita descargar nuestra plantilla Pro que encontrará en multiplatformkickstarter.com"
 }

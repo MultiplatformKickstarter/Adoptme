@@ -48,7 +48,7 @@ class GlobalAppSettingsRepository(
     }
 
     fun isMockedContentEnabled(): Boolean {
-        return settings.getBoolean(MOCKED_CONTENT_KEY, false)
+        return settings.getBoolean(MOCKED_CONTENT_KEY, true)
     }
 
     fun setMockedContentCheckStatus(checked: Boolean) {

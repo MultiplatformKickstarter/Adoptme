@@ -34,7 +34,7 @@ import org.koin.dsl.module
 
 val commonModule = module {
     factory { (navigator: Navigator) ->
-        HomeScreenViewModel(navigator, get(), get(), get(), get(), get(), get(), get(), get())
+        HomeScreenViewModel(navigator, get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
     factory {
         PetUploadViewModel(get(), get(), get(), get())

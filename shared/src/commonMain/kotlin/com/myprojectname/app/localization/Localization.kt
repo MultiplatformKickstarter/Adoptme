@@ -12,6 +12,7 @@ interface Localization {
 
     val actionSettings: String
     val next: String
+    val close: String
     val previous: String
 
     val promptEmail: String
@@ -59,8 +60,8 @@ interface Localization {
     val start: String
     val insertAdBannerTrait: String
 
-    val emptyScreenTitle: String
-    val emptyScreenSubtitle: String
+    val proFeatureScreenTitle: String
+    val proFeatureScreenDescription: String
     val homeFeaturedViewAll: String
     val homePetsNearYou: String
     val homeMyLastSearch: String
@@ -150,6 +151,14 @@ interface Localization {
     val emailSignUpTermsAndConditions: String
 
     val debugMenuTitle: String
+
+    val onboardingPromoTitle1: String
+    val onboardingPromoTitle2: String
+    val onboardingPromoTitle3: String
+
+    val onboardingPromoLine1: String
+    val onboardingPromoLine2: String
+    val onboardingPromoLine3: String
 }
 
 enum class AvailableLanguages {

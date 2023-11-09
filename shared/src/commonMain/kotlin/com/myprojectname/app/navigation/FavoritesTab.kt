@@ -7,7 +7,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.myprojectname.app.localization.getCurrentLocalization
 import com.myprojectname.app.ui.icon.MyProjectNameIcons
-import com.myprojectname.app.ui.screens.EmptyComingSoon
+import com.myprojectname.app.ui.screens.ProTemplateFeature
 
 internal object FavoritesTab : Tab {
 
@@ -27,6 +27,6 @@ internal object FavoritesTab : Tab {
 
     @Composable
     override fun Content() {
-        EmptyComingSoon()
+        ProTemplateFeature()
     }
 }

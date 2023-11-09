@@ -7,6 +7,7 @@ internal object EnglishLocalization : Localization {
 
     override val actionSettings = "Settings"
     override val next = "Next"
+    override val close = "Close"
     override val previous = "Previous"
 
     override val promptEmail = "Email"
@@ -54,8 +55,8 @@ internal object EnglishLocalization : Localization {
     override val start = "LET\'S START!"
     override val insertAdBannerTrait = "Let us help you find a family for your pet. If your cat have just got little puppies you can use our platform to find the right person to adopt them. It\'s really easy!"
 
-    override val emptyScreenTitle = "Screen under construction"
-    override val emptyScreenSubtitle = "This screen is still under construction. This Template will help you create Multiplatform Apps in no time"
+    override val proFeatureScreenTitle = "PRO Template Feature"
+    override val proFeatureScreenDescription = "This screen is available on the **Pro Template**. Find more information about the features at "
     override val homeFeaturedViewAll = "See all >"
     override val homePetsNearYou = "Pets near you"
     override val homeMyLastSearch = "My last search"
@@ -143,4 +144,12 @@ internal object EnglishLocalization : Localization {
     override val emailSignUpTermsAndConditions = "When I sign up I accept the terms and conditions and data privacy policy."
 
     override val debugMenuTitle = "Debug Menu"
+
+    override val onboardingPromoTitle1 = "Multiplatform Kickstarter"
+    override val onboardingPromoTitle2 = "Features"
+    override val onboardingPromoTitle3 = "PRO Template"
+
+    override val onboardingPromoLine1 = "! This is the onboarding component that showcases all the features you'll find in this application."
+    override val onboardingPromoLine2 = "This template has all the needed to kickstart your own applications for Android, iOS and Desktop in no time. From Navigation, Compose components to Dependency Injection and even a Server with Login/SignUp and CRUD API built in."
+    override val onboardingPromoLine3 = "If you need more features like Saved Searches, Geolocation, Followers, Rating or Marketplace functionality you only need to download our **Pro Template** you'll find at "
 }
