@@ -4,10 +4,6 @@
   Author: Multiplatform Kickstarter
   -->
 
-❗ **IMPORTANT** ❗ This is only a **PREVIEW**. This template is still under development. It's possible it has bugs and some things could not work properly. **For now, we are not open for contribution until the preview is over.** 
-
-
-
 <img src="config/images/multiplatform-kickstarter-logo.png" align="left" height="128px" />
 <img align="left" width="0" height="128px" hspace="10" />
 
@@ -86,12 +82,12 @@ Comes with this stack built-in:
 
 ### Download
 
-Click to "Use This Template" button to create a new repository using this template.
+Click to "Use This Template" button to create a new repository with this template.
 
 
 ### Usage
 
-Go to the [Documentation page](https://docs.multiplatformkickstarter.com) for all the information.
+Go to the [Documentation page](https://docs.multiplatformkickstarter.com) for all the information. (**WIP**)
 
 
 PRO Template
@@ -100,7 +96,6 @@ PRO Template
 Do you need more? The Basic template is a good start but the **Pro template** have all you need to create professional apps without a hassle.
 It includes more features, screens and components. Like:
 
-- OnBoarding Carousel
 - Advanced CI (deployment)
 - A/B Component
 - Deeplinks
