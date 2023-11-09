@@ -151,6 +151,10 @@ interface Localization {
 
     val debugMenuTitle: String
 
+    val onboardingPromoTitle1: String
+    val onboardingPromoTitle2: String
+    val onboardingPromoTitle3: String
+
     val onboardingPromoLine1: String
     val onboardingPromoLine2: String
     val onboardingPromoLine3: String

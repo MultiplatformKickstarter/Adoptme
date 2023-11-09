@@ -2,6 +2,7 @@ package com.myprojectname.app.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -24,21 +25,35 @@ class OnboardingScreen : Screen {
         
         MyProjectNameTheme {
             val onboardingPromoLine1 = buildAnnotatedString {
-                append(localization.onboardingPromoLine1)
+                append("Welcome to ")
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                    append(" Terms and Condition")
+                    append("Multiplatform Kickstarter")
+                }
+                append(localization.onboardingPromoLine1)
+            }
+
+            val onboardingPromoLine3 = buildAnnotatedString {
+                append(localization.onboardingPromoLine3)
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append("multiplatformkickstarter.com")
                 }
             }
 
             val carouselItems: List<CarouselItem> = listOf(
-                CarouselItem(Resources.Drawables.catAndDog, onboardingPromoLine1),
-                CarouselItem(Resources.Drawables.catAndDog, onboardingPromoLine1),
-                CarouselItem(Resources.Drawables.catAndDog, onboardingPromoLine1),
+                CarouselItem(Resources.Drawables.catAndDog, localization.onboardingPromoTitle1.toAnnotatedString(), onboardingPromoLine1),
+                CarouselItem(Resources.Drawables.catAndDog, localization.onboardingPromoTitle2.toAnnotatedString(), localization.onboardingPromoLine2.toAnnotatedString()),
+                CarouselItem(Resources.Drawables.catAndDog, localization.onboardingPromoTitle3.toAnnotatedString(), onboardingPromoLine3),
                 )
             val onBoardingComponent = OnBoardingComponent(carouselItems, localization.actionSignIn) {
                 navigator.pop()
             }
             onBoardingComponent.DrawCarousel()
         }
+    }
+}
+
+private fun String.toAnnotatedString(): AnnotatedString {
+    return buildAnnotatedString {
+        append(this@toAnnotatedString)
     }
 }
