@@ -150,6 +150,6 @@ internal object EnglishLocalization : Localization {
     override val onboardingPromoTitle3 = "PRO Template"
 
     override val onboardingPromoLine1 = "! This is the onboarding component that showcases all the features you'll find in this application."
-    override val onboardingPromoLine2 = "This template has all the needed to kickstart your own applications in no time. From Navigation to Dependency Injection to Server API."
-    override val onboardingPromoLine3 = "If you need more, like Saved Searches, Geolocation, Followers, Rating or Marketplace features you only need to download our **Pro Template** you'll find at "
+    override val onboardingPromoLine2 = "This template has all the needed to kickstart your own applications for Android, iOS and Desktop in no time. From Navigation, Compose components to Dependency Injection and even a Server with Login/SignUp and CRUD API built in."
+    override val onboardingPromoLine3 = "If you need more features like Saved Searches, Geolocation, Followers, Rating or Marketplace functionality you only need to download our **Pro Template** you'll find at "
 }
