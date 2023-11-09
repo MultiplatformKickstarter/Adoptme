@@ -3,7 +3,7 @@
   Description: The first Open Source Template with all boilerplate code needed to quickly create Kotlin Multiplatform Applications.
   Author: Multiplatform Kickstarter
   -->
- **ROADMAP:** Checkout the board with the progress of the template [here](https://github.com/orgs/MultiplatformKickstarter/projects/6).** 
+ **ROADMAP**: Checkout the board with the progress done for the template [here](https://github.com/orgs/MultiplatformKickstarter/projects/6). 
 
 
 <img src="config/images/multiplatform-kickstarter-logo.png" align="left" height="128px" />
@@ -17,7 +17,7 @@ The first Open Source Template with all boilerplate code needed to quickly creat
 
 <br/><br/>
 <p align="center">
-<b><a href="#features">Features</a></b>
+<b><a href="#about">About</a></b>
 |
 <b><a href="#download">Download</a></b>
 |
@@ -37,7 +37,7 @@ The first Open Source Template with all boilerplate code needed to quickly creat
 </p>
 <br/>
 
-### Features
+### About
 
 <img align="right" width="0" height="368px" hspace="20"/>
 <img src="config/images/multiplatform-kickstarter-screenshot.png" height="368px" align="right" />
@@ -79,18 +79,18 @@ Comes with this stack built-in:
 * Accessibility (and color accessible themes)
 * Tracking system
 * Internationalization (FIGS)
-<br><br><br>
+<br><br>
 
 
 ### Download
 
 Click to "Use This Template" button to create a new repository with this template.
-
+<br><br>
 
 ### Usage
 
 Go to the [Documentation page](https://docs.multiplatformkickstarter.com) for all the information. (**WIP**)
-
+<br><br>
 
 PRO Template
 -----------------
@@ -109,7 +109,7 @@ It includes more features, screens and components. Like:
 **Save months of work plus a lot of money and focus on building a profitable business.**
 
 Checkout [multiplatformkickstarter.com](https://www.multiplatformkickstarter.com) for all details or go directly to our [store](https://www.multiplatformkickstarter.com/pricing)
-
+<br><br>
 
 
 Who made this
@@ -118,21 +118,21 @@ Who made this
 | <a href="https://github.com/ferranpons"><img src="https://avatars2.githubusercontent.com/u/1225463?v=3&s=460" alt="Ferran Pons" align="left" height="100" width="100" /></a> |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Ferran Pons](https://github.com/ferranpons)                                                                                                                                 |
-
+<br><br>
 
 
 Contribute
 ----------
 
 For now, we are not open for contribution until the preview is over.
-
+<br><br>
 
 
 Bugs and Feedback
 -----------------
 
 For bugs, questions and discussions please use the [Github Issues](https://github.com/multiplatformkickstarter/kmp-template/issues).
-
+<br><br>
 
 
 Social Media
@@ -143,7 +143,7 @@ Check out our social media to be up-to-date about new products, features and rel
 - [X platform](https://twitter.com/mpkickstarter)
 
 **Follow us!**
-
+<br><br>
 
 
 License
@@ -162,7 +162,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
+<br><br>
 
 
 Credits
