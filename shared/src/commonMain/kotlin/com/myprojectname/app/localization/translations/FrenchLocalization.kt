@@ -7,7 +7,7 @@ internal object FrenchLocalization : Localization {
 
     override val actionSettings = "Paramètres"
     override val next = "Suivant"
-    override val close = "Close"
+    override val close = "Fermer"
     override val previous = "Précédent"
 
     override val promptEmail = "E-mail"
@@ -146,10 +146,10 @@ internal object FrenchLocalization : Localization {
     override val debugMenuTitle = "Menu de Débogage"
 
     override val onboardingPromoTitle1 = "Multiplatform Kickstarter"
-    override val onboardingPromoTitle2 = ""
-    override val onboardingPromoTitle3 = ""
+    override val onboardingPromoTitle2 = "Caractéristiques"
+    override val onboardingPromoTitle3 = "Pro Template"
 
-    override val onboardingPromoLine1 = "Welcome to Multiplatform Kickstarter! This is the onboarding component that will showcase all the features you'll find in this application."
-    override val onboardingPromoLine2 = "This template has all the needed to kickstart your own applications in no time. From Navigation to Dependency Injection to Server API."
-    override val onboardingPromoLine3 = "If you need more, like Saved Searches, Geolocation, Followers, Rating or a Marketplace you only need to download our Pro Template you'll find at multiplatformkickstarter.com"
+    override val onboardingPromoLine1 = "Bienvenue à Multiplatform Kickstarter! Il s'agit du composant d'intégration qui présentera toutes les fonctionnalités que vous trouverez dans cette application."
+    override val onboardingPromoLine2 = "Ce modèle contient tout le nécessaire pour démarrer vos propres applications en un rien de temps. De la navigation à l’injection de dépendances vers l’API serveur."
+    override val onboardingPromoLine3 = "Si vous avez besoin de plus, comme des recherches enregistrées, la géolocalisation, les abonnés, l'évaluation ou une place de marché, il vous suffit de télécharger notre modèle Pro que vous trouverez sur multiplatformkickstarter.com"
 }
