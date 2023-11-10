@@ -24,5 +24,4 @@ rootProject.name = "Multiplatform Kickstarter"
 include(":androidApp")
 include(":shared")
 include(":desktopApp")
-//include(":webApp")
 include(":backend")
