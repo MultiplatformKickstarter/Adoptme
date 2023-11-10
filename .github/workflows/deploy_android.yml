@@ -1,3 +1,5 @@
+name: Deploy Android
+
 jobs:
   deploy_android:
     needs: [prepare_deploy]

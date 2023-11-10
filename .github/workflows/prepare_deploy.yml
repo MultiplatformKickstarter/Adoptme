@@ -1,3 +1,5 @@
+name: Prepare Deploy
+
 jobs:
   prepare_deploy:
     runs-on: ubuntu-latest
