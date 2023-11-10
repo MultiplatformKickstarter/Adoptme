@@ -6,7 +6,7 @@ plugins {
 }
 
 application {
-    mainClass.set("com.myprojectname.ApplicationKt")
+    mainClass.set("com.multiplatformkickstarter.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
