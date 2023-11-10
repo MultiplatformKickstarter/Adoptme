@@ -4,13 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.myprojectname.app.android"
-    compileSdk = 34
+    namespace = "com.multiplatformkickstarter.app.android"
+    compileSdk = properties["multiplatformkickstarter.android.compileSdk"].toString().toInt()
     defaultConfig {
-        applicationId = "com.myprojectname.app.android"
-        minSdk = 26
-        targetSdk = 34
-        versionCode = 1
+        applicationId = "com.multiplatformkickstarter.app.android"
+        minSdk = properties["multiplatformkickstarter.android.minSdk"].toString().toInt()
+        targetSdk = properties["multiplatformkickstarter.android.targetSdk"].toString().toInt()
         versionName = "1.0"
     }
     buildFeatures {
