@@ -1,0 +1,35 @@
+name: Prepare Deploy
+
+jobs:
+  prepare_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set env
+        id: last_tag
+        run: echo "LAST_TAG=$(git tag --sort=committerdate | tail -1)" >> $GITHUB_OUTPUT
+      - uses: actions-ecosystem/action-bump-semver@v1
+        id: bump-semver
+        with:
+          current_version: ${{ steps.last_tag.outputs.LAST_TAG }}
+          level: patch
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git tag ${{ steps.bump-semver.outputs.new_version }}
+          git push --tags
+      - name: "Set output"
+        id: set-output
+        run: |
+          echo "multiplatform_kickstarter_version_name=${{ steps.bump-semver.outputs.new_version }}" >> $GITHUB_OUTPUT
+
+          IFS='.' read -r major minor patch <<< "${{ steps.bump-semver.outputs.new_version }}"
+          multiplatform_kickstarter_version_code=$((major * 10000 + minor * 100 + patch))
+
+          echo "multiplatform_kickstarter_version_code=${multiplatform_kickstarter_version_code}" >> $GITHUB_OUTPUT
+      - name: "Print output"
+        run: |
+          echo -e "Version name is: \n ${{ steps.set-output.outputs.multiplatform_kickstarter_version_name }}"
+          echo -e "Version code is: \n ${{ steps.set-output.outputs.multiplatform_kickstarter_version_code }}

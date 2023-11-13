@@ -18,11 +18,7 @@ kotlin {
     }
 
     jvm("desktop")
-/*
-    js(IR) {
-        browser()
-    }
-*/
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -43,12 +39,7 @@ kotlin {
                 implementation(compose.material)
                 implementation(compose.material3)
                 implementation(compose.animation)
-                // implementation("org.jetbrains.compose.ui:ui-test-junit4-uikitarm64:1.4.3")
-                // implementation(compose.preview)
                 implementation(compose.materialIconsExtended)
-                // implementation(compose.uiTooling)
-                /*@OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.uiTestJUnit4)*/
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
                 implementation(libs.kotlinx.serialization.json)
@@ -98,17 +89,7 @@ kotlin {
                 dependsOn(commonMain)
             }
         }
-/*
-        val jsMain by getting {
-            dependencies {
-                implementation(compose.html.core)
-                implementation(compose.runtime)
-                implementation("io.ktor:ktor-client-js:2.2.1")
-                implementation("io.ktor:ktor-client-json-js:2.1.0")
-                dependsOn(commonMain)
-            }
-        }
-*/
+
         val commonTest by getting {
             dependencies {
                 implementation(libs.koin.test)
@@ -121,10 +102,10 @@ kotlin {
 }
 
 android {
-    namespace = "com.myprojectname.app"
-    compileSdk = 33
+    namespace = "com.multiplatformkickstarter.app"
+    compileSdk = properties["multiplatformkickstarter.android.compileSdk"].toString().toInt()
     defaultConfig {
-        minSdk = 26
+        minSdk = properties["multiplatformkickstarter.android.minSdk"].toString().toInt()
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

@@ -9,12 +9,12 @@ Basic Service template in ktor
 
 ## How to run it using Docker
 ```
-docker build -t myprojectname .
-docker run -p 8080:8080 myprojectname
+docker build -t multiplatformkickstarter .
+docker run -p 8080:8080 multiplatformkickstarter
 ```
 
 To run MK Service container as a service on Linux with systemd:﻿
-Create a service descriptor file /etc/systemd/system/docker.myprojectname.service:
+Create a service descriptor file /etc/systemd/system/docker.multiplatformkickstarter.service:
 
 ```
 [Unit]
@@ -27,7 +27,7 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker exec %n stop
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStart=/usr/bin/docker run -p 8080:8080 myprojectname
+ExecStart=/usr/bin/docker run -p 8080:8080 multiplatformkickstarter
 
 [Install]
 WantedBy=default.target
@@ -36,12 +36,12 @@ WantedBy=default.target
 
 Enable starting the service on system boot with the following command:
 ```
-sudo systemctl enable docker.myprojectname
+sudo systemctl enable docker.multiplatformkickstarter
 ```
 
 
 You can also stop and start the service manually at any moment with the following commands, respectively:
 ```
-sudo service docker.myprojectname stop
-sudo service docker.myprojectname start
+sudo service docker.multiplatformkickstarter stop
+sudo service docker.multiplatformkickstarter start
 ```

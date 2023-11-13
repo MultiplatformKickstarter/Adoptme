@@ -1,9 +1,9 @@
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.myprojectname.app.MainApp
-import com.myprojectname.app.di.commonModule
-import com.myprojectname.app.ui.theme.MyProjectNameTheme
+import com.multiplatformkickstarter.app.MainApp
+import com.multiplatformkickstarter.app.di.commonModule
+import com.multiplatformkickstarter.app.ui.theme.MultiplatformKickstarterTheme
 import org.koin.core.context.startKoin
 
 fun main() = application {
@@ -11,7 +11,7 @@ fun main() = application {
         modules(commonModule)
     }
     Window(onCloseRequest = ::exitApplication) {
-        MyProjectNameTheme {
+        MultiplatformKickstarterTheme {
             MainApp()
         }
     }
