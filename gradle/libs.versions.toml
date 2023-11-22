@@ -18,8 +18,8 @@ kotlinx-coroutines = "1.7.3"
 androidx-junit = "1.1.5"
 espressoCore = "3.5.1"
 accompanistSystemuicontroller = "0.32.0"
-activityCompose = "1.8.0"
-firebase = "32.5.0"
+activityCompose = "1.8.1"
+firebase = "32.6.0"
 
 [libraries]
 # Common
@@ -73,7 +73,7 @@ androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-j
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
 kotlinx-coroutines-swingui = "org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3"
 ktor-client-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor-client" }
-androidx-compose-ui-util = "androidx.compose.ui:ui-util:1.6.0-alpha08"
+androidx-compose-ui-util = "androidx.compose.ui:ui-util:1.6.0-beta01"
 
 # Backend
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor-server" }

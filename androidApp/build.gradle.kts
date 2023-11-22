@@ -3,6 +3,17 @@ plugins {
     kotlin("android")
 }
 
+val versionNum: String? by project
+val versionMajor = properties["multiplatformkickstarter.version.major"].toString().toInt()
+val versionMinor = properties["multiplatformkickstarter.version.minor"].toString().toInt()
+val versionPatch = properties["multiplatformkickstarter.version.patch"].toString().toInt()
+
+fun versionCode(): Int {
+    versionNum?.let {
+        return (versionMajor * 1000000) + (versionMinor * 1000) + it.toInt()
+    } ?: return 1
+}
+
 android {
     namespace = "com.multiplatformkickstarter.app.android"
     compileSdk = properties["multiplatformkickstarter.android.compileSdk"].toString().toInt()
@@ -10,7 +21,8 @@ android {
         applicationId = "com.multiplatformkickstarter.app.android"
         minSdk = properties["multiplatformkickstarter.android.minSdk"].toString().toInt()
         targetSdk = properties["multiplatformkickstarter.android.targetSdk"].toString().toInt()
-        versionName = "1.0"
+        versionCode = versionCode()
+        versionName = "$versionMajor.$versionMinor.$versionPatch"
     }
     buildFeatures {
         compose = true
