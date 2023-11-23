@@ -17,7 +17,7 @@ The first Open Source Template with all boilerplate code needed to quickly creat
 
 <!-- Badges -->
 <a href="https://twitter.com/mpkickstarter" target="_blank">
- <img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white" />
+ <img src="https://img.shields.io/badge/@mpkickstarter-000000?style=for-the-badge&logo=x&logoColor=white" />
 </a>
 <!-- Badges End -->
 
