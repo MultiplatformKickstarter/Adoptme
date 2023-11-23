@@ -17,7 +17,7 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+    jvm()
 
     listOf(
         iosX64(),
@@ -31,72 +31,64 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(libs.skiko)
-                implementation(compose.ui)
-                implementation(compose.foundation)
-                implementation(compose.material)
-                implementation(compose.material3)
-                implementation(compose.animation)
-                implementation(compose.materialIconsExtended)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
-                implementation(libs.kotlinx.serialization.json)
-                implementation(libs.kotlinx.datetime)
-                implementation(libs.kotlinx.coroutines.core)
+        commonMain.dependencies {
+            implementation(libs.skiko)
+            implementation(compose.ui)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.material3)
+            implementation(compose.animation)
+            implementation(compose.materialIconsExtended)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.coroutines.core)
 
-                implementation(libs.ktor.client)
-                implementation(libs.ktor.client.content.negotiation)
-                implementation(libs.ktor.server.serialization.kotlinx.json)
+            implementation(libs.ktor.client)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.server.serialization.kotlinx.json)
 
-                // Kamel for image loading
-                implementation(libs.kamel)
+            // Kamel for image loading
+            implementation(libs.kamel)
 
-                // Voyager for Navigation
-                implementation(libs.voyager.navigator)
-                implementation(libs.voyager.bottom.sheet.navigator)
-                implementation(libs.voyager.tab.navigator)
-                implementation(libs.voyager.transitions)
-                implementation(libs.voyager.koin)
+            // Voyager for Navigation
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.bottom.sheet.navigator)
+            implementation(libs.voyager.tab.navigator)
+            implementation(libs.voyager.transitions)
+            implementation(libs.voyager.koin)
 
-                // Multiplatform Settings to encrypted key-value data
-                implementation(libs.multiplatform.settings.no.arg)
-                implementation(libs.multiplatform.settings.serialization)
+            // Multiplatform Settings to encrypted key-value data
+            implementation(libs.multiplatform.settings.no.arg)
+            implementation(libs.multiplatform.settings.serialization)
 
-                // Dependency Injection
-                implementation(libs.koin.core)
-                implementation(libs.koin.test)
+            // Dependency Injection
+            implementation(libs.koin.core)
+            implementation(libs.koin.test)
 
-                // Logging
-                implementation(libs.kermit)
-            }
-        }
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.android)
-            }
-        }
-        val iosMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.darwin)
-            }
+            // Logging
+            implementation(libs.kermit)
         }
 
-        val desktopMain by getting {
-            dependencies {
-                implementation(compose.desktop.common)
-                dependsOn(commonMain)
-            }
+        androidMain.dependencies {
+            implementation(libs.ktor.client.android)
         }
 
-        val commonTest by getting {
-            dependencies {
-                implementation(libs.koin.test)
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.kotlinx.coroutines.test)
-                implementation(libs.multiplatform.settings.test)
-            }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
+
+        jvmMain.dependencies {
+            implementation(compose.desktop.common)
+
+        }
+
+        commonTest.dependencies {
+            implementation(libs.koin.test)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.multiplatform.settings.test)
         }
     }
 }

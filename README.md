@@ -15,6 +15,16 @@
 The first Open Source Template with all boilerplate code needed to quickly create Kotlin Multiplatform Applications.
 </div>
 
+<!-- Badges -->
+<a href="https://twitter.com/mpkickstarter" target="_blank">
+ <img src="https://img.shields.io/badge/@mpkickstarter-000000?style=for-the-badge&logo=x&logoColor=white" />
+</a>
+&nbsp;
+<a href="https://multiplatformkickstarter.com" target="_blank">
+ <img src="https://img.shields.io/badge/Multiplatform_Kickstarter-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=white" />
+</a>
+<!-- Badges End -->
+
 <br/><br/>
 <p align="center">
 <b><a href="#about">About</a></b>
