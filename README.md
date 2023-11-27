@@ -1,5 +1,5 @@
 <!--
-  Title: Multiplatform Kickstarter Template
+  Title: Adoptme Kotlin Multiplatform Template
   Description: The first Open Source Template with all boilerplate code needed to quickly create Kotlin Multiplatform Applications.
   Author: Multiplatform Kickstarter
   -->
@@ -14,7 +14,7 @@
 <img align="left" width="0" height="128px" hspace="10" />
 
 <div style="display:block; height: 168px;">
-* <i>The Multiplatform Kickstarter Basic Template</i> *
+* <i>Adoptme</i> *
 
 The first Open Source Template with all boilerplate code needed to quickly create Kotlin Multiplatform Applications.
 </div>
@@ -57,7 +57,7 @@ The first Open Source Template with all boilerplate code needed to quickly creat
 <img align="right" width="0" height="368px" hspace="20"/>
 <img src="config/images/multiplatform-kickstarter-screenshot.png" height="368px" align="right" />
 
-Multiplatform Kickstarter is an opinionated template based in **Kotlin Multiplatform** (KMP) and **Compose Multiplatform**. While most templates only solves the basic functionality, we are aiming to solve most of the common problems when creating applications from initial status to production. 
+Adoptme is an opinionated template based in **Kotlin Multiplatform** (KMP) and **Compose Multiplatform**. While most templates only solves the basic functionality, we are aiming to solve most of the common problems when creating applications from initial status to production. 
 
 Comes with this stack built-in:
 
@@ -110,7 +110,7 @@ Go to the [Documentation page](https://docs.multiplatformkickstarter.com) for al
 PRO Template
 -----------------
 
-Do you need more? The Basic template is a good start but the **Pro template** have all you need to create professional apps without a hassle.
+Do you need more? Adoptme is a good start but the **Pro template** have all you need to create professional apps without a hassle.
 It includes more features, screens and components. Like:
 
 - Advanced CI (deployment)
