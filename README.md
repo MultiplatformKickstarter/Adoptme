@@ -3,8 +3,12 @@
   Description: The first Open Source Template with all boilerplate code needed to quickly create Kotlin Multiplatform Applications.
   Author: Multiplatform Kickstarter
   -->
- **ROADMAP**: Checkout the board with the progress done for the template [here](https://github.com/orgs/MultiplatformKickstarter/projects/6).
- <br><br>
+
+[![Build](https://github.com/multiplatformkickstarter/kmp-template/actions/workflows/basic.yml/badge.svg)](https://github.com/multiplatformkickstarter/kmp-template/actions/workflows/basic.yml)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
+![badge-android](http://img.shields.io/badge/platform-android-6EDB8D.svg?style=flat)
+![badge-ios](http://img.shields.io/badge/platform-ios-6EDB8D.svg?style=flat)
+![badge-desktop](http://img.shields.io/badge/platform-desktop-6EDB8D.svg?style=flat)
 
 <img src="config/images/multiplatform-kickstarter-logo.png" align="left" height="128px" />
 <img align="left" width="0" height="128px" hspace="10" />
@@ -26,6 +30,7 @@ The first Open Source Template with all boilerplate code needed to quickly creat
 <!-- Badges End -->
 
 <br/><br/>
+
 <p align="center">
 <b><a href="#about">About</a></b>
 |
