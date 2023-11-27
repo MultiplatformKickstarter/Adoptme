@@ -22,13 +22,13 @@ The first Open Source Template with all boilerplate code needed to quickly creat
 </a>
 <!-- Badges End -->
 
+<br/><br/>
+
 [![Build](https://github.com/multiplatformkickstarter/kmp-template/actions/workflows/basic.yml/badge.svg)](https://github.com/multiplatformkickstarter/kmp-template/actions/workflows/basic.yml)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
 ![badge-android](http://img.shields.io/badge/platform-android-6EDB8D.svg?style=flat)
 ![badge-ios](http://img.shields.io/badge/platform-ios-6EDB8D.svg?style=flat)
 ![badge-desktop](http://img.shields.io/badge/platform-desktop-6EDB8D.svg?style=flat)
-
-<br/><br/>
 
 <p align="center">
 <b><a href="#about">About</a></b>
