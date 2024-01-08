@@ -7,18 +7,18 @@ voyager = "1.0.0"
 koin = "3.5.0"
 koin-compose = "1.1.0"
 junit = "4.13.2"
-androidGradlePlugin = "8.2.0"
+androidGradlePlugin = "8.2.1"
 composeMultiplatform = "1.5.11"
 compose-compiler = "1.5.6-dev-k1.9.21-3eed341308a"
 exposed = "0.37.3"
-skiko = "0.7.85.4"
+skiko = "0.7.89.1"
 ktlint = "11.5.1"
 detekt = "1.23.1"
 kotlinx-coroutines = "1.7.3"
 androidx-junit = "1.1.5"
 espressoCore = "3.5.1"
 accompanistSystemuicontroller = "0.32.0"
-activityCompose = "1.8.1"
+activityCompose = "1.8.2"
 firebase = "32.7.0"
 
 [libraries]
@@ -72,7 +72,7 @@ androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-j
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
 kotlinx-coroutines-swingui = "org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3"
 ktor-client-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor-client" }
-androidx-compose-ui-util = "androidx.compose.ui:ui-util:1.6.0-beta02"
+androidx-compose-ui-util = "androidx.compose.ui:ui-util:1.6.0-beta03"
 
 # Backend
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor-server" }
