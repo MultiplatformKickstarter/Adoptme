@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.multiplatformkickstarter.app.ui.theme.Typography
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -109,7 +110,7 @@ class OnboardingComponent(
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     Image(
-                        painterResource(item.imageResource),
+                        painterResource(DrawableResource(item.imageResource)),
                         "",
                         modifier = Modifier
                             .fillMaxWidth()

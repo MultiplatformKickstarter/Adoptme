@@ -62,6 +62,7 @@ import com.multiplatformkickstarter.app.ui.components.PetsSearchBar
 import com.multiplatformkickstarter.app.ui.screens.viewmodel.HomeScreenState
 import com.multiplatformkickstarter.app.ui.screens.viewmodel.HomeScreenViewModel
 import com.multiplatformkickstarter.app.ui.theme.Typography
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.koin.core.parameter.ParametersHolder
@@ -173,7 +174,7 @@ class HomeTabScreen : Screen {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Image(
-                    painterResource(Resources.Drawables.catAndDog),
+                    painterResource(DrawableResource(Resources.Drawables.catAndDog)),
                     contentDescription = "",
                     modifier = Modifier.size(150.dp)
                 )

@@ -77,6 +77,7 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.stately.common)
         }
 
         jvmMain.dependencies {
