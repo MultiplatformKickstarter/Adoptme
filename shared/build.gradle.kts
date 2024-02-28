@@ -82,7 +82,6 @@ kotlin {
 
         jvmMain.dependencies {
             implementation(compose.desktop.common)
-
         }
 
         commonTest.dependencies {
