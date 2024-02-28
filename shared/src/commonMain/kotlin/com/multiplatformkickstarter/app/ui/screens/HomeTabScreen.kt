@@ -51,10 +51,10 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.common.model.PetCategory
 import com.multiplatformkickstarter.app.feature.debugmenu.getDebug
 import com.multiplatformkickstarter.app.localization.Localization
+import com.multiplatformkickstarter.app.localization.SetLanguage
 import com.multiplatformkickstarter.app.localization.getCurrentLanguage
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
 import com.multiplatformkickstarter.app.localization.getLocalizedModelName
-import com.multiplatformkickstarter.app.localization.SetLanguage
 import com.multiplatformkickstarter.app.platform.Resources
 import com.multiplatformkickstarter.app.ui.components.EmptyLayout
 import com.multiplatformkickstarter.app.ui.components.PetCardSmall

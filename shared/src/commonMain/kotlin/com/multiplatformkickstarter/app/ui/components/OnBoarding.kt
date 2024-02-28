@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -54,7 +53,7 @@ class OnboardingComponent(
         )
 
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize()
         ) {
             Box(
                 modifier = Modifier.weight(1f)
@@ -72,7 +71,7 @@ class OnboardingComponent(
                         } else {
                             coroutineScope.launch { state.animateScrollToPage(state.currentPage + 1) }
                         }
-                    },
+                    }
                 ) {
                     Text(
                         modifier = Modifier.padding(4.dp),
@@ -141,11 +140,11 @@ class OnboardingComponent(
 
     @Composable
     fun DotsIndicator(
-        totalDots : Int,
-        selectedIndex : Int,
+        totalDots: Int,
+        selectedIndex: Int,
         selectedColor: Color,
-        unSelectedColor: Color,
-    ){
+        unSelectedColor: Color
+    ) {
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()

@@ -1,6 +1,5 @@
 package com.multiplatformkickstarter.app.feature.debugmenu
 
-
 class JvmDebug : Debug {
     override val isDebug: Boolean = true
 }
