@@ -16,7 +16,13 @@ subprojects {
 
         configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
             debug.set(true)
+            filter {
+                exclude { element ->
+                    element.file.path.contains("generated")
+                }
+            }
         }
+
 
         configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
             parallel = false
