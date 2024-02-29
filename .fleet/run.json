@@ -3,7 +3,7 @@
         {
             "type": "android-app",
             "name": "Android-app configuration",
-            "module": "My_Project_Name.androidApp.main",
+            "module": "MultiplatformKickstarter.androidApp.main",
             "destination": "Pixel 7 API 33",
         },
         {
@@ -14,7 +14,31 @@
                 "target": "iosApp",
             },
             "configuration": "Debug",
-            "destination": "iPhone 15 | iOS 17.0",
+            "destination": "iPhone 15 Pro | iOS 17.2",
+        },
+        {
+            "name": "desktopApp [Jvm]",
+            "type": "jps-run",
+            "workingDir": "$PROJECT_DIR$",
+            "mainClass": "MainKt",
+            "module": "MultiplatformKickstarter.desktopApp.jvmMain",
+            "options": ["-Djava.library.path=$PROJECT_DIR$/desktopApp/build/classes/kotlin/jvm/main:$PROJECT_DIR$/shared/build/classes/kotlin/jvm/main:$PROJECT_DIR$/shared/build/processedResources/jvm/main", "-Dfile.encoding=UTF-8", "-Dsun.stdout.encoding=UTF-8", "-Dsun.stderr.encoding=UTF-8"]
+        },
+        {
+            "name": "Server",
+            "type": "gradle",
+            "workingDir": "$PROJECT_DIR$",
+            "environment": {
+                "JDBC_DATABASE_URL": "jdbc:postgresql:habits?user=postgres",
+                "JWT_SECRET": "898748674728934843",
+                "SECRET_KEY": "898748674728934843",
+                "JDBC_DRIVER": "org.postgresql.Driver"
+            },
+            "tasks": ["run"],
+            "args": ["--info", "-p", "$PROJECT_DIR$/backend"],
+            "initScripts": {
+                "flmapper": "ext.mapPath = { path -> null }"
+            }
         }
     ]
 }
