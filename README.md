@@ -4,11 +4,12 @@
   Author: Multiplatform Kickstarter
   -->
 
-[![Build](https://github.com/multiplatformkickstarter/kmp-template/actions/workflows/basic.yml/badge.svg)](https://github.com/multiplatformkickstarter/kmp-template/actions/workflows/basic.yml)
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.21-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
+[![Build](https://github.com/MultiplatformKickstarter/Adoptme/actions/workflows/basic.yml/badge.svg)](https://github.com/multiplatformkickstarter/Adoptme/actions/workflows/basic.yml)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
 ![badge-android](http://img.shields.io/badge/platform-android-6EDB8D.svg?style=flat)
 ![badge-ios](http://img.shields.io/badge/platform-ios-6EDB8D.svg?style=flat)
 ![badge-desktop](http://img.shields.io/badge/platform-desktop-6EDB8D.svg?style=flat)
+![badge-ktor](http://img.shields.io/badge/platform-ktor-6EDB8D.svg?style=flat)
 
 <img src="config/images/multiplatform-kickstarter-logo.png" align="left" height="128px" />
 <img align="left" width="0" height="128px" hspace="10" />
@@ -139,14 +140,20 @@ Who made this
 Contribute
 ----------
 
-For now, we are not open for contribution until the preview is over.
+1. Create an issue to discuss about your idea
+2. [Fork it] (https://github.com/MultiplatformKickstarter/Adoptme/fork)
+3. Create your feature branch (`git checkout -b my-new-feature`)
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create a new Pull Request
+7. Profit! :white_check_mark:
 <br><br>
 
 
 Bugs and Feedback
 -----------------
 
-For bugs, questions and discussions please use the [Github Issues](https://github.com/multiplatformkickstarter/kmp-template/issues).
+For bugs, questions and discussions please use the [Github Issues](https://github.com/multiplatformkickstarter/Adoptme/issues).
 <br><br>
 
 
@@ -164,7 +171,7 @@ Check out our social media to be up-to-date about new products, features and rel
 License
 -------
 
-Copyright 2023 Multiplatform Kickstarter
+Copyright 2023-2024 Multiplatform Kickstarter
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

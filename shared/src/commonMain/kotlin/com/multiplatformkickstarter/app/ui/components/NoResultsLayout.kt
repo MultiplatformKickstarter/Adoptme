@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.multiplatformkickstarter.app.localization.Localization
 import com.multiplatformkickstarter.app.platform.Resources
 import com.multiplatformkickstarter.app.ui.theme.Typography
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -56,7 +57,7 @@ fun EmptyLayout(
             color = MaterialTheme.colorScheme.outline
         )
         Image(
-            painterResource(imageResource ?: Resources.Drawables.noData),
+            painterResource(DrawableResource(imageResource ?: Resources.Drawables.noData)),
             contentDescription = description,
             modifier = Modifier.size(260.dp)
         )

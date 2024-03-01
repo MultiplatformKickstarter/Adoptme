@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Multiplatform Kickstarter"
+rootProject.name = "MultiplatformKickstarter"
 include(":androidApp")
 include(":shared")
 include(":desktopApp")

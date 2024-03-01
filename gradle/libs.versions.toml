@@ -1,25 +1,26 @@
 [versions]
-kotlin = "1.9.21"
-ktor-client = "2.3.7"
-ktor-server = "2.3.7"
+kotlin = "1.9.22"
+ktor-client = "2.3.8"
+ktor-server = "2.3.8"
 multiplatform-settings = "1.0.0"
 voyager = "1.0.0"
-koin = "3.5.0"
-koin-compose = "1.1.0"
+koin = "3.5.3"
+koin-compose = "1.1.2"
 junit = "4.13.2"
-androidGradlePlugin = "8.2.1"
-composeMultiplatform = "1.5.11"
-compose-compiler = "1.5.6-dev-k1.9.21-3eed341308a"
+androidGradlePlugin = "8.2.2"
+composeMultiplatform = "1.6.0"
+compose-compiler = "1.5.8-dev-k1.9.22-42b6ec2b037"
 exposed = "0.37.3"
-skiko = "0.7.89.1"
+skiko = "0.7.93"
 ktlint = "11.5.1"
 detekt = "1.23.1"
-kotlinx-coroutines = "1.7.3"
+kotlinx-coroutines = "1.8.0"
 androidx-junit = "1.1.5"
 espressoCore = "3.5.1"
 accompanistSystemuicontroller = "0.32.0"
 activityCompose = "1.8.2"
-firebase = "32.7.0"
+firebase = "32.7.2"
+touchlab = "2.0.5"
 
 [libraries]
 # Common
@@ -37,8 +38,8 @@ ktor-client = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client"
 kamel = "media.kamel:kamel-image:0.7.1"
 kermit = "co.touchlab:kermit:2.0.0-RC5"
 
-kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
-kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.4.0"
+kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2"
+kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.5.0"
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 
@@ -52,7 +53,7 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 # Android
-compose-bom = "androidx.compose:compose-bom:2023.10.01"
+compose-bom = "androidx.compose:compose-bom:2024.02.01"
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
 androidx-core-ktx = "androidx.core:core-ktx:1.12.0"
@@ -67,12 +68,13 @@ androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", vers
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
 
 # iOS
+stately-common = { module = "co.touchlab:stately-common", version.ref = "touchlab" }
 
 # Desktop
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
-kotlinx-coroutines-swingui = "org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3"
+kotlinx-coroutines-swingui = "org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.0"
 ktor-client-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor-client" }
-androidx-compose-ui-util = "androidx.compose.ui:ui-util:1.6.0-beta03"
+androidx-compose-ui-util = "androidx.compose.ui:ui-util:1.6.2"
 
 # Backend
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor-server" }

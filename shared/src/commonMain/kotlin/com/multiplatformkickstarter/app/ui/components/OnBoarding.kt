@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -35,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.multiplatformkickstarter.app.ui.theme.Typography
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -53,7 +53,7 @@ class OnboardingComponent(
         )
 
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize()
         ) {
             Box(
                 modifier = Modifier.weight(1f)
@@ -71,7 +71,7 @@ class OnboardingComponent(
                         } else {
                             coroutineScope.launch { state.animateScrollToPage(state.currentPage + 1) }
                         }
-                    },
+                    }
                 ) {
                     Text(
                         modifier = Modifier.padding(4.dp),
@@ -109,7 +109,7 @@ class OnboardingComponent(
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     Image(
-                        painterResource(item.imageResource),
+                        painterResource(DrawableResource(item.imageResource)),
                         "",
                         modifier = Modifier
                             .fillMaxWidth()
@@ -140,11 +140,11 @@ class OnboardingComponent(
 
     @Composable
     fun DotsIndicator(
-        totalDots : Int,
-        selectedIndex : Int,
+        totalDots: Int,
+        selectedIndex: Int,
         selectedColor: Color,
-        unSelectedColor: Color,
-    ){
+        unSelectedColor: Color
+    ) {
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()

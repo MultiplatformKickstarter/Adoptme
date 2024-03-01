@@ -51,9 +51,9 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.feature.debugmenu.viewmodel.DebugMenuSideEffects
 import com.multiplatformkickstarter.app.feature.debugmenu.viewmodel.DebugMenuViewModel
 import com.multiplatformkickstarter.app.localization.AvailableLanguages
+import com.multiplatformkickstarter.app.localization.SetLanguage
 import com.multiplatformkickstarter.app.localization.getCurrentLanguage
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
-import com.multiplatformkickstarter.app.localization.SetLanguage
 import com.multiplatformkickstarter.app.platform.Environment
 import com.multiplatformkickstarter.app.platform.ServerEnvironment
 import com.multiplatformkickstarter.app.ui.components.ColoredSnackBarHost

@@ -21,7 +21,6 @@ class OnboardingScreen : Screen {
     override fun Content() {
         val localization = getCurrentLocalization()
         val navigator = LocalNavigator.currentOrThrow
-        
         MultiplatformKickstarterTheme {
             val onboardingPromoTitle1 = buildAnnotatedString {
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
@@ -58,7 +57,7 @@ class OnboardingScreen : Screen {
             val carouselItems: List<CarouselItem> = listOf(
                 CarouselItem(Resources.Drawables.mkLogo, onboardingPromoTitle1, onboardingPromoLine1, localization.next),
                 CarouselItem(Resources.Drawables.features, onboardingPromoTitle2, localization.onboardingPromoLine2.toAnnotatedString(), localization.next),
-                CarouselItem(Resources.Drawables.productQuality, onboardingPromoTitle3, onboardingPromoLine3, localization.close) { navigator.pop() },
+                CarouselItem(Resources.Drawables.productQuality, onboardingPromoTitle3, onboardingPromoLine3, localization.close) { navigator.pop() }
             )
             val onboardingComponent = OnboardingComponent(carouselItems)
             onboardingComponent.DrawCarousel()

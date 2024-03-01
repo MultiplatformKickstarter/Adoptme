@@ -21,6 +21,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
 import com.multiplatformkickstarter.app.platform.Resources
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -36,7 +37,7 @@ fun ProTemplateFeature(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painterResource(Resources.Drawables.mkLogo),
+            painterResource(DrawableResource(Resources.Drawables.mkLogo)),
             "",
             modifier = Modifier
                 .fillMaxHeight(0.4f)
