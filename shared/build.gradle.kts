@@ -69,6 +69,8 @@ kotlin {
 
             // Logging
             implementation(libs.kermit)
+
+            implementation(libs.junit)
         }
 
         androidMain.dependencies {
