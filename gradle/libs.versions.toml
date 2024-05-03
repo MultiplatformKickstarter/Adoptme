@@ -19,7 +19,7 @@ androidx-junit = "1.1.5"
 espressoCore = "3.5.1"
 accompanistSystemuicontroller = "0.32.0"
 activityCompose = "1.9.0"
-firebase = "32.8.1"
+firebase = "33.0.0"
 touchlab = "2.0.5"
 
 [libraries]
@@ -53,10 +53,10 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 # Android
-compose-bom = "androidx.compose:compose-bom:2024.04.01"
+compose-bom = "androidx.compose:compose-bom:2024.05.00"
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
-androidx-core-ktx = "androidx.core:core-ktx:1.13.0"
+androidx-core-ktx = "androidx.core:core-ktx:1.13.1"
 androidx-core-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 androidx-tracing-ktx = "androidx.tracing:tracing-ktx:1.2.0"
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
@@ -74,7 +74,7 @@ stately-common = { module = "co.touchlab:stately-common", version.ref = "touchla
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
 kotlinx-coroutines-swingui = "org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.0"
 ktor-client-java = { module = "io.ktor:ktor-client-java", version.ref = "ktor-client" }
-androidx-compose-ui-util = "androidx.compose.ui:ui-util:1.6.6"
+androidx-compose-ui-util = "androidx.compose.ui:ui-util:1.6.7"
 
 # Backend
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor-server" }
