@@ -10,7 +10,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
-import com.multiplatformkickstarter.app.platform.Resources
 import com.multiplatformkickstarter.app.resources.Res
 import com.multiplatformkickstarter.app.resources.features_overview_cuate
 import com.multiplatformkickstarter.app.resources.mklogo

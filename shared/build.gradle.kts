@@ -35,6 +35,8 @@ kotlin {
         all {
             languageSettings {
                 optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
+                optIn("androidx.compose.foundation.layout.ExperimentalLayoutApi")
+                optIn("androidx.compose.material3.ExperimentalMaterial3Api")
             }
         }
         commonMain.dependencies {

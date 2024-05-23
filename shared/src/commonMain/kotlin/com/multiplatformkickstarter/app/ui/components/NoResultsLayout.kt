@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package com.multiplatformkickstarter.app.ui.components
 
 import androidx.compose.foundation.Image
@@ -22,14 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.multiplatformkickstarter.app.localization.Localization
-import com.multiplatformkickstarter.app.platform.Resources
 import com.multiplatformkickstarter.app.resources.Res
-import com.multiplatformkickstarter.app.resources.cat_dog
 import com.multiplatformkickstarter.app.resources.no_data_cuate
 import com.multiplatformkickstarter.app.ui.theme.Typography
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.vectorResource
 
 @Composable
