@@ -18,7 +18,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -172,7 +172,7 @@ class PetUploadScreen : Screen {
                         ),
                         navigationIcon = {
                             IconButton(onClick = { onClose.invoke() }) {
-                                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Go back")
+                                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Go back")
                             }
                         },
                         actions = {
