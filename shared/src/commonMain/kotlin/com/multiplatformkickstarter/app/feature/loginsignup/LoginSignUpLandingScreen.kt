@@ -39,6 +39,7 @@ import com.multiplatformkickstarter.app.ui.theme.MultiplatformKickstarterTheme
 import com.multiplatformkickstarter.app.ui.theme.Typography
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.InternalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 class LoginSignUpLandingScreen : Screen {
@@ -50,6 +51,7 @@ class LoginSignUpLandingScreen : Screen {
     }
 }
 
+@OptIn(InternalResourceApi::class)
 @Composable
 fun LoginSignUpView() {
     val localization = getCurrentLocalization()
@@ -75,11 +77,11 @@ fun LoginSignUpView() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
+            /*Image(
                 painterResource(DrawableResource(Resources.Drawables.catAndDog)),
                 contentDescription = "",
                 modifier = Modifier.size(150.dp)
-            )
+            )*/
 
             Text(
                 text = AnnotatedString(localization.loginLandingTitle),

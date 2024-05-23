@@ -56,11 +56,11 @@ fun EmptyLayout(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.outline
         )
-        Image(
+        /*Image(
             painterResource(DrawableResource(imageResource ?: Resources.Drawables.noData)),
             contentDescription = description,
             modifier = Modifier.size(260.dp)
-        )
+        )*/
         actionLabel?.let {
             Spacer(modifier = Modifier.size(10.dp))
             Button(

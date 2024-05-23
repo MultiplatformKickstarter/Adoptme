@@ -36,7 +36,7 @@ fun ProTemplateFeature(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
+        /*Image(
             painterResource(DrawableResource(Resources.Drawables.mkLogo)),
             "",
             modifier = Modifier
@@ -44,7 +44,7 @@ fun ProTemplateFeature(
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp),
             contentScale = ContentScale.FillWidth
-        )
+        )*/
         Text(
             modifier = Modifier.padding(16.dp),
             text = localization.proFeatureScreenTitle,

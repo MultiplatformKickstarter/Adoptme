@@ -173,11 +173,11 @@ class HomeTabScreen : Screen {
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Image(
+                /*Image(
                     painterResource(DrawableResource(Resources.Drawables.catAndDog)),
                     contentDescription = "",
                     modifier = Modifier.size(150.dp)
-                )
+                )*/
                 Column {
                     Text(
                         modifier = Modifier

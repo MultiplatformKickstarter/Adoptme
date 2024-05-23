@@ -108,7 +108,7 @@ class OnboardingComponent(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Image(
+                    /*Image(
                         painterResource(DrawableResource(item.imageResource)),
                         "",
                         modifier = Modifier
@@ -116,7 +116,7 @@ class OnboardingComponent(
                             .weight(0.5f)
                             .padding(start = 24.dp, end = 24.dp),
                         contentScale = ContentScale.FillWidth
-                    )
+                    )*/
                     item.title?.let { title ->
                         Text(
                             modifier = Modifier.padding(16.dp),

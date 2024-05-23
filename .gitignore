@@ -35,3 +35,6 @@ google-services.json
 # Android Profiling
 *.hprof
 xcuserdata
+
+*.klib
+.kotlin/metadata
