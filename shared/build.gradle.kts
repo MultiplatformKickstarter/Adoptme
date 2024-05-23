@@ -32,6 +32,11 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings {
+                optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
+            }
+        }
         commonMain.dependencies {
             implementation(libs.skiko)
             implementation(compose.ui)
@@ -40,7 +45,6 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.animation)
             implementation(compose.materialIconsExtended)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
@@ -106,4 +110,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.multiplatformkickstarter.app.resources"
+    generateResClass = always
 }

@@ -56,6 +56,8 @@ import com.multiplatformkickstarter.app.localization.getCurrentLanguage
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
 import com.multiplatformkickstarter.app.localization.getLocalizedModelName
 import com.multiplatformkickstarter.app.platform.Resources
+import com.multiplatformkickstarter.app.resources.Res
+import com.multiplatformkickstarter.app.resources.cat_dog
 import com.multiplatformkickstarter.app.ui.components.EmptyLayout
 import com.multiplatformkickstarter.app.ui.components.PetCardSmall
 import com.multiplatformkickstarter.app.ui.components.PetsSearchBar
@@ -65,6 +67,7 @@ import com.multiplatformkickstarter.app.ui.theme.Typography
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 import org.koin.core.parameter.ParametersHolder
 
 class HomeTabScreen : Screen {
@@ -173,11 +176,11 @@ class HomeTabScreen : Screen {
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                /*Image(
-                    painterResource(DrawableResource(Resources.Drawables.catAndDog)),
+                Image(
+                    imageVector = vectorResource(Res.drawable.cat_dog),
                     contentDescription = "",
                     modifier = Modifier.size(150.dp)
-                )*/
+                )
                 Column {
                     Text(
                         modifier = Modifier

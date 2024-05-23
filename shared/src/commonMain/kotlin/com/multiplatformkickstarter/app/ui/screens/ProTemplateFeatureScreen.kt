@@ -21,9 +21,13 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
 import com.multiplatformkickstarter.app.platform.Resources
+import com.multiplatformkickstarter.app.resources.Res
+import com.multiplatformkickstarter.app.resources.cat_dog
+import com.multiplatformkickstarter.app.resources.mklogo
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -36,15 +40,15 @@ fun ProTemplateFeature(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        /*Image(
-            painterResource(DrawableResource(Resources.Drawables.mkLogo)),
+        Image(
+            imageVector = vectorResource(Res.drawable.mklogo),
             "",
             modifier = Modifier
                 .fillMaxHeight(0.4f)
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp),
             contentScale = ContentScale.FillWidth
-        )*/
+        )
         Text(
             modifier = Modifier.padding(16.dp),
             text = localization.proFeatureScreenTitle,

@@ -108,15 +108,15 @@ class OnboardingComponent(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    /*Image(
-                        painterResource(DrawableResource(item.imageResource)),
+                    Image(
+                        painterResource(item.imageResource),
                         "",
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(0.5f)
                             .padding(start = 24.dp, end = 24.dp),
                         contentScale = ContentScale.FillWidth
-                    )*/
+                    )
                     item.title?.let { title ->
                         Text(
                             modifier = Modifier.padding(16.dp),
@@ -178,7 +178,7 @@ class OnboardingComponent(
 }
 
 data class CarouselItem(
-    val imageResource: String,
+    val imageResource: DrawableResource,
     val title: AnnotatedString?,
     val description: AnnotatedString?,
     val actionText: String,

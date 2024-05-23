@@ -34,13 +34,13 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
-import com.multiplatformkickstarter.app.platform.Resources
 import com.multiplatformkickstarter.app.ui.theme.MultiplatformKickstarterTheme
 import com.multiplatformkickstarter.app.ui.theme.Typography
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.InternalResourceApi
-import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
+import com.multiplatformkickstarter.app.resources.Res
+import com.multiplatformkickstarter.app.resources.cat_dog
 
 class LoginSignUpLandingScreen : Screen {
     @Composable
@@ -77,11 +77,11 @@ fun LoginSignUpView() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            /*Image(
-                painterResource(DrawableResource(Resources.Drawables.catAndDog)),
+            Image(
+                imageVector = vectorResource(Res.drawable.cat_dog),
                 contentDescription = "",
                 modifier = Modifier.size(150.dp)
-            )*/
+            )
 
             Text(
                 text = AnnotatedString(localization.loginLandingTitle),
