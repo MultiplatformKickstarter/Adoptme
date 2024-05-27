@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class)
 
 package com.multiplatformkickstarter.app.ui.components
 
@@ -35,7 +35,6 @@ import androidx.compose.ui.unit.dp
 import com.multiplatformkickstarter.app.ui.theme.Typography
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 private val defaultAction = {}
@@ -109,7 +108,7 @@ class OnboardingComponent(
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     Image(
-                        painterResource(DrawableResource(item.imageResource)),
+                        painterResource(item.imageResource),
                         "",
                         modifier = Modifier
                             .fillMaxWidth()
@@ -178,7 +177,7 @@ class OnboardingComponent(
 }
 
 data class CarouselItem(
-    val imageResource: String,
+    val imageResource: DrawableResource,
     val title: AnnotatedString?,
     val description: AnnotatedString?,
     val actionText: String,

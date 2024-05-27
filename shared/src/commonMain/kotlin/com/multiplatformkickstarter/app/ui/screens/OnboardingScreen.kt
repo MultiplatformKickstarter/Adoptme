@@ -10,7 +10,10 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
-import com.multiplatformkickstarter.app.platform.Resources
+import com.multiplatformkickstarter.app.resources.Res
+import com.multiplatformkickstarter.app.resources.features_overview_cuate
+import com.multiplatformkickstarter.app.resources.mklogo
+import com.multiplatformkickstarter.app.resources.product_quality_amico
 import com.multiplatformkickstarter.app.ui.components.CarouselItem
 import com.multiplatformkickstarter.app.ui.components.OnboardingComponent
 import com.multiplatformkickstarter.app.ui.theme.MultiplatformKickstarterTheme
@@ -55,9 +58,9 @@ class OnboardingScreen : Screen {
             }
 
             val carouselItems: List<CarouselItem> = listOf(
-                CarouselItem(Resources.Drawables.mkLogo, onboardingPromoTitle1, onboardingPromoLine1, localization.next),
-                CarouselItem(Resources.Drawables.features, onboardingPromoTitle2, localization.onboardingPromoLine2.toAnnotatedString(), localization.next),
-                CarouselItem(Resources.Drawables.productQuality, onboardingPromoTitle3, onboardingPromoLine3, localization.close) { navigator.pop() }
+                CarouselItem(Res.drawable.mklogo, onboardingPromoTitle1, onboardingPromoLine1, localization.next),
+                CarouselItem(Res.drawable.features_overview_cuate, onboardingPromoTitle2, localization.onboardingPromoLine2.toAnnotatedString(), localization.next),
+                CarouselItem(Res.drawable.product_quality_amico, onboardingPromoTitle3, onboardingPromoLine3, localization.close) { navigator.pop() }
             )
             val onboardingComponent = OnboardingComponent(carouselItems)
             onboardingComponent.DrawCarousel()

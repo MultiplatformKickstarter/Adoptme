@@ -31,8 +31,9 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.localization.Localization
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
-import com.multiplatformkickstarter.app.platform.Resources
 import com.multiplatformkickstarter.app.platform.shimmerLoadingAnimation
+import com.multiplatformkickstarter.app.resources.Res
+import com.multiplatformkickstarter.app.resources.authentication_rafiki
 import com.multiplatformkickstarter.app.ui.components.EmptyLayout
 import com.multiplatformkickstarter.app.ui.components.PickerItem
 import com.multiplatformkickstarter.app.ui.components.RatingBar
@@ -69,7 +70,7 @@ class ProfileTabScreen : Screen {
                 title = localization.notLoggedInTitle,
                 description = localization.notLoggedInDescription,
                 actionLabel = localization.notLoggedInAction,
-                imageResource = Resources.Drawables.login,
+                imageResource = Res.drawable.authentication_rafiki,
                 localization = localization
             ) {
                 viewModel.onSignUpLoginClicked()

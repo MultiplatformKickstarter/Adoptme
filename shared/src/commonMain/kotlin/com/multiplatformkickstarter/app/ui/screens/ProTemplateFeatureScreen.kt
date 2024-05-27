@@ -20,12 +20,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
-import com.multiplatformkickstarter.app.platform.Resources
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
+import com.multiplatformkickstarter.app.resources.Res
+import com.multiplatformkickstarter.app.resources.mklogo
+import org.jetbrains.compose.resources.vectorResource
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun ProTemplateFeature(
     modifier: Modifier = Modifier
@@ -37,7 +35,7 @@ fun ProTemplateFeature(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painterResource(DrawableResource(Resources.Drawables.mkLogo)),
+            imageVector = vectorResource(Res.drawable.mklogo),
             "",
             modifier = Modifier
                 .fillMaxHeight(0.4f)

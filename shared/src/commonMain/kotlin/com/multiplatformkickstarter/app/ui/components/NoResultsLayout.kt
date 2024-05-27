@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package com.multiplatformkickstarter.app.ui.components
 
 import androidx.compose.foundation.Image
@@ -22,17 +20,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.multiplatformkickstarter.app.localization.Localization
-import com.multiplatformkickstarter.app.platform.Resources
+import com.multiplatformkickstarter.app.resources.Res
+import com.multiplatformkickstarter.app.resources.no_data_cuate
 import com.multiplatformkickstarter.app.ui.theme.Typography
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 fun EmptyLayout(
     title: String? = null,
     description: String? = null,
-    imageResource: String? = null,
+    imageResource: DrawableResource? = null,
     actionLabel: String? = null,
     localization: Localization,
     action: () -> Unit
@@ -57,7 +55,7 @@ fun EmptyLayout(
             color = MaterialTheme.colorScheme.outline
         )
         Image(
-            painterResource(DrawableResource(imageResource ?: Resources.Drawables.noData)),
+            imageVector = vectorResource(imageResource ?: Res.drawable.no_data_cuate),
             contentDescription = description,
             modifier = Modifier.size(260.dp)
         )
