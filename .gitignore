@@ -38,3 +38,4 @@ xcuserdata
 
 *.klib
 .kotlin/metadata
+.kotlin/sessions
