@@ -21,7 +21,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "MultiplatformKickstarter"
-include(":androidApp")
+include(":composeApp")
 include(":shared")
-include(":desktopApp")
 include(":backend")

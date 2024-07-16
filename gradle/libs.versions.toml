@@ -1,4 +1,7 @@
 [versions]
+android-compileSdk = "34"
+android-minSdk = "26"
+android-targetSdk = "34"
 kotlin = "2.0.0"
 ktor-client = "2.3.12"
 ktor-server = "2.3.12"
@@ -8,7 +11,7 @@ koin = "3.5.6"
 koin-compose = "1.1.3"
 junit = "4.13.2"
 androidGradlePlugin = "8.5.1"
-composeMultiplatform = "1.6.10"
+composeMultiplatform = "1.6.11"
 exposed = "0.37.3"
 skiko = "0.8.4"
 ktlint = "11.5.1"
@@ -20,6 +23,7 @@ accompanistSystemuicontroller = "0.32.0"
 activityCompose = "1.9.0"
 firebase = "33.1.2"
 touchlab = "2.0.5"
+navigationCommonKtx = "2.7.7"
 
 [libraries]
 # Common
@@ -110,12 +114,13 @@ exposed-dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exp
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
 
 kotlinx-html-jvm = "org.jetbrains.kotlinx:kotlinx-html-jvm:0.9.1"
-logback-classic = "ch.qos.logback:logback-classic:1.3.0"
+logback-classic = "ch.qos.logback:logback-classic:1.5.6"
 postgresql = "org.postgresql:postgresql:42.3.8"
 hikariCP = "com.zaxxer:HikariCP:5.0.1"
 swagger-codegen = "io.swagger.codegen.v3:swagger-codegen-generators:1.0.38"
 
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "navigationCommonKtx" }
 
 [plugins]
 #Common
@@ -129,7 +134,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 
 #Backend
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "kotlin" }
-shadow = { id = "com.github.johnrengelman.shadow", version = "7.0.0" }
+shadow = { id = "com.github.johnrengelman.shadow", version = "7.1.2" }
 
 [bundles]
 
