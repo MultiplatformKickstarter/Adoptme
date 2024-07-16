@@ -5,7 +5,7 @@
   -->
 
 [![Build](https://github.com/MultiplatformKickstarter/Adoptme/actions/workflows/basic.yml/badge.svg)](https://github.com/multiplatformkickstarter/Adoptme/actions/workflows/basic.yml)
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.0.0-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
 ![badge-android](http://img.shields.io/badge/platform-android-6EDB8D.svg?style=flat)
 ![badge-ios](http://img.shields.io/badge/platform-ios-6EDB8D.svg?style=flat)
 ![badge-desktop](http://img.shields.io/badge/platform-desktop-6EDB8D.svg?style=flat)
