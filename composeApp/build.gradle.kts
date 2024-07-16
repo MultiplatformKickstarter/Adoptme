@@ -10,6 +10,17 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
+val versionNum: String? by project
+val versionMajor = properties["multiplatformkickstarter.version.major"].toString().toInt()
+val versionMinor = properties["multiplatformkickstarter.version.minor"].toString().toInt()
+val versionPatch = properties["multiplatformkickstarter.version.patch"].toString().toInt()
+
+fun versionCode(): Int {
+    versionNum?.let {
+        return (versionMajor * 1000000) + (versionMinor * 1000) + it.toInt()
+    } ?: return 1
+}
+
 kotlin {
     /*@OptIn(ExperimentalWasmDsl::class)
     wasmJs {
@@ -131,8 +142,8 @@ android {
         applicationId = "com.multiplatformkickstarter.app.android"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = versionCode()
+        versionName = "$versionMajor.$versionMinor.$versionPatch"
     }
     packaging {
         resources {
@@ -192,7 +203,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.multiplatformkickstarter.app"
-            packageVersion = "1.0.0"
+            packageVersion = "$versionMajor.$versionMinor.$versionPatch"
         }
     }
 
