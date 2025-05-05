@@ -108,17 +108,16 @@ Click to "Use This Template" button to create a new repository with this templat
 Go to the [Documentation page](https://docs.multiplatformkickstarter.com) for all the information. (**WIP**)
 <br><br>
 
-PRO Template
+Need a different template?
 -----------------
 
-Do you need more? Adoptme is a good start but the **Pro template** have all you need to create professional apps without a hassle.
-It includes more features, screens and components. Like:
+Do you need a different use case? Adoptme Template is a good start but the are more **complete templates** that have all you need to create professional apps without a hassle.
+Including more features, screens and components. Like:
 
 - Advanced CI (deployment)
-- A/B Component
-- Deeplinks
-- More Translations
-- Social Login
+- RSS Component
+- Read and Download PDFs
+- Built-in video-game
 - 3rd party integrations
 - **and more!**
 
@@ -171,7 +170,7 @@ Check out our social media to be up-to-date about new products, features and rel
 License
 -------
 
-Copyright 2023-2024 Multiplatform Kickstarter
+Copyright 2023-2025 Multiplatform Kickstarter
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
