@@ -18,15 +18,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.localization.Localization
@@ -52,15 +52,14 @@ class ProfileTabScreen : Screen {
         val navigator = LocalNavigator.currentOrThrow
         val localization = getCurrentLocalization()
 
-        val viewModel = getScreenModel<ProfileViewModel>(
+        val viewModel = koinScreenModel<ProfileViewModel>(
             parameters = { ParametersHolder(listOf(navigator).toMutableList(), false) }
         )
 
-        LifecycleEffect(
-            onStarted = {
-                viewModel.onStarted(navigator)
-            }
-        )
+        DisposableEffect(key) {
+            viewModel.onStarted(navigator)
+            onDispose {}
+        }
 
         val state by viewModel.state.collectAsState()
         if (state.isLoggedIn) {

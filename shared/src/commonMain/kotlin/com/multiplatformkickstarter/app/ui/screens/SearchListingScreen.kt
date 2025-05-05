@@ -10,7 +10,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,15 +20,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.common.model.PetCategory
@@ -57,15 +56,14 @@ class SearchListingScreen(
         val snackbarHostState = remember { SnackbarHostState() }
         val navigator = LocalNavigator.currentOrThrow
 
-        val viewModel = getScreenModel<SearchListingViewModel>(
+        val viewModel = koinScreenModel<SearchListingViewModel>(
             parameters = { ParametersHolder(listOf(searchId, petCategory, navigator).toMutableList(), false) }
         )
 
-        LifecycleEffect(
-            onStarted = {
-                viewModel.onStarted()
-            }
-        )
+        DisposableEffect(key) {
+            viewModel.onStarted()
+            onDispose {}
+        }
 
         SetupSideEffects(viewModel, snackbarHostState, localization)
         MultiplatformKickstarterTheme {

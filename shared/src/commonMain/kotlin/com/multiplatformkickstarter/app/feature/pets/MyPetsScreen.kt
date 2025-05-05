@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.feature.pets.viewmodels.MyPetsViewModel
@@ -46,7 +46,7 @@ class MyPetsScreen : Screen {
         val localization = getCurrentLocalization()
         val navigator = LocalNavigator.currentOrThrow
 
-        val viewModel = getScreenModel<MyPetsViewModel>(
+        val viewModel = koinScreenModel<MyPetsViewModel>(
             parameters = { ParametersHolder(listOf(navigator).toMutableList(), false) }
         )
         MyPetsScreenView(viewModel, localization) {

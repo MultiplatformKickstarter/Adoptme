@@ -46,7 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.common.model.GeoLocation
@@ -87,7 +87,7 @@ class PetUploadScreen : Screen {
             val snackbarHostState = remember { SnackbarHostState() }
             showingModal = remember { mutableStateOf(false) }
 
-            val viewModel = getScreenModel<PetUploadViewModel>()
+            val viewModel = koinScreenModel<PetUploadViewModel>()
 
             SetupSideEffects(viewModel, snackbarHostState, localization)
             PetUploadView(viewModel, snackbarHostState) {

@@ -38,7 +38,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.feature.loginsignup.viewmodels.EmailLoginSideEffects
@@ -60,7 +60,7 @@ class EmailLoginScreen : Screen {
         MultiplatformKickstarterTheme {
             val localization = getCurrentLocalization()
             val snackbarHostState = remember { SnackbarHostState() }
-            val viewModel = getScreenModel<EmailLoginViewModel>()
+            val viewModel = koinScreenModel<EmailLoginViewModel>()
 
             SetupSideEffects(viewModel, snackbarHostState, localization)
             EmailLoginView(viewModel, snackbarHostState, localization)

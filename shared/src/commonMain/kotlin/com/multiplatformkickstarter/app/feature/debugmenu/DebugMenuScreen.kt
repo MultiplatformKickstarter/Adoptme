@@ -45,7 +45,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.feature.debugmenu.viewmodel.DebugMenuSideEffects
@@ -74,7 +74,7 @@ class DebugMenuScreen : Screen {
             val snackbarHostState = remember { SnackbarHostState() }
             showingModal = remember { mutableStateOf(false) }
 
-            val viewModel = getScreenModel<DebugMenuViewModel>()
+            val viewModel = koinScreenModel<DebugMenuViewModel>()
 
             SetupSideEffects(viewModel)
             DebugMenuView(viewModel, snackbarHostState) {
