@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,7 +36,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.feature.loginsignup.viewmodels.EmailSignUpSideEffects
@@ -60,7 +58,7 @@ class EmailSignUpScreen : Screen {
         MultiplatformKickstarterTheme {
             val localization = getCurrentLocalization()
             val snackbarHostState = remember { SnackbarHostState() }
-            val viewModel = getScreenModel<EmailSignUpViewModel>()
+            val viewModel = koinScreenModel<EmailSignUpViewModel>()
 
             SetupSideEffects(viewModel, snackbarHostState)
             EmailSignUpView(viewModel, snackbarHostState, localization)
@@ -111,7 +109,7 @@ fun EmailSignUpView(viewModel: EmailSignUpViewModel, snackbarHostState: Snackbar
                 navigationIcon = {
                     IconButton(onClick = { currentNavigator.pop() }) {
                         Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            imageVector = MultiplatformKickstarterIcons.ArrowBack,
                             contentDescription = localization.backLabel
                         )
                     }

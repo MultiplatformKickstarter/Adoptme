@@ -35,6 +35,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -43,9 +44,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.common.model.PetCategory
@@ -70,15 +70,14 @@ class HomeTabScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val viewModel = getScreenModel<HomeScreenViewModel>(
+        val viewModel = koinScreenModel<HomeScreenViewModel>(
             parameters = { ParametersHolder(listOf(navigator).toMutableList(), false) }
         )
 
-        LifecycleEffect(
-            onStarted = {
-                viewModel.onStarted(navigator)
-            }
-        )
+        DisposableEffect(key) {
+            viewModel.onStarted(navigator)
+            onDispose {}
+        }
 
         HomeScreenView(viewModel)
     }

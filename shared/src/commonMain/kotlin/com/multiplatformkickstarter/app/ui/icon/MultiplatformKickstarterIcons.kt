@@ -9,6 +9,7 @@ import androidx.compose.material.icons.automirrored.rounded.TextSnippet
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.BrokenImage
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Create
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Email
@@ -51,6 +52,7 @@ object MultiplatformKickstarterIcons {
     val Help = Icons.AutoMirrored.Rounded.Help
     val Pets = Icons.Rounded.Pets
     val BrokenImage = Icons.Rounded.BrokenImage
+    val Close = Icons.Rounded.Close
 }
 
 /**

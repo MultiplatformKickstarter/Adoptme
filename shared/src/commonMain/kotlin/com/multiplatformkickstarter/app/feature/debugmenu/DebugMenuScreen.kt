@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxColors
@@ -45,7 +43,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.feature.debugmenu.viewmodel.DebugMenuSideEffects
@@ -74,7 +72,7 @@ class DebugMenuScreen : Screen {
             val snackbarHostState = remember { SnackbarHostState() }
             showingModal = remember { mutableStateOf(false) }
 
-            val viewModel = getScreenModel<DebugMenuViewModel>()
+            val viewModel = koinScreenModel<DebugMenuViewModel>()
 
             SetupSideEffects(viewModel)
             DebugMenuView(viewModel, snackbarHostState) {
@@ -139,7 +137,7 @@ class DebugMenuScreen : Screen {
                         ),
                         navigationIcon = {
                             IconButton(onClick = { onClose.invoke() }) {
-                                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Go back")
+                                Icon(imageVector = MultiplatformKickstarterIcons.ArrowBack, contentDescription = "Go back")
                             }
                         }
                     )

@@ -19,8 +19,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -37,9 +36,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.feature.profile.viewmodels.ProfileDetailViewModel
@@ -63,15 +61,14 @@ class ProfileDetailScreen(val userId: Int) : Screen {
     override fun Content() {
         MultiplatformKickstarterTheme {
             val currentNavigator = LocalNavigator.currentOrThrow
-            val viewModel = getScreenModel<ProfileDetailViewModel>(
+            val viewModel = koinScreenModel<ProfileDetailViewModel>(
                 parameters = { ParametersHolder(listOf(userId, currentNavigator).toMutableList(), false) }
             )
 
-            LifecycleEffect(
-                onStarted = {
-                    viewModel.onStarted()
-                }
-            )
+            DisposableEffect(key) {
+                viewModel.onStarted()
+                onDispose {}
+            }
 
             ProfileDetailView(viewModel, localization) {
                 currentNavigator.pop()
@@ -95,7 +92,7 @@ class ProfileDetailScreen(val userId: Int) : Screen {
                         TopAppBar(
                             navigationIcon = {
                                 IconButton(onClick = { onClose.invoke() }) {
-                                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Go back")
+                                    Icon(imageVector = MultiplatformKickstarterIcons.ArrowBack, contentDescription = "Go back")
                                 }
                             },
                             title = {},
