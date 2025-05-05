@@ -19,8 +19,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -94,7 +92,7 @@ class ProfileDetailScreen(val userId: Int) : Screen {
                         TopAppBar(
                             navigationIcon = {
                                 IconButton(onClick = { onClose.invoke() }) {
-                                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Go back")
+                                    Icon(imageVector = MultiplatformKickstarterIcons.ArrowBack, contentDescription = "Go back")
                                 }
                             },
                             title = {},

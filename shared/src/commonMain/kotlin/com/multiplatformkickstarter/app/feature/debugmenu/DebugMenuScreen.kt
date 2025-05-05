@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxColors
@@ -139,7 +137,7 @@ class DebugMenuScreen : Screen {
                         ),
                         navigationIcon = {
                             IconButton(onClick = { onClose.invoke() }) {
-                                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Go back")
+                                Icon(imageVector = MultiplatformKickstarterIcons.ArrowBack, contentDescription = "Go back")
                             }
                         }
                     )

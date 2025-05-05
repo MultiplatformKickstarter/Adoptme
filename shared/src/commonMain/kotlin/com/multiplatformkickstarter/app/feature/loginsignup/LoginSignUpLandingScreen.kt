@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,6 +34,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
 import com.multiplatformkickstarter.app.resources.Res
 import com.multiplatformkickstarter.app.resources.cat_dog
+import com.multiplatformkickstarter.app.ui.icon.MultiplatformKickstarterIcons
 import com.multiplatformkickstarter.app.ui.theme.MultiplatformKickstarterTheme
 import com.multiplatformkickstarter.app.ui.theme.Typography
 import org.jetbrains.compose.resources.vectorResource
@@ -61,7 +60,7 @@ fun LoginSignUpView() {
                 navigationIcon = {
                     IconButton(onClick = { currentNavigator.pop() }) {
                         Icon(
-                            imageVector = Icons.Filled.Close,
+                            imageVector = MultiplatformKickstarterIcons.Close,
                             contentDescription = localization.backLabel
                         )
                     }
