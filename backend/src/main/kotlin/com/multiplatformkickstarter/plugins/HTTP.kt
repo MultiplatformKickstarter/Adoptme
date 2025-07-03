@@ -24,10 +24,12 @@ fun Application.configureHTTP() {
     install(CachingHeaders) {
         options { _, outgoingContent ->
             when (outgoingContent.contentType?.withoutParameters()) {
-                ContentType.Text.CSS -> CachingOptions(
-                    CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60),
-                    ZonedDateTime.of(0, 0, 1, 0, 0, 0, 0, ZoneId.systemDefault())
-                )
+                ContentType.Text.CSS ->
+                    CachingOptions(
+                        CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60),
+                        ZonedDateTime.of(0, 0, 1, 0, 0, 0, 0, ZoneId.systemDefault()),
+                    )
+
                 else -> null
             }
         }

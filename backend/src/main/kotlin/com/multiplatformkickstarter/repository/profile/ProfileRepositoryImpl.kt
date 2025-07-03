@@ -10,33 +10,33 @@ import org.jetbrains.exposed.sql.statements.InsertStatement
 import org.jetbrains.exposed.sql.update
 
 class ProfileRepositoryImpl : ProfileRepository {
-
     override suspend fun addProfile(
         userId: Int,
         name: String,
         description: String?,
         image: String?,
         location: String?,
-        rating: Double?
+        rating: Double?,
     ): Profile? {
         var statement: InsertStatement<Number>? = null
         dbQuery {
-            statement = Profiles.insert { profiles ->
-                profiles[Profiles.userId] = userId
-                profiles[Profiles.name] = name
-                description?.let {
-                    profiles[Profiles.description] = it
+            statement =
+                Profiles.insert { profiles ->
+                    profiles[Profiles.userId] = userId
+                    profiles[Profiles.name] = name
+                    description?.let {
+                        profiles[Profiles.description] = it
+                    }
+                    image?.let {
+                        profiles[Profiles.image] = it
+                    }
+                    location?.let {
+                        profiles[Profiles.location] = it
+                    }
+                    rating?.let {
+                        profiles[Profiles.rating] = it
+                    }
                 }
-                image?.let {
-                    profiles[Profiles.image] = it
-                }
-                location?.let {
-                    profiles[Profiles.location] = it
-                }
-                rating?.let {
-                    profiles[Profiles.rating] = it
-                }
-            }
         }
         return rowToProfiles(statement?.resultedValues?.get(0))
     }
@@ -55,7 +55,7 @@ class ProfileRepositoryImpl : ProfileRepository {
         description: String?,
         image: String?,
         location: String?,
-        rating: Double?
+        rating: Double?,
     ): Profile? {
         return dbQuery {
             Profiles.select(Profiles.userId).where {
@@ -99,7 +99,7 @@ class ProfileRepositoryImpl : ProfileRepository {
             description = row[Profiles.description],
             image = row[Profiles.image],
             location = geoLocation,
-            rating = row[Profiles.rating]
+            rating = row[Profiles.rating],
         )
     }
 

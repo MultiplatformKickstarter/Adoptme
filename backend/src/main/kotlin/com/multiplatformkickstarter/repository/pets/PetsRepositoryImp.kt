@@ -30,33 +30,35 @@ class PetsRepositoryImp : PetsRepository {
         size: String,
         color: String,
         status: String,
-        shelterId: Int?
+        shelterId: Int?,
     ): PetModel? {
         var statement: InsertStatement<Number>? = null
         dbQuery {
-            statement = Pets.insert {
-                it[Pets.userId] = userId
-                it[Pets.title] = title
-                it[Pets.description] = description
-                it[Pets.images] = images
-                it[Pets.category] = category
-                it[Pets.location] = location
-                it[Pets.published] = published
-                it[Pets.breed] = breed
-                it[Pets.age] = age
-                it[Pets.gender] = gender
-                it[Pets.size] = size
-                it[Pets.color] = color
-                it[Pets.status] = status
-                it[Pets.shelterId] = shelterId ?: 0
-            }
+            statement =
+                Pets.insert {
+                    it[Pets.userId] = userId
+                    it[Pets.title] = title
+                    it[Pets.description] = description
+                    it[Pets.images] = images
+                    it[Pets.category] = category
+                    it[Pets.location] = location
+                    it[Pets.published] = published
+                    it[Pets.breed] = breed
+                    it[Pets.age] = age
+                    it[Pets.gender] = gender
+                    it[Pets.size] = size
+                    it[Pets.color] = color
+                    it[Pets.status] = status
+                    it[Pets.shelterId] = shelterId ?: 0
+                }
         }
         return rowToPetModel(statement?.resultedValues?.get(0))
     }
 
     override suspend fun getPets(userId: Int): List<PetModel> {
         return dbQuery {
-            Pets.select(Pets.userId).where { Pets.userId.eq(userId) }.mapNotNull { rowToPetModel(it) }
+            Pets.select(Pets.userId).where { Pets.userId.eq(userId) }
+                .mapNotNull { rowToPetModel(it) }
         }
     }
 
@@ -87,7 +89,7 @@ class PetsRepositoryImp : PetsRepository {
         size: String?,
         color: String?,
         status: String?,
-        shelterId: Int?
+        shelterId: Int?,
     ): PetModel? {
         return dbQuery {
             Pets.select(Pets.id).where {
@@ -161,7 +163,7 @@ class PetsRepositoryImp : PetsRepository {
             size = PetSize.valueOf(row[Pets.size]),
             color = row[Pets.color].toString(),
             status = PetStatus.valueOf(row[Pets.status]),
-            shelterId = row[Pets.shelterId]
+            shelterId = row[Pets.shelterId],
         )
     }
 

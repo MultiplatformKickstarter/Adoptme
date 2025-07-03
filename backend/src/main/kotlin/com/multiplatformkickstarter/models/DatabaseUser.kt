@@ -8,5 +8,5 @@ data class DatabaseUser(
     val userId: Int,
     val email: String,
     val name: String,
-    val passwordHash: String
+    val passwordHash: String,
 ) : Serializable, Principal

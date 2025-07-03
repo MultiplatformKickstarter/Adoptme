@@ -44,4 +44,5 @@ fun Application.configureGeneralRouting() {
 }
 
 class AuthenticationException : RuntimeException()
+
 class AuthorizationException : RuntimeException()

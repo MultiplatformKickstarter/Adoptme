@@ -3,14 +3,13 @@ package com.multiplatformkickstarter.repository.profile
 import com.multiplatformkickstarter.app.common.model.Profile
 
 interface ProfileRepository {
-
     suspend fun addProfile(
         userId: Int,
         name: String,
         description: String?,
         image: String?,
         location: String?,
-        rating: Double?
+        rating: Double?,
     ): Profile?
 
     suspend fun getProfile(userId: Int): Profile?
@@ -21,6 +20,6 @@ interface ProfileRepository {
         description: String?,
         image: String?,
         location: String?,
-        rating: Double?
+        rating: Double?,
     ): Profile?
 }

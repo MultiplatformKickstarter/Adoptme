@@ -56,7 +56,10 @@ class PetsDeleteRoute
 
 @Suppress("LongMethod", "TooGenericExceptionCaught", "CyclomaticComplexMethod")
 @KtorExperimentalLocationsAPI
-fun Route.pets(petsRepository: PetsRepository, userRepository: UserRepository) {
+fun Route.pets(
+    petsRepository: PetsRepository,
+    userRepository: UserRepository,
+) {
     authenticate(JWT_CONFIGURATION) {
         post<PetsCreateRoute> {
             val petsParameters = call.receive<Parameters>()
@@ -73,34 +76,37 @@ fun Route.pets(petsRepository: PetsRepository, userRepository: UserRepository) {
             val status = petsParameters["status"] ?: ""
             val shelterId = petsParameters["shelterId"]?.toInt() ?: -1
 
-            val user = call.sessions.get<UserSession>()?.let {
-                userRepository.findUser(it.userId)
-            }
+            val user =
+                call.sessions.get<UserSession>()?.let {
+                    userRepository.findUser(it.userId)
+                }
             if (user == null) {
                 call.respond(HttpStatusCode.BadRequest, "Problems retrieving User")
                 return@post
             }
 
             val date = Calendar.getInstance().time
-            val formattedDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault()).format(date)
+            val formattedDate =
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault()).format(date)
 
             try {
-                val currentPet = petsRepository.addPet(
-                    userId = user.userId,
-                    title = title,
-                    description = description,
-                    images = images,
-                    category = category,
-                    location = location,
-                    published = formattedDate,
-                    breed = breed,
-                    age = age,
-                    gender = gender,
-                    size = size,
-                    color = color,
-                    status = status,
-                    shelterId = shelterId
-                )
+                val currentPet =
+                    petsRepository.addPet(
+                        userId = user.userId,
+                        title = title,
+                        description = description,
+                        images = images,
+                        category = category,
+                        location = location,
+                        published = formattedDate,
+                        breed = breed,
+                        age = age,
+                        gender = gender,
+                        size = size,
+                        color = color,
+                        status = status,
+                        shelterId = shelterId,
+                    )
                 currentPet?.id?.let {
                     call.respond(HttpStatusCode.OK, currentPet)
                 }
@@ -158,34 +164,37 @@ fun Route.pets(petsRepository: PetsRepository, userRepository: UserRepository) {
             val status = petsParameters["status"] ?: ""
             val shelterId = petsParameters["shelterId"]?.toInt() ?: -1
 
-            val user = call.sessions.get<UserSession>()?.let {
-                userRepository.findUser(it.userId)
-            }
+            val user =
+                call.sessions.get<UserSession>()?.let {
+                    userRepository.findUser(it.userId)
+                }
             if (user == null) {
                 call.respond(HttpStatusCode.BadRequest, "Problems retrieving User")
                 return@patch
             }
 
             val date = Calendar.getInstance().time
-            val formattedDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault()).format(date)
+            val formattedDate =
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault()).format(date)
 
             try {
                 if (petId != null) {
-                    val currentPet = petsRepository.updatePet(
-                        petId = petId.toInt(),
-                        title = title,
-                        description = description,
-                        images = images,
-                        location = location,
-                        modified = formattedDate,
-                        breed = breed,
-                        age = age,
-                        gender = gender,
-                        size = size,
-                        color = color,
-                        status = status,
-                        shelterId = shelterId
-                    )
+                    val currentPet =
+                        petsRepository.updatePet(
+                            petId = petId,
+                            title = title,
+                            description = description,
+                            images = images,
+                            location = location,
+                            modified = formattedDate,
+                            breed = breed,
+                            age = age,
+                            gender = gender,
+                            size = size,
+                            color = color,
+                            status = status,
+                            shelterId = shelterId,
+                        )
                     currentPet?.id?.let {
                         call.respond(HttpStatusCode.OK, currentPet)
                         return@patch
@@ -204,9 +213,10 @@ fun Route.pets(petsRepository: PetsRepository, userRepository: UserRepository) {
             val petsParameters = call.receive<Parameters>()
             val petId = petsParameters["id"]?.toInt()
 
-            val user = call.sessions.get<UserSession>()?.let {
-                userRepository.findUser(it.userId)
-            }
+            val user =
+                call.sessions.get<UserSession>()?.let {
+                    userRepository.findUser(it.userId)
+                }
 
             if (user == null) {
                 call.respond(HttpStatusCode.BadRequest, "Problems retrieving User")

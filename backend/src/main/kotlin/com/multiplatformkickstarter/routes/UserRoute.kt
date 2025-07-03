@@ -43,7 +43,7 @@ class UserLogoutRoute
 fun Route.users(
     userRepository: UserRepository,
     jwtService: JwtService,
-    hashFunction: (String) -> String
+    hashFunction: (String) -> String,
 ) {
     post<UserCreateRoute> {
         val signupParameters = call.receive<Parameters>()
@@ -57,7 +57,7 @@ fun Route.users(
                 call.sessions.set(UserSession(it))
                 call.respondText(
                     jwtService.generateToken(newUser),
-                    status = HttpStatusCode.Created
+                    status = HttpStatusCode.Created,
                 )
             }
         } catch (e: Throwable) {
