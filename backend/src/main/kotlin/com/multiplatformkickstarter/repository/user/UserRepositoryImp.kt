@@ -4,7 +4,6 @@ import com.multiplatformkickstarter.models.DatabaseUser
 import com.multiplatformkickstarter.repository.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.statements.InsertStatement
 
 class UserRepositoryImp : UserRepository {
@@ -26,12 +25,12 @@ class UserRepositoryImp : UserRepository {
     }
 
     override suspend fun findUser(userId: Int) = dbQuery {
-        Users.select { Users.userId.eq(userId) }
+        Users.select(Users.userId).where { Users.userId.eq(userId) }
             .map { rowToUser(it) }.singleOrNull()
     }
 
     override suspend fun findUserByEmail(email: String) = dbQuery {
-        Users.select { Users.email.eq(email) }
+        Users.select(Users.email).where { Users.email.eq(email) }
             .map { rowToUser(it) }.singleOrNull()
     }
 

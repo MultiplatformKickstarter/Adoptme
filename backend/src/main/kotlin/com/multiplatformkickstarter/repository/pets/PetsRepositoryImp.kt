@@ -12,7 +12,6 @@ import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.statements.InsertStatement
 import org.jetbrains.exposed.sql.update
 
@@ -57,17 +56,13 @@ class PetsRepositoryImp : PetsRepository {
 
     override suspend fun getPets(userId: Int): List<PetModel> {
         return dbQuery {
-            Pets.select {
-                Pets.userId.eq((userId)) // 3
-            }.mapNotNull { rowToPetModel(it) }
+            Pets.select(Pets.userId).where { Pets.userId.eq(userId) }.mapNotNull { rowToPetModel(it) }
         }
     }
 
     override suspend fun getPet(petId: Int): PetModel {
         return dbQuery {
-            Pets.select {
-                Pets.id.eq((petId))
-            }.mapNotNull { rowToPetModel(it) }
+            Pets.select(Pets.id).where { Pets.id.eq(petId) }.mapNotNull { rowToPetModel(it) }
         }.first()
     }
 
@@ -95,7 +90,7 @@ class PetsRepositoryImp : PetsRepository {
         shelterId: Int?
     ): PetModel? {
         return dbQuery {
-            Pets.select {
+            Pets.select(Pets.id).where {
                 Pets.id.eq((petId))
             }.forUpdate()
 
@@ -139,7 +134,7 @@ class PetsRepositoryImp : PetsRepository {
                 }
             }
 
-            Pets.select {
+            Pets.select(Pets.id).where {
                 Pets.id.eq((petId))
             }.mapNotNull { rowToPetModel(it) }
         }.firstOrNull()

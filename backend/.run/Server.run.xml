@@ -3,6 +3,7 @@
     <ExternalSystemSettings>
       <option name="env">
         <map>
+          <entry key="DEVELOPER_DIR" value="/Applications/Xcode.app/Contents/Developer" />
           <entry key="JDBC_DATABASE_URL" value="jdbc:postgresql:habits?user=postgres" />
           <entry key="JDBC_DRIVER" value="org.postgresql.Driver" />
           <entry key="JWT_SECRET" value="898748674728934843" />
@@ -26,6 +27,7 @@
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
     <DebugAllEnabled>false</DebugAllEnabled>
+    <RunAsTest>false</RunAsTest>
     <method v="2" />
   </configuration>
 </component>

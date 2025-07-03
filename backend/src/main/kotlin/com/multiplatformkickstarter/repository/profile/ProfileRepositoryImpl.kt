@@ -6,7 +6,6 @@ import com.multiplatformkickstarter.repository.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.statements.InsertStatement
 import org.jetbrains.exposed.sql.update
 
@@ -44,7 +43,7 @@ class ProfileRepositoryImpl : ProfileRepository {
 
     override suspend fun getProfile(userId: Int): Profile? {
         return dbQuery {
-            Profiles.select {
+            Profiles.select(Profiles.userId).where {
                 Profiles.userId.eq((userId))
             }.mapNotNull { rowToProfiles(it) }
         }.firstOrNull()
@@ -59,7 +58,7 @@ class ProfileRepositoryImpl : ProfileRepository {
         rating: Double?
     ): Profile? {
         return dbQuery {
-            Profiles.select {
+            Profiles.select(Profiles.userId).where {
                 Profiles.userId.eq((userId))
             }.forUpdate()
 
@@ -82,7 +81,7 @@ class ProfileRepositoryImpl : ProfileRepository {
                 }
             }
 
-            Profiles.select {
+            Profiles.select(Profiles.userId).where {
                 Profiles.userId.eq((userId))
             }.mapNotNull { rowToProfiles(it) }
         }.firstOrNull()
