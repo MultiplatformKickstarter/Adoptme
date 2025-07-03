@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 package com.multiplatformkickstarter.app.ui.screens.viewmodel
 
 import cafe.adriel.voyager.core.model.ScreenModel
@@ -30,9 +32,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 private const val ONBOARDING_VIEWED_KEY = "onboarding_viewed_key"
 
