@@ -1,5 +1,6 @@
 package com.multiplatformkickstarter.app.localization
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -16,6 +17,8 @@ actual fun getCurrentLanguage(): AvailableLanguages {
     }
 }
 
+@SuppressLint("LocalContextConfigurationRead")
+@Suppress("FunctionName")
 @Composable
 actual fun SetLanguage(language: AvailableLanguages) {
     val context = LocalContext.current
