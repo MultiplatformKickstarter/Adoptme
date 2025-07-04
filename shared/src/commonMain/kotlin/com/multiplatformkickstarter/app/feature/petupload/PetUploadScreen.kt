@@ -5,6 +5,7 @@ package com.multiplatformkickstarter.app.feature.petupload
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -43,6 +45,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
@@ -395,23 +398,39 @@ class PetUploadScreen : Screen {
 
             val ageInteractionSource = remember { MutableInteractionSource() }
             val isAgePressed by ageInteractionSource.collectIsPressedAsState()
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                value = getLocalizedModelName(age.value.name),
-                onValueChange = { },
-                placeholder = {
-                    Text(
-                        text = localization.petUploadAgeField,
-                        style = Typography.get().titleSmall
-                    )
-                },
-                readOnly = true,
-                trailingIcon = {
-                    Icon(imageVector = MultiplatformKickstarterIcons.ArrowDropDown, contentDescription = null)
-                },
-                interactionSource = ageInteractionSource
-            )
+            Box(
+                modifier = Modifier.fillMaxWidth().clickable {
+                    ageInteractionSource.tryEmit(PressInteraction.Press(Offset.Unspecified))
+                }
+            ) {
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    value = getLocalizedModelName(age.value.name),
+                    onValueChange = { },
+                    placeholder = {
+                        Text(
+                            text = localization.petUploadAgeField,
+                            style = Typography.get().titleSmall
+                        )
+                    },
+                    readOnly = true,
+                    enabled = false,
+                    interactionSource = null,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        disabledContainerColor = OutlinedTextFieldDefaults.colors().focusedContainerColor,
+                        disabledTextColor = OutlinedTextFieldDefaults.colors().focusedTextColor,
+                        disabledLabelColor = OutlinedTextFieldDefaults.colors().focusedLabelColor,
+                        disabledLeadingIconColor = OutlinedTextFieldDefaults.colors().focusedLeadingIconColor,
+                        disabledTrailingIconColor = OutlinedTextFieldDefaults.colors().focusedTrailingIconColor,
+                        disabledPlaceholderColor = OutlinedTextFieldDefaults.colors().focusedPlaceholderColor,
+                        disabledBorderColor = OutlinedTextFieldDefaults.colors().unfocusedIndicatorColor,
+                    ),
+                    trailingIcon = {
+                        Icon(imageVector = MultiplatformKickstarterIcons.ArrowDropDown, contentDescription = null)
+                    },
+                )
+            }
 
             Spacer(modifier = Modifier.size(16.dp))
 
