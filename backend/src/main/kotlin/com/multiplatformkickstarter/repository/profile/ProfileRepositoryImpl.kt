@@ -6,45 +6,44 @@ import com.multiplatformkickstarter.repository.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.statements.InsertStatement
 import org.jetbrains.exposed.sql.update
 
 class ProfileRepositoryImpl : ProfileRepository {
-
     override suspend fun addProfile(
         userId: Int,
         name: String,
         description: String?,
         image: String?,
         location: String?,
-        rating: Double?
+        rating: Double?,
     ): Profile? {
         var statement: InsertStatement<Number>? = null
         dbQuery {
-            statement = Profiles.insert { profiles ->
-                profiles[Profiles.userId] = userId
-                profiles[Profiles.name] = name
-                description?.let {
-                    profiles[Profiles.description] = it
+            statement =
+                Profiles.insert { profiles ->
+                    profiles[Profiles.userId] = userId
+                    profiles[Profiles.name] = name
+                    description?.let {
+                        profiles[Profiles.description] = it
+                    }
+                    image?.let {
+                        profiles[Profiles.image] = it
+                    }
+                    location?.let {
+                        profiles[Profiles.location] = it
+                    }
+                    rating?.let {
+                        profiles[Profiles.rating] = it
+                    }
                 }
-                image?.let {
-                    profiles[Profiles.image] = it
-                }
-                location?.let {
-                    profiles[Profiles.location] = it
-                }
-                rating?.let {
-                    profiles[Profiles.rating] = it
-                }
-            }
         }
         return rowToProfiles(statement?.resultedValues?.get(0))
     }
 
     override suspend fun getProfile(userId: Int): Profile? {
         return dbQuery {
-            Profiles.select {
+            Profiles.select(Profiles.userId).where {
                 Profiles.userId.eq((userId))
             }.mapNotNull { rowToProfiles(it) }
         }.firstOrNull()
@@ -56,10 +55,10 @@ class ProfileRepositoryImpl : ProfileRepository {
         description: String?,
         image: String?,
         location: String?,
-        rating: Double?
+        rating: Double?,
     ): Profile? {
         return dbQuery {
-            Profiles.select {
+            Profiles.select(Profiles.userId).where {
                 Profiles.userId.eq((userId))
             }.forUpdate()
 
@@ -82,7 +81,7 @@ class ProfileRepositoryImpl : ProfileRepository {
                 }
             }
 
-            Profiles.select {
+            Profiles.select(Profiles.userId).where {
                 Profiles.userId.eq((userId))
             }.mapNotNull { rowToProfiles(it) }
         }.firstOrNull()
@@ -100,7 +99,7 @@ class ProfileRepositoryImpl : ProfileRepository {
             description = row[Profiles.description],
             image = row[Profiles.image],
             location = geoLocation,
-            rating = row[Profiles.rating]
+            rating = row[Profiles.rating],
         )
     }
 

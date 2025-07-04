@@ -2140,7 +2140,7 @@ except ApiException as e:
       this.isPrimitive = !this.isAny && !this.isArray && !this.isObject;
   
       //
-      this.showToggle = this.schema.description || this.schema.title || this.isPrimitive && (this.schema.minimum || this.schema.maximum || this.schema.exclusiveMinimum || this.schema.exclusiveMaximum);
+      this.showToggle = this.schema.description || this.schema.title || this.isPrimitive && (this.schema.minimum || this.schema.maximum || this.schema.exclusiveMinimum || this.schema.exclusiveMaximum || this.schema.maxLength || this.schema.minLength || this.schema.pattern || this.schema.format);
   
       // populate isRequired property down to properties
       if (this.schema && Array.isArray(this.schema.required)) {

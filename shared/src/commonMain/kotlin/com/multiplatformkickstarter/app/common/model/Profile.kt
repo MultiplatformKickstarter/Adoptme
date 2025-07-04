@@ -10,5 +10,5 @@ data class Profile(
     val description: String?,
     val image: String?,
     val location: GeoLocation?,
-    val rating: Double?
+    val rating: Double?,
 )

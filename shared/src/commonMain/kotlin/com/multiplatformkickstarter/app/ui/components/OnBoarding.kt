@@ -40,7 +40,7 @@ import org.jetbrains.compose.resources.painterResource
 private val defaultAction = {}
 
 class OnboardingComponent(
-    private val carouselItems: List<CarouselItem>
+    private val carouselItems: List<CarouselItem>,
 ) {
     @Composable
     fun DrawCarousel() {
@@ -48,14 +48,14 @@ class OnboardingComponent(
         val state = rememberPagerState(
             initialPage = 0,
             initialPageOffsetFraction = 0f,
-            pageCount = { carouselItems.size }
+            pageCount = { carouselItems.size },
         )
 
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
         ) {
             Box(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             ) {
                 Carousel(state, carouselItems)
             }
@@ -75,7 +75,7 @@ class OnboardingComponent(
                     Text(
                         modifier = Modifier.padding(4.dp),
                         text = item.actionText,
-                        style = Typography.get().bodyMedium
+                        style = Typography.get().bodyMedium,
                     )
                 }
             }
@@ -84,28 +84,31 @@ class OnboardingComponent(
                 totalDots = carouselItems.size,
                 selectedIndex = state.currentPage,
                 selectedColor = Color.DarkGray,
-                unSelectedColor = Color.Gray
+                unSelectedColor = Color.Gray,
             )
         }
     }
 
     @Composable
-    fun Carousel(state: PagerState, carouselItemsList: List<CarouselItem>) {
+    fun Carousel(
+        state: PagerState,
+        carouselItemsList: List<CarouselItem>,
+    ) {
         HorizontalPager(
             state = state,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp)
+                .padding(top = 16.dp),
         ) {
             val item = carouselItemsList[it]
             Card(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp),
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceBetween
+                    verticalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Image(
                         painterResource(item.imageResource),
@@ -114,14 +117,14 @@ class OnboardingComponent(
                             .fillMaxWidth()
                             .weight(0.5f)
                             .padding(start = 24.dp, end = 24.dp),
-                        contentScale = ContentScale.FillWidth
+                        contentScale = ContentScale.FillWidth,
                     )
                     item.title?.let { title ->
                         Text(
                             modifier = Modifier.padding(16.dp),
                             text = title,
                             textAlign = TextAlign.Center,
-                            style = Typography.get().headlineMedium
+                            style = Typography.get().headlineMedium,
                         )
                     }
                     item.description?.let { description ->
@@ -129,7 +132,7 @@ class OnboardingComponent(
                             modifier = Modifier.padding(16.dp),
                             text = description,
                             textAlign = TextAlign.Center,
-                            style = Typography.get().bodyLarge
+                            style = Typography.get().bodyLarge,
                         )
                     }
                 }
@@ -142,14 +145,14 @@ class OnboardingComponent(
         totalDots: Int,
         selectedIndex: Int,
         selectedColor: Color,
-        unSelectedColor: Color
+        unSelectedColor: Color,
     ) {
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .padding(16.dp),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
         ) {
             items(totalDots) { index ->
                 if (index == selectedIndex) {
@@ -164,7 +167,7 @@ class OnboardingComponent(
                         modifier = Modifier
                             .size(10.dp)
                             .clip(CircleShape)
-                            .background(unSelectedColor)
+                            .background(unSelectedColor),
                     )
                 }
 

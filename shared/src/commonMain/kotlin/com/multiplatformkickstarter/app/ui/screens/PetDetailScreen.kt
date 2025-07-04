@@ -69,7 +69,7 @@ fun PetDetailView(petModel: PetModel, onClose: () -> Unit) {
                     IconButton(onClick = { onClose.invoke() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = localization.backButton
+                            contentDescription = localization.backButton,
                         )
                     }
                 },
@@ -107,13 +107,13 @@ fun PetDetailView(petModel: PetModel, onClose: () -> Unit) {
                             .background(color = MaterialTheme.colorScheme.primaryContainer)
                             .height(250.dp)
                             .fillMaxWidth(),
-                        contentAlignment = Alignment.Center
+                        contentAlignment = Alignment.Center,
                     ) {
                         Icon(
                             modifier = Modifier.size(64.dp),
                             imageVector = MultiplatformKickstarterIcons.Person,
                             contentDescription = "image",
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
                         )
                     }
                 }

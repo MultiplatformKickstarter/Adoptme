@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 package com.multiplatformkickstarter.app.ui.screens.viewmodel
 
 import cafe.adriel.voyager.core.model.ScreenModel
@@ -30,9 +32,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 private const val ONBOARDING_VIEWED_KEY = "onboarding_viewed_key"
 
@@ -46,20 +49,21 @@ class HomeScreenViewModel(
     private val rootNavigatorRepository: RootNavigatorRepository,
     private val lastSearchesRepository: LastSearchesRepository,
     private val globalAppSettingsRepository: GlobalAppSettingsRepository,
-    private val settings: Settings
+    private val settings: Settings,
 ) : ScreenModel {
     private val _sideEffects = Channel<HomeScreenSideEffects>()
     val sideEffects: Flow<HomeScreenSideEffects> = _sideEffects.receiveAsFlow()
-    private val _state = MutableStateFlow(
-        HomeScreenState(
-            userName = null,
-            greeting = localization.homeScreenSignUpLogin,
-            header = getMainHeader(null),
-            nearMeAds = emptyList(),
-            lastSearchAds = emptyList(),
-            currentLanguage = AvailableLanguages.EN
+    private val _state =
+        MutableStateFlow(
+            HomeScreenState(
+                userName = null,
+                greeting = localization.homeScreenSignUpLogin,
+                header = getMainHeader(null),
+                nearMeAds = emptyList(),
+                lastSearchAds = emptyList(),
+                currentLanguage = AvailableLanguages.EN,
+            )
         )
-    )
     val state: StateFlow<HomeScreenState> = _state.asStateFlow()
     private val debugComponent = getDebug()
 
@@ -128,14 +132,15 @@ class HomeScreenViewModel(
                 .onSuccess {
                     _state.value = _state.value.copy(nearMeAds = it)
                 }
-            _state.value = _state.value.copy(
-                userName = profileRepository.getName(),
-                greeting = getGreeting(),
-                header = getMainHeader(profileRepository.getName()),
-                nearMeAds = _state.value.nearMeAds,
-                lastSearchAds = _state.value.lastSearchAds,
-                currentLanguage = globalAppSettingsRepository.getCurrentLanguage()
-            )
+            _state.value =
+                _state.value.copy(
+                    userName = profileRepository.getName(),
+                    greeting = getGreeting(),
+                    header = getMainHeader(profileRepository.getName()),
+                    nearMeAds = _state.value.nearMeAds,
+                    lastSearchAds = _state.value.lastSearchAds,
+                    currentLanguage = globalAppSettingsRepository.getCurrentLanguage(),
+                )
         }
     }
 
@@ -154,7 +159,7 @@ data class HomeScreenState(
     val header: String,
     val nearMeAds: List<PetModel>,
     val lastSearchAds: List<PetModel>,
-    val currentLanguage: AvailableLanguages
+    val currentLanguage: AvailableLanguages,
 )
 
 sealed class HomeScreenSideEffects

@@ -135,7 +135,6 @@ class HomeTabScreen : Screen {
                 )
             }
         ) { paddingValues ->
-
             BoxWithConstraints(Modifier.fillMaxSize().padding(paddingValues), propagateMinConstraints = true) {
                 val maxWidth = this.maxWidth
 
@@ -164,7 +163,10 @@ class HomeTabScreen : Screen {
     }
 
     @Composable
-    fun BannerHeader(viewModel: HomeScreenViewModel, localization: Localization) {
+    fun BannerHeader(
+        viewModel: HomeScreenViewModel,
+        localization: Localization,
+    ) {
         Box(
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -207,7 +209,10 @@ class HomeTabScreen : Screen {
     }
 
     @Composable
-    fun CategoriesCarousel(viewModel: HomeScreenViewModel, localization: Localization) {
+    fun CategoriesCarousel(
+        viewModel: HomeScreenViewModel,
+        localization: Localization,
+    ) {
         Text(
             text = localization.homeScreenCategoryTitle,
             style = Typography.get().titleMedium,
@@ -240,7 +245,11 @@ class HomeTabScreen : Screen {
     }
 
     @Composable
-    fun LastSearchCarousel(viewModel: HomeScreenViewModel, localization: Localization, state: HomeScreenState) {
+    fun LastSearchCarousel(
+        viewModel: HomeScreenViewModel,
+        localization: Localization,
+        state: HomeScreenState,
+    ) {
         if (state.lastSearchAds.isNotEmpty()) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -277,7 +286,12 @@ class HomeTabScreen : Screen {
     }
 
     @Composable
-    fun NearMeListView(viewModel: HomeScreenViewModel, state: HomeScreenState, localization: Localization, maxWidth: Dp) {
+    fun NearMeListView(
+        viewModel: HomeScreenViewModel,
+        state: HomeScreenState,
+        localization: Localization,
+        maxWidth: Dp,
+    ) {
         Text(
             text = localization.homePetsNearYou,
             style = Typography.get().titleMedium,

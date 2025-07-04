@@ -17,7 +17,7 @@ interface PetsRepository {
         size: String,
         color: String,
         status: String,
-        shelterId: Int?
+        shelterId: Int?,
     ): PetModel?
 
     suspend fun getPet(petId: Int): PetModel
@@ -39,6 +39,6 @@ interface PetsRepository {
         size: String?,
         color: String?,
         status: String?,
-        shelterId: Int?
+        shelterId: Int?,
     ): PetModel?
 }

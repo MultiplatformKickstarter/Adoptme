@@ -22,7 +22,7 @@ class ProfileViewModel(
     private var navigator: Navigator,
     private val profileRepository: ProfileRepository,
     private val sessionRepository: SessionRepository,
-    private val rootNavigatorRepository: RootNavigatorRepository
+    private val rootNavigatorRepository: RootNavigatorRepository,
 ) : ScreenModel {
     private val _state = MutableStateFlow(ProfileState("", "", "", null, 0.0, false))
     val state = _state.asStateFlow()
@@ -67,14 +67,15 @@ class ProfileViewModel(
     fun onStarted(navigator: Navigator) {
         this.navigator = navigator
         screenModelScope.launch {
-            _state.value = ProfileState(
-                name = profileRepository.getName(),
-                description = profileRepository.getDescription(),
-                image = profileRepository.getImage(),
-                location = profileRepository.getLocation(),
-                rating = profileRepository.getRating(),
-                isLoggedIn = sessionRepository.isLoggedIn()
-            )
+            _state.value =
+                ProfileState(
+                    name = profileRepository.getName(),
+                    description = profileRepository.getDescription(),
+                    image = profileRepository.getImage(),
+                    location = profileRepository.getLocation(),
+                    rating = profileRepository.getRating(),
+                    isLoggedIn = sessionRepository.isLoggedIn()
+                )
         }
     }
 
@@ -94,6 +95,8 @@ data class ProfileState(
 
 sealed class ProfileSideEffects {
     data object Initial : ProfileSideEffects()
+
     data object OnSignedUp : ProfileSideEffects()
+
     data object OnSignUpError : ProfileSideEffects()
 }

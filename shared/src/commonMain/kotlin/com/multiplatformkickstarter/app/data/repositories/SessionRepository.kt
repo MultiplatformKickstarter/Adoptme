@@ -9,7 +9,6 @@ const val USER_TOKEN_KEY = "USER_TOKEN_KEY"
 const val IS_LOGGED_IN_KEY = "IS_LOGGED_IN_KEY"
 
 class SessionRepository(private val settings: Settings) {
-
     fun getUserId(): Int {
         return settings.getInt(USER_ID_KEY, -1)
     }

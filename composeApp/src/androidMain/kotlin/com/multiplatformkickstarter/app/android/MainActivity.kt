@@ -37,13 +37,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun shouldUseDarkTheme(
-    uiState: MainActivityUiState
-): Boolean = when (uiState) {
-    MainActivityUiState.Loading -> isSystemInDarkTheme()
-    is MainActivityUiState.Success -> when (uiState.userData.darkThemeConfig) {
-        DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-        DarkThemeConfig.LIGHT -> false
-        DarkThemeConfig.DARK -> true
+fun shouldUseDarkTheme(uiState: MainActivityUiState): Boolean =
+    when (uiState) {
+        MainActivityUiState.Loading -> isSystemInDarkTheme()
+        is MainActivityUiState.Success ->
+            when (uiState.userData.darkThemeConfig) {
+                DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+                DarkThemeConfig.LIGHT -> false
+                DarkThemeConfig.DARK -> true
+            }
     }
-}

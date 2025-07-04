@@ -45,7 +45,7 @@ fun MainScreenView() {
     val rootNavigator = LocalNavigator.currentOrThrow
     TabNavigator(
         HomeTab,
-        disposeNestedNavigators = false
+        disposeNestedNavigators = false,
     ) { _ ->
         val rootNavigatorRepository = setupRootNavigator(rootNavigator, LocalTabNavigator.current)
         val rootSnackbarHostStateRepository = setupRootSnackbarHostState(snackbarHostState)
@@ -63,7 +63,7 @@ fun MainScreenView() {
                     TabNavigationItem(InboxTab, rootNavigatorRepository)
                     TabNavigationItem(ProfileTab, rootNavigatorRepository)
                 }
-            }
+            },
         ) {
             SlideTransition(LocalNavigator.currentOrThrow) { screen ->
                 screen.Content()
@@ -72,7 +72,10 @@ fun MainScreenView() {
     }
 }
 
-fun setupRootNavigator(rootNavigator: Navigator, tabNavigator: TabNavigator): RootNavigatorRepository {
+fun setupRootNavigator(
+    rootNavigator: Navigator,
+    tabNavigator: TabNavigator,
+): RootNavigatorRepository {
     val koin = KoinPlatform.getKoin()
     return koin.get(null, parameters = { ParametersHolder(listOf(rootNavigator, tabNavigator).toMutableList(), false) })
 }
@@ -83,7 +86,10 @@ fun setupRootSnackbarHostState(snackbarHostState: SnackbarHostState): RootSnackb
 }
 
 @Composable
-private fun RowScope.TabNavigationItem(tab: Tab, rootNavigator: RootNavigatorRepository) {
+private fun RowScope.TabNavigationItem(
+    tab: Tab,
+    rootNavigator: RootNavigatorRepository,
+) {
     val tabNavigator = LocalTabNavigator.current
     val currentDestination = tabNavigator.current.key == tab.key
 
@@ -100,10 +106,12 @@ private fun RowScope.TabNavigationItem(tab: Tab, rootNavigator: RootNavigatorRep
             tab.options.icon?.let {
                 androidx.compose.material3.Icon(
                     painter = it,
-                    contentDescription = tab.options.title
+                    contentDescription = tab.options.title,
                 )
             }
         },
-        label = { androidx.compose.material3.Text(tab.options.title) }
+        label = {
+            androidx.compose.material3.Text(tab.options.title)
+        }
     )
 }

@@ -19,11 +19,15 @@ class PetModel(
     val color: String,
     val status: PetStatus,
     val shelterId: Int?,
-    val userId: Int
+    val userId: Int,
 )
 
 enum class PetAge {
-    BABY, YOUNG, ADULT, SENIOR;
+    BABY,
+    YOUNG,
+    ADULT,
+    SENIOR,
+    ;
 
     companion object
 }

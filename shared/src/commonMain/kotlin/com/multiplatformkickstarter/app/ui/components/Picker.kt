@@ -30,14 +30,14 @@ import com.multiplatformkickstarter.app.ui.theme.Typography
 fun Picker(
     modifier: Modifier,
     pickerModel: PickerModel,
-    onClose: () -> Unit
+    onClose: () -> Unit,
 ) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.scrim)
             .clickable { onClose.invoke() },
-        contentAlignment = Alignment.BottomCenter
+        contentAlignment = Alignment.BottomCenter,
     ) {
         PickerScaffold(pickerModel.title, pickerModel.description, pickerModel.options, onClose)
     }
@@ -48,7 +48,7 @@ internal fun PickerScaffold(
     title: String,
     description: String?,
     options: List<PickerOption>,
-    onClose: () -> Unit
+    onClose: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -73,14 +73,14 @@ internal fun PickerScaffold(
             text = title,
             style = Typography.get().headlineSmall,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(16.dp),
         )
         description?.let {
             Text(
                 text = title,
                 style = Typography.get().bodyMedium,
                 modifier = Modifier
-                    .padding(start = 16.dp)
+                    .padding(start = 16.dp),
             )
         }
 
@@ -103,7 +103,7 @@ fun PickerItem(text: String, icon: ImageVector?, action: () -> Unit) {
                     .fillMaxWidth()
                     .size(60.dp)
                     .padding(start = 16.dp),
-                horizontalArrangement = Arrangement.Start
+                horizontalArrangement = Arrangement.Start,
             ) {
                 icon?.let {
                     Icon(
@@ -111,14 +111,14 @@ fun PickerItem(text: String, icon: ImageVector?, action: () -> Unit) {
                             .size(24.dp)
                             .align(Alignment.CenterVertically),
                         imageVector = it,
-                        contentDescription = null // decorative image
+                        contentDescription = null, // decorative image
                     )
                     Spacer(modifier = Modifier.width(16.dp))
                 }
                 Text(
                     text = text,
                     style = Typography.get().bodyLarge,
-                    modifier = Modifier.align(Alignment.CenterVertically)
+                    modifier = Modifier.align(Alignment.CenterVertically),
                 )
             }
         }
@@ -128,6 +128,11 @@ fun PickerItem(text: String, icon: ImageVector?, action: () -> Unit) {
 data class PickerModel(
     val title: String,
     val description: String?,
-    val options: List<PickerOption>
+    val options: List<PickerOption>,
 )
-data class PickerOption(val text: String, val icon: ImageVector?, val action: () -> Unit)
+
+data class PickerOption(
+    val text: String,
+    val icon: ImageVector?,
+    val action: () -> Unit
+)

@@ -24,15 +24,16 @@ import com.multiplatformkickstarter.app.resources.Res
 import com.multiplatformkickstarter.app.resources.mklogo
 import org.jetbrains.compose.resources.vectorResource
 
+@Suppress("FunctionName")
 @Composable
 fun ProTemplateFeature(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val localization = getCurrentLocalization()
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
             imageVector = vectorResource(Res.drawable.mklogo),
@@ -41,27 +42,28 @@ fun ProTemplateFeature(
                 .fillMaxHeight(0.4f)
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp),
-            contentScale = ContentScale.FillWidth
+            contentScale = ContentScale.FillWidth,
         )
         Text(
             modifier = Modifier.padding(16.dp),
             text = localization.proFeatureScreenTitle,
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
         )
-        val proFeaturesDescription = buildAnnotatedString {
-            append(localization.proFeatureScreenDescription)
-            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                append("multiplatformkickstarter.com")
+        val proFeaturesDescription =
+            buildAnnotatedString {
+                append(localization.proFeatureScreenDescription)
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append("multiplatformkickstarter.com")
+                }
             }
-        }
         Text(
             modifier = Modifier.padding(horizontal = 24.dp),
             text = proFeaturesDescription,
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.outline
+            color = MaterialTheme.colorScheme.outline,
         )
     }
 }

@@ -23,7 +23,7 @@ internal object PetUploadTab : Tab {
                 TabOptions(
                     index = 2u,
                     title = localization.upload,
-                    icon = icon
+                    icon = icon,
                 )
             }
         }

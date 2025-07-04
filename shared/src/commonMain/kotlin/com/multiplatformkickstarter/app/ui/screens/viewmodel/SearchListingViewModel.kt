@@ -62,12 +62,15 @@ class SearchListingViewModel(
 data class SearchListingState(
     val searchId: Int? = null,
     val petCategory: PetCategory? = null,
-    val pets: List<PetModel>
+    val pets: List<PetModel>,
 )
 
 sealed class SearchListingSideEffects {
     data object Initial : SearchListingSideEffects()
+
     data class OnLoaded(val pets: List<PetModel>) : SearchListingSideEffects()
+
     data object OnNoResults : SearchListingSideEffects()
+
     data object OnLoadError : SearchListingSideEffects()
 }

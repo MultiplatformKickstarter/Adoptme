@@ -78,7 +78,11 @@ class ProfileTabScreen : Screen {
     }
 
     @Composable
-    fun ProfileScreenView(viewModel: ProfileViewModel, state: ProfileState, localization: Localization) {
+    fun ProfileScreenView(
+        viewModel: ProfileViewModel,
+        state: ProfileState,
+        localization: Localization,
+    ) {
         val scrollState = rememberScrollState()
         MultiplatformKickstarterTheme {
             Column(modifier = Modifier.padding(bottom = 80.dp).verticalScroll(scrollState)) {
@@ -89,7 +93,10 @@ class ProfileTabScreen : Screen {
     }
 
     @Composable
-    fun UserProfileData(state: ProfileState, viewModel: ProfileViewModel) {
+    fun UserProfileData(
+        state: ProfileState,
+        viewModel: ProfileViewModel,
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -97,7 +104,7 @@ class ProfileTabScreen : Screen {
                 .clickable {
                     viewModel.onProfileDetailClicked()
                 },
-            horizontalArrangement = Arrangement.Start
+            horizontalArrangement = Arrangement.Start,
         ) {
             if (state.image.isEmpty()) {
                 Icon(
@@ -105,7 +112,7 @@ class ProfileTabScreen : Screen {
                         .size(64.dp)
                         .padding(4.dp),
                     imageVector = MultiplatformKickstarterIcons.Person,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             } else {
                 KamelImage(
@@ -130,13 +137,13 @@ class ProfileTabScreen : Screen {
                                 .background(color = MaterialTheme.colorScheme.primaryContainer)
                                 .height(64.dp)
                                 .fillMaxWidth(),
-                            contentAlignment = Alignment.Center
+                            contentAlignment = Alignment.Center,
                         ) {
                             Icon(
                                 modifier = Modifier.size(24.dp),
                                 imageVector = MultiplatformKickstarterIcons.Person,
                                 contentDescription = "image",
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
                             )
                         }
                     }
@@ -182,13 +189,34 @@ class ProfileTabScreen : Screen {
     @Composable
     fun OptionsList(localization: Localization, viewModel: ProfileViewModel) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            PickerItem(localization.profileMyPets, MultiplatformKickstarterIcons.Pets) { viewModel.onMyPetsClicked() }
-            PickerItem(localization.profileAccountSettings, MultiplatformKickstarterIcons.Settings) { viewModel.onProfileAccountSettingsClicked() }
-            PickerItem(localization.profileSettings, MultiplatformKickstarterIcons.Settings) { viewModel.onProfileSettingsClicked() }
-            PickerItem(localization.profileBlog, MultiplatformKickstarterIcons.Blog) { viewModel.onBlogClicked() }
-            PickerItem(localization.profileTermsAndConditions, MultiplatformKickstarterIcons.Info) { viewModel.onTermsAndConditionsClicked() }
-            PickerItem(localization.profileHelp, MultiplatformKickstarterIcons.Help) { viewModel.onHelpClicked() }
-            PickerItem(localization.profileCloseSession, MultiplatformKickstarterIcons.Exit) { viewModel.onCloseSessionClicked() }
+            PickerItem(
+                localization.profileMyPets,
+                MultiplatformKickstarterIcons.Pets,
+            ) { viewModel.onMyPetsClicked() }
+            PickerItem(
+                localization.profileAccountSettings,
+                MultiplatformKickstarterIcons.Settings,
+            ) { viewModel.onProfileAccountSettingsClicked() }
+            PickerItem(
+                localization.profileSettings,
+                MultiplatformKickstarterIcons.Settings,
+            ) { viewModel.onProfileSettingsClicked() }
+            PickerItem(
+                localization.profileBlog,
+                MultiplatformKickstarterIcons.Blog,
+            ) { viewModel.onBlogClicked() }
+            PickerItem(
+                localization.profileTermsAndConditions,
+                MultiplatformKickstarterIcons.Info,
+            ) { viewModel.onTermsAndConditionsClicked() }
+            PickerItem(
+                localization.profileHelp,
+                MultiplatformKickstarterIcons.Help,
+            ) { viewModel.onHelpClicked() }
+            PickerItem(
+                localization.profileCloseSession,
+                MultiplatformKickstarterIcons.Exit,
+            ) { viewModel.onCloseSessionClicked() }
         }
     }
 }

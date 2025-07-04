@@ -8,12 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
+@Suppress("FunctionName")
 @Composable
 fun RatingBar(
     modifier: Modifier = Modifier,
     rating: Double = 0.0,
     stars: Int = 5,
-    starsColor: Color = Color.Yellow
+    starsColor: Color = Color.Yellow,
 ) {
     val filledStars = kotlin.math.floor(rating).toInt()
     val unfilledStars = (stars - kotlin.math.ceil(rating)).toInt()
@@ -28,7 +29,7 @@ fun RatingBar(
             Icon(
                 imageVector = Icons.Outlined.Star,
                 contentDescription = null,
-                tint = starsColor
+                tint = starsColor,
             )
         }
 
@@ -36,7 +37,7 @@ fun RatingBar(
             Icon(
                 imageVector = Icons.Outlined.Star,
                 contentDescription = null,
-                tint = starsColor
+                tint = starsColor,
             )
         }
     }

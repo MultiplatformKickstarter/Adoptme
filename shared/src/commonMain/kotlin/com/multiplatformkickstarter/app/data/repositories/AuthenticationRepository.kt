@@ -15,7 +15,6 @@ private const val SIGN_UP_PATH = "v1/users/create"
 private const val LOGOUT_PATH = "v1/users/logout"
 
 class AuthenticationRepository(private val service: ServiceClient) {
-
     suspend fun login(email: String, password: String): AuthenticationResponse {
         return service.httpClient.requestAndCatch(
             {
@@ -37,9 +36,11 @@ class AuthenticationRepository(private val service: ServiceClient) {
                     HttpStatusCode.Unauthorized -> {
                         throw UnauthorizedException()
                     }
+
                     HttpStatusCode.BadRequest -> {
                         throw BadRequestException()
                     }
+
                     else -> throw this
                 }
             }
@@ -51,11 +52,12 @@ class AuthenticationRepository(private val service: ServiceClient) {
             {
                 val response = this.submitForm(
                     url = "${ServerEnvironment.PRODUCTION.url}/$SIGN_UP_PATH",
-                    formParameters = Parameters.build {
-                        append("name", name)
-                        append("email", email)
-                        append("password", password)
-                    }
+                    formParameters =
+                        Parameters.build {
+                            append("name", name)
+                            append("email", email)
+                            append("password", password)
+                        }
                 )
                 AuthenticationResponse(
                     id = response.headers["user_id"]?.toInt()!!,
@@ -68,9 +70,11 @@ class AuthenticationRepository(private val service: ServiceClient) {
                     HttpStatusCode.BadRequest -> {
                         throw BadRequestException()
                     }
+
                     HttpStatusCode.Conflict -> {
                         throw ConflictException()
                     }
+
                     else -> throw this
                 }
             }
@@ -87,9 +91,11 @@ class AuthenticationRepository(private val service: ServiceClient) {
                     HttpStatusCode.BadRequest -> {
                         throw BadRequestException()
                     }
+
                     HttpStatusCode.Conflict -> {
                         throw ConflictException()
                     }
+
                     else -> throw this
                 }
             }

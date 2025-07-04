@@ -42,7 +42,7 @@ class ProfileUpdateRoute
 @KtorExperimentalLocationsAPI
 fun Route.profiles(
     profileRepository: ProfileRepository,
-    userRepository: UserRepository
+    userRepository: UserRepository,
 ) {
     authenticate(JWT_CONFIGURATION) {
         post<ProfileCreateRoute> {
@@ -53,23 +53,25 @@ fun Route.profiles(
             val location = profileParameters["location"] ?: ""
             val rating = profileParameters["rating"] ?: ""
 
-            val user = call.sessions.get<UserSession>()?.let {
-                userRepository.findUser(it.userId)
-            }
+            val user =
+                call.sessions.get<UserSession>()?.let {
+                    userRepository.findUser(it.userId)
+                }
             if (user == null) {
                 call.respond(HttpStatusCode.BadRequest, "Problems retrieving User")
                 return@post
             }
 
             try {
-                val profile = profileRepository.addProfile(
-                    user.userId,
-                    name = name,
-                    description = description,
-                    image = image,
-                    location = location,
-                    rating = rating.toDouble()
-                )
+                val profile =
+                    profileRepository.addProfile(
+                        user.userId,
+                        name = name,
+                        description = description,
+                        image = image,
+                        location = location,
+                        rating = rating.toDouble(),
+                    )
                 profile?.id?.let {
                     call.respond(HttpStatusCode.OK, profile)
                 }
@@ -107,23 +109,25 @@ fun Route.profiles(
             val location = profileParameters["location"] ?: ""
             val rating = profileParameters["rating"] ?: ""
 
-            val user = call.sessions.get<UserSession>()?.let {
-                userRepository.findUser(it.userId)
-            }
+            val user =
+                call.sessions.get<UserSession>()?.let {
+                    userRepository.findUser(it.userId)
+                }
             if (user == null) {
                 call.respond(HttpStatusCode.BadRequest, "Problems retrieving User")
                 return@patch
             }
 
             try {
-                val profile = profileRepository.updateProfile(
-                    userId = user.userId,
-                    name = name,
-                    description = description,
-                    image = image,
-                    location = location,
-                    rating = rating.toDouble()
-                )
+                val profile =
+                    profileRepository.updateProfile(
+                        userId = user.userId,
+                        name = name,
+                        description = description,
+                        image = image,
+                        location = location,
+                        rating = rating.toDouble(),
+                    )
                 profile?.id?.let {
                     call.respond(HttpStatusCode.OK, profile)
                 }

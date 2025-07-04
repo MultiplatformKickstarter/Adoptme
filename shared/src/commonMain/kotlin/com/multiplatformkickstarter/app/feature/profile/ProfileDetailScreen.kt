@@ -62,7 +62,12 @@ class ProfileDetailScreen(val userId: Int) : Screen {
         MultiplatformKickstarterTheme {
             val currentNavigator = LocalNavigator.currentOrThrow
             val viewModel = koinScreenModel<ProfileDetailViewModel>(
-                parameters = { ParametersHolder(listOf(userId, currentNavigator).toMutableList(), false) }
+                parameters = {
+                    ParametersHolder(
+                        listOf(userId, currentNavigator).toMutableList(),
+                        false
+                    )
+                }
             )
 
             DisposableEffect(key) {
@@ -77,7 +82,11 @@ class ProfileDetailScreen(val userId: Int) : Screen {
     }
 
     @Composable
-    fun ProfileDetailView(viewModel: ProfileDetailViewModel, localization: Localization, onClose: () -> Unit) {
+    fun ProfileDetailView(
+        viewModel: ProfileDetailViewModel,
+        localization: Localization,
+        onClose: () -> Unit
+    ) {
         val scrollState = rememberScrollState()
         val state by viewModel.state.collectAsState()
 
@@ -92,7 +101,10 @@ class ProfileDetailScreen(val userId: Int) : Screen {
                         TopAppBar(
                             navigationIcon = {
                                 IconButton(onClick = { onClose.invoke() }) {
-                                    Icon(imageVector = MultiplatformKickstarterIcons.ArrowBack, contentDescription = "Go back")
+                                    Icon(
+                                        imageVector = MultiplatformKickstarterIcons.ArrowBack,
+                                        contentDescription = "Go back"
+                                    )
                                 }
                             },
                             title = {},
@@ -193,23 +205,24 @@ class ProfileDetailScreen(val userId: Int) : Screen {
                 }
             ) {
                 Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(it)
-                        .verticalScroll(scrollState)
-                        .background(MaterialTheme.colorScheme.background)
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(it)
+                            .verticalScroll(scrollState)
+                            .background(MaterialTheme.colorScheme.background),
                 ) {
                     Text(
                         text = localization.profileScreenUserAds,
                         style = Typography.get().titleMedium,
-                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
                     )
 
                     if (state.pets.isNotEmpty()) {
                         val itemSize: Dp = (maxWidth / 2) - 8.dp
                         FlowRow(
                             horizontalArrangement = Arrangement.SpaceEvenly,
-                            maxItemsInEachRow = 2
+                            maxItemsInEachRow = 2,
                         ) {
                             state.pets.map { item ->
                                 PetCardSmall(item = item, itemSize, itemSize) {

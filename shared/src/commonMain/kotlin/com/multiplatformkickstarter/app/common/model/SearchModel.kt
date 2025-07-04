@@ -9,5 +9,5 @@ data class SearchList(val list: List<SearchModel>)
 data class SearchModel(
     val text: String? = null,
     val petCategory: PetCategory? = null,
-    val location: GeoLocation? = null
+    val location: GeoLocation? = null,
 )

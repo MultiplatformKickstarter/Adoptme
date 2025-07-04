@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 @Immutable
 data class BackgroundTheme(
     val color: Color = Color.Unspecified,
-    val tonalElevation: Dp = Dp.Unspecified
+    val tonalElevation: Dp = Dp.Unspecified,
 )
 
 /**
@@ -40,6 +40,7 @@ val LocalBackgroundTheme = staticCompositionLocalOf { BackgroundTheme() }
  * @param modifier Modifier to be applied to the background.
  * @param content The background content.
  */
+@Suppress("FunctionName")
 @Composable
 fun MultiplatformKickstarterBackground(
     modifier: Modifier = Modifier,
@@ -83,39 +84,36 @@ fun MultiplatformKickstarterGradientBackground(
                 .drawWithCache {
                     // Compute the start and end coordinates such that the gradients are angled 11.06
                     // degrees off the vertical axis
-                    /*val offset = size.height * tan(
-                        Math
-                            .toRadians(11.06)
-                            .toFloat()
-                    )
-                     */
                     val offset = size.height
 
                     val start = Offset(size.width / 2 + offset / 2, 0f)
                     val end = Offset(size.width / 2 - offset / 2, size.height)
 
                     // Create the top gradient that fades out after the halfway point vertically
-                    val topGradient = Brush.linearGradient(
-                        0f to if (currentTopColor == Color.Unspecified) {
-                            Color.Transparent
-                        } else {
-                            currentTopColor
-                        },
-                        0.724f to Color.Transparent,
-                        start = start,
-                        end = end
-                    )
+                    val topGradient =
+                        Brush.linearGradient(
+                            0f to
+                                    if (currentTopColor == Color.Unspecified) {
+                                        Color.Transparent
+                                    } else {
+                                        currentTopColor
+                                    },
+                            0.724f to Color.Transparent,
+                            start = start,
+                            end = end,
+                        )
                     // Create the bottom gradient that fades in before the halfway point vertically
-                    val bottomGradient = Brush.linearGradient(
-                        0.2552f to Color.Transparent,
-                        1f to if (currentBottomColor == Color.Unspecified) {
-                            Color.Transparent
-                        } else {
-                            currentBottomColor
-                        },
-                        start = start,
-                        end = end
-                    )
+                    val bottomGradient =
+                        Brush.linearGradient(
+                            0.2552f to Color.Transparent,
+                            1f to if (currentBottomColor == Color.Unspecified) {
+                                Color.Transparent
+                            } else {
+                                currentBottomColor
+                            },
+                            start = start,
+                            end = end,
+                        )
 
                     onDrawBehind {
                         // There is overlap here, so order is important
@@ -133,10 +131,9 @@ fun MultiplatformKickstarterGradientBackground(
  * Multipreview annotation that represents light and dark themes. Add this annotation to a
  * composable to render the both themes.
  */
-// @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, name = "Light theme")
-// @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "Dark theme")
 annotation class ThemePreviews
 
+@Suppress("FunctionName")
 @ThemePreviews
 @Composable
 fun BackgroundDefault() {
@@ -145,6 +142,7 @@ fun BackgroundDefault() {
     }
 }
 
+@Suppress("FunctionName")
 @ThemePreviews
 @Composable
 fun BackgroundDynamic() {
@@ -153,6 +151,7 @@ fun BackgroundDynamic() {
     }
 }
 
+@Suppress("FunctionName")
 @ThemePreviews
 @Composable
 fun GradientBackgroundDefault() {
@@ -161,6 +160,7 @@ fun GradientBackgroundDefault() {
     }
 }
 
+@Suppress("FunctionName")
 @ThemePreviews
 @Composable
 fun GradientBackgroundDynamic() {

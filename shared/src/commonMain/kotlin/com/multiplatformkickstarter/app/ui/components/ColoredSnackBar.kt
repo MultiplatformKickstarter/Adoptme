@@ -20,10 +20,11 @@ import com.multiplatformkickstarter.app.ui.theme.warningContainer
 
 private const val DELIMITER = "##"
 
+@Suppress("FunctionName")
 @Composable
 fun ColoredSnackBarHost(
     hostState: SnackbarHostState,
-    action: @Composable (() -> Unit)? = null
+    action: @Composable (() -> Unit)? = null,
 ) {
     SnackbarHost(hostState) {
         val message = it.getSnackbarMessage()
@@ -38,12 +39,12 @@ fun ColoredSnackBarHost(
             modifier = Modifier.padding(8.dp),
             containerColor = color.first,
             contentColor = color.second,
-            action = action
+            action = action,
         ) {
             hostState.currentSnackbarData?.let {
                 Text(
                     text = message.message,
-                    style = Typography.get().bodyMedium
+                    style = Typography.get().bodyMedium,
                 )
             }
         }
@@ -55,7 +56,7 @@ suspend fun SnackbarHostState.showSnackbar(
     message: String,
     actionLabel: String? = null,
     withDismissAction: Boolean = false,
-    duration: SnackbarDuration = SnackbarDuration.Short
+    duration: SnackbarDuration = SnackbarDuration.Short,
 ): SnackbarResult {
     return showSnackbar(SnackbarMessage(type, message).toString(), actionLabel, withDismissAction, duration)
 }
@@ -74,7 +75,7 @@ private data class SnackbarMessage(
 
             return SnackbarMessage(
                 type = SnackbarType.valueOf(type),
-                message = message
+                message = message,
             )
         }
     }
@@ -85,5 +86,8 @@ private fun SnackbarData.getSnackbarMessage(): SnackbarMessage {
 }
 
 enum class SnackbarType {
-    SUCCESS, ERROR, INFO, WARNING
+    SUCCESS,
+    ERROR,
+    INFO,
+    WARNING
 }

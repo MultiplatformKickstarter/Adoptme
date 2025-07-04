@@ -39,7 +39,7 @@ fun PetCardSmall(
     item: PetModel,
     width: Dp,
     height: Dp,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     val imageHeight = 70.dp
     val roundedCornerSize = 10.dp
@@ -52,7 +52,7 @@ fun PetCardSmall(
             containerColor = MaterialTheme.colorScheme.background,
             contentColor = MaterialTheme.colorScheme.onBackground
         ),
-        interactionSource = remember { MutableInteractionSource() }
+        interactionSource = remember { MutableInteractionSource() },
     ) {
         Column {
             KamelImage(
@@ -70,7 +70,7 @@ fun PetCardSmall(
                             .background(color = MaterialTheme.colorScheme.primaryContainer)
                             .height(imageHeight)
                             .fillMaxWidth()
-                            .shimmerLoadingAnimation(isLoadingCompleted = false)
+                            .shimmerLoadingAnimation(isLoadingCompleted = false),
                     )
                 },
                 onFailure = {
@@ -80,13 +80,13 @@ fun PetCardSmall(
                             .background(color = MaterialTheme.colorScheme.primaryContainer)
                             .height(imageHeight)
                             .fillMaxWidth(),
-                        contentAlignment = Alignment.Center
+                        contentAlignment = Alignment.Center,
                     ) {
                         Icon(
                             modifier = Modifier.size(36.dp),
                             imageVector = MultiplatformKickstarterIcons.BrokenImage,
                             contentDescription = "image",
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
                         )
                     }
                 }
@@ -95,13 +95,13 @@ fun PetCardSmall(
                 modifier = Modifier.padding(top = 6.dp),
                 text = item.title,
                 style = Typography.get().titleSmall,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = item.description,
                 style = Typography.get().bodySmall,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }

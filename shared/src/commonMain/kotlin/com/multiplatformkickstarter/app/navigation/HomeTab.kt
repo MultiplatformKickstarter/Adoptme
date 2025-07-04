@@ -12,7 +12,6 @@ import com.multiplatformkickstarter.app.ui.icon.MultiplatformKickstarterIcons
 import com.multiplatformkickstarter.app.ui.screens.HomeTabScreen
 
 internal object HomeTab : Tab {
-
     override val options: TabOptions
         @Composable
         get() {
@@ -22,7 +21,7 @@ internal object HomeTab : Tab {
                 TabOptions(
                     index = 0u,
                     title = getCurrentLocalization().home,
-                    icon = icon
+                    icon = icon,
                 )
             }
         }

@@ -34,14 +34,15 @@ class ProfileDetailViewModel(
                 profileRepository.getProfile(userId)
             }
             val pets = emptyList<PetModel>()
-            _state.value = ProfileDetailState(
-                name = profile.name,
-                description = profile.description,
-                image = profile.image,
-                location = profile.location,
-                rating = profile.rating,
-                pets = pets
-            )
+            _state.value =
+                ProfileDetailState(
+                    name = profile.name,
+                    description = profile.description,
+                    image = profile.image,
+                    location = profile.location,
+                    rating = profile.rating,
+                    pets = pets,
+                )
         }
     }
 
@@ -56,7 +57,7 @@ data class ProfileDetailState(
     val image: String?,
     val location: GeoLocation?,
     val rating: Double?,
-    val pets: List<PetModel>
+    val pets: List<PetModel>,
 )
 
 sealed class ProfileDetailSideEffects {
