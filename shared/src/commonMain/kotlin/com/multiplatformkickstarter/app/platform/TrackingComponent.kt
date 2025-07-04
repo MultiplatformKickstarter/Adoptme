@@ -4,7 +4,6 @@ import kotlin.native.concurrent.ThreadLocal
 
 @ThreadLocal
 object TrackingComponent {
-
     private val EMPTY_TRACKER = EmptyTracker()
 
     private var tracker: Tracker = EMPTY_TRACKER
@@ -37,7 +36,7 @@ enum class TrackEvents(val eventName: String) {
     SIGN_UP_ERROR("Sign Up Error"),
     PET_UPLOAD_SUCCESSFUL("Pet Upload Successful"),
     PET_UPLOAD_ERROR("Pet Upload Error"),
-    REQUEST_ERROR("Request Error")
+    REQUEST_ERROR("Request Error"),
 }
 
 interface Tracker {

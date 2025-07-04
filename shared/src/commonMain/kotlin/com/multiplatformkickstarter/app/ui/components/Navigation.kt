@@ -38,7 +38,7 @@ fun RowScope.MultiplatformKickstarterNavigationBarItem(
     selectedIcon: @Composable () -> Unit = icon,
     enabled: Boolean = true,
     label: @Composable (() -> Unit)? = null,
-    alwaysShowLabel: Boolean = true
+    alwaysShowLabel: Boolean = true,
 ) {
     NavigationBarItem(
         selected = selected,
@@ -48,13 +48,14 @@ fun RowScope.MultiplatformKickstarterNavigationBarItem(
         enabled = enabled,
         label = label,
         alwaysShowLabel = alwaysShowLabel,
-        colors = NavigationBarItemDefaults.colors(
-            selectedIconColor = MultiplatformKickstarterNavigationDefaults.navigationSelectedItemColor(),
-            unselectedIconColor = MultiplatformKickstarterNavigationDefaults.navigationContentColor(),
-            selectedTextColor = MultiplatformKickstarterNavigationDefaults.navigationSelectedItemColor(),
-            unselectedTextColor = MultiplatformKickstarterNavigationDefaults.navigationContentColor(),
-            indicatorColor = MultiplatformKickstarterNavigationDefaults.navigationIndicatorColor()
-        )
+        colors =
+            NavigationBarItemDefaults.colors(
+                selectedIconColor = MultiplatformKickstarterNavigationDefaults.navigationSelectedItemColor(),
+                unselectedIconColor = MultiplatformKickstarterNavigationDefaults.navigationContentColor(),
+                selectedTextColor = MultiplatformKickstarterNavigationDefaults.navigationSelectedItemColor(),
+                unselectedTextColor = MultiplatformKickstarterNavigationDefaults.navigationContentColor(),
+                indicatorColor = MultiplatformKickstarterNavigationDefaults.navigationIndicatorColor()
+            )
     )
 }
 
@@ -65,16 +66,17 @@ fun RowScope.MultiplatformKickstarterNavigationBarItem(
  * @param content Destinations inside the navigation bar. This should contain multiple
  * [NavigationBarItem]s.
  */
+@Suppress("FunctionName")
 @Composable
 fun MultiplatformKickstarterNavigationBar(
     modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     NavigationBar(
         modifier = modifier,
         contentColor = MultiplatformKickstarterNavigationDefaults.navigationContentColor(),
         tonalElevation = 0.dp,
-        content = content
+        content = content,
     )
 }
 
@@ -102,7 +104,7 @@ fun MultiplatformKickstarterNavigationRailItem(
     selectedIcon: @Composable () -> Unit = icon,
     enabled: Boolean = true,
     label: @Composable (() -> Unit)? = null,
-    alwaysShowLabel: Boolean = true
+    alwaysShowLabel: Boolean = true,
 ) {
     NavigationRailItem(
         selected = selected,
@@ -118,7 +120,7 @@ fun MultiplatformKickstarterNavigationRailItem(
             selectedTextColor = MultiplatformKickstarterNavigationDefaults.navigationSelectedItemColor(),
             unselectedTextColor = MultiplatformKickstarterNavigationDefaults.navigationContentColor(),
             indicatorColor = MultiplatformKickstarterNavigationDefaults.navigationIndicatorColor()
-        )
+        ),
     )
 }
 
@@ -134,14 +136,14 @@ fun MultiplatformKickstarterNavigationRailItem(
 fun MultiplatformKickstarterNavigationRail(
     modifier: Modifier = Modifier,
     header: @Composable (ColumnScope.() -> Unit)? = null,
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     NavigationRail(
         modifier = modifier,
         containerColor = Color.Transparent,
         contentColor = MultiplatformKickstarterNavigationDefaults.navigationContentColor(),
         header = header,
-        content = content
+        content = content,
     )
 }
 

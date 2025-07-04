@@ -11,7 +11,7 @@ class GetLastSearchUseCase(
     private val lastSearchesRepository: LastSearchesRepository,
     private val petsFromSearchRepository: PetsFromSearchRepository,
     private val lastSearchAdsMockRepository: LastSearchAdsMockRepository,
-    private val globalAppSettingsRepository: GlobalAppSettingsRepository
+    private val globalAppSettingsRepository: GlobalAppSettingsRepository,
 ) : UseCase() {
 
     suspend fun invoke(): Result<List<PetModel>> = runCatching {

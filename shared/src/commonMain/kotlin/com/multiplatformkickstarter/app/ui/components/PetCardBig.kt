@@ -36,7 +36,7 @@ import io.kamel.image.asyncPainterResource
 @Composable
 fun PetCardBig(
     item: PetModel,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     val imageHeight = 120.dp
     val roundedCornerSize = 10.dp
@@ -49,9 +49,9 @@ fun PetCardBig(
         shape = RoundedCornerShape(roundedCornerSize),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.background,
-            contentColor = MaterialTheme.colorScheme.onBackground
+            contentColor = MaterialTheme.colorScheme.onBackground,
         ),
-        interactionSource = remember { MutableInteractionSource() }
+        interactionSource = remember { MutableInteractionSource() },
     ) {
         Column {
             KamelImage(
@@ -69,7 +69,7 @@ fun PetCardBig(
                             .background(color = MaterialTheme.colorScheme.primaryContainer)
                             .height(imageHeight)
                             .fillMaxWidth()
-                            .shimmerLoadingAnimation(isLoadingCompleted = false)
+                            .shimmerLoadingAnimation(isLoadingCompleted = false),
                     )
                 },
                 onFailure = {
@@ -79,13 +79,13 @@ fun PetCardBig(
                             .background(color = MaterialTheme.colorScheme.primaryContainer)
                             .height(imageHeight)
                             .fillMaxWidth(),
-                        contentAlignment = Alignment.Center
+                        contentAlignment = Alignment.Center,
                     ) {
                         Icon(
                             modifier = Modifier.size(48.dp),
                             imageVector = MultiplatformKickstarterIcons.BrokenImage,
                             contentDescription = "image",
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
                         )
                     }
                 }
@@ -94,13 +94,13 @@ fun PetCardBig(
                 text = item.title,
                 style = Typography.get().headlineMedium,
                 modifier = Modifier.fillMaxWidth(),
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
             Text(
                 text = item.description,
                 style = Typography.get().bodyMedium,
                 modifier = Modifier.fillMaxWidth(),
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }

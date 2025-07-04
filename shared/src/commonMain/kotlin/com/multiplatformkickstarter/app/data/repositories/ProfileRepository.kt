@@ -47,7 +47,7 @@ class ProfileRepository(
             getDescription(),
             getImage(),
             getLocation(),
-            getRating()
+            getRating(),
         )
     }
 
@@ -89,7 +89,14 @@ class ProfileRepository(
         return settings.getDouble(PROFILE_RATING_KEY, 0.0)
     }
 
-    fun initProfile(userId: Int, name: String, description: String?, image: String?, geoLocation: GeoLocation?, rating: Double?) {
+    fun initProfile(
+        userId: Int,
+        name: String,
+        description: String?,
+        image: String?,
+        geoLocation: GeoLocation?,
+        rating: Double?,
+    ) {
         settings.putInt(PROFILE_ID_KEY, userId)
         settings.putString(PROFILE_NAME_KEY, name)
         description?.let {

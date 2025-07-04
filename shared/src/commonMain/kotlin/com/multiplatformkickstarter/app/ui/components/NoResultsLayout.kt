@@ -33,31 +33,31 @@ fun EmptyLayout(
     imageResource: DrawableResource? = null,
     actionLabel: String? = null,
     localization: Localization,
-    action: () -> Unit
+    action: () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             modifier = Modifier.padding(16.dp),
             text = title ?: localization.noResultsTitle,
             style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
         )
         Text(
             modifier = Modifier.padding(horizontal = 16.dp),
             text = description ?: localization.noResultsDesciption,
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.outline
+            color = MaterialTheme.colorScheme.outline,
         )
         Image(
             imageVector = vectorResource(imageResource ?: Res.drawable.no_data_cuate),
             contentDescription = description,
-            modifier = Modifier.size(260.dp)
+            modifier = Modifier.size(260.dp),
         )
         actionLabel?.let {
             Spacer(modifier = Modifier.size(10.dp))
@@ -66,17 +66,18 @@ fun EmptyLayout(
                     action.invoke()
                 },
                 colors = ButtonDefaults.buttonColors(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .size(50.dp)
-                    .padding(start = 16.dp, end = 16.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .size(50.dp)
+                        .padding(start = 16.dp, end = 16.dp),
                 contentPadding = PaddingValues(0.dp),
-                shape = RoundedCornerShape(10)
+                shape = RoundedCornerShape(10),
             ) {
                 Text(
                     text = it,
                     style = Typography.get().titleMedium,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(8.dp),
                 )
             }
         }

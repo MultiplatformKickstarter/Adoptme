@@ -28,7 +28,7 @@ data class GradientColors(
     val primary: Color = Color.Unspecified,
     val secondary: Color = Color.Unspecified,
     val tertiary: Color = Color.Unspecified,
-    val neutral: Color = Color.Unspecified
+    val neutral: Color = Color.Unspecified,
 )
 
 /**

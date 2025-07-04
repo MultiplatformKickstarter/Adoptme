@@ -7,7 +7,7 @@ enum class PetCategory(val id: Int) {
     RABBITS(3),
     SMALL_AND_FURRY(4),
     HORSES(5),
-    OTHER(6);
+    OTHER(6),;
 
     companion object
 }

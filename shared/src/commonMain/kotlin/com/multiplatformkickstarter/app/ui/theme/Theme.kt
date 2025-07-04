@@ -11,86 +11,89 @@ import androidx.compose.ui.unit.dp
 /**
  * Light default theme color scheme
  */
-// @VisibleForTesting
-val LightDefaultColorScheme = lightColorScheme(
-    primary = lightPrimary,
-    onPrimary = lightOnPrimary,
-    primaryContainer = lightPrimaryContainer,
-    onPrimaryContainer = lightOnPrimaryContainer,
-    inversePrimary = lightPrimaryInverse,
-    secondary = lightSecondary,
-    onSecondary = lightOnSecondary,
-    secondaryContainer = lightSecondaryContainer,
-    onSecondaryContainer = lightOnSecondaryContainer,
-    tertiary = lightTertiary,
-    onTertiary = lightOnTertiary,
-    tertiaryContainer = lightTertiaryContainer,
-    onTertiaryContainer = lightOnTertiaryContainer,
-    error = lightError,
-    onError = lightOnError,
-    errorContainer = lightErrorContainer,
-    onErrorContainer = lightOnErrorContainer,
-    background = lightBackground,
-    onBackground = lightOnBackground,
-    surface = lightSurface,
-    onSurface = lightOnSurface,
-    inverseSurface = lightInverseSurface,
-    inverseOnSurface = lightInverseOnSurface,
-    surfaceVariant = lightSurfaceVariant,
-    onSurfaceVariant = lightOnSurfaceVariant,
-    outline = lightOutline,
-    scrim = scrimColor
-)
+val LightDefaultColorScheme =
+    lightColorScheme(
+        primary = lightPrimary,
+        onPrimary = lightOnPrimary,
+        primaryContainer = lightPrimaryContainer,
+        onPrimaryContainer = lightOnPrimaryContainer,
+        inversePrimary = lightPrimaryInverse,
+        secondary = lightSecondary,
+        onSecondary = lightOnSecondary,
+        secondaryContainer = lightSecondaryContainer,
+        onSecondaryContainer = lightOnSecondaryContainer,
+        tertiary = lightTertiary,
+        onTertiary = lightOnTertiary,
+        tertiaryContainer = lightTertiaryContainer,
+        onTertiaryContainer = lightOnTertiaryContainer,
+        error = lightError,
+        onError = lightOnError,
+        errorContainer = lightErrorContainer,
+        onErrorContainer = lightOnErrorContainer,
+        background = lightBackground,
+        onBackground = lightOnBackground,
+        surface = lightSurface,
+        onSurface = lightOnSurface,
+        inverseSurface = lightInverseSurface,
+        inverseOnSurface = lightInverseOnSurface,
+        surfaceVariant = lightSurfaceVariant,
+        onSurfaceVariant = lightOnSurfaceVariant,
+        outline = lightOutline,
+        scrim = scrimColor,
+    )
 
 /**
  * Dark default theme color scheme
  */
 // @VisibleForTesting
-val DarkDefaultColorScheme = darkColorScheme(
-    primary = darkPrimary,
-    onPrimary = darkOnPrimary,
-    primaryContainer = darkPrimaryContainer,
-    onPrimaryContainer = darkOnPrimaryContainer,
-    inversePrimary = darkPrimaryInverse,
-    secondary = darkSecondary,
-    onSecondary = darkOnSecondary,
-    secondaryContainer = darkSecondaryContainer,
-    onSecondaryContainer = darkOnSecondaryContainer,
-    tertiary = darkTertiary,
-    onTertiary = darkOnTertiary,
-    tertiaryContainer = darkTertiaryContainer,
-    onTertiaryContainer = darkOnTertiaryContainer,
-    error = darkError,
-    onError = darkOnError,
-    errorContainer = darkErrorContainer,
-    onErrorContainer = darkOnErrorContainer,
-    background = darkBackground,
-    onBackground = darkOnBackground,
-    surface = darkSurface,
-    onSurface = darkOnSurface,
-    inverseSurface = darkInverseSurface,
-    inverseOnSurface = darkInverseOnSurface,
-    surfaceVariant = darkSurfaceVariant,
-    onSurfaceVariant = darkOnSurfaceVariant,
-    outline = darkOutline,
-    scrim = scrimColor
-)
+val DarkDefaultColorScheme =
+    darkColorScheme(
+        primary = darkPrimary,
+        onPrimary = darkOnPrimary,
+        primaryContainer = darkPrimaryContainer,
+        onPrimaryContainer = darkOnPrimaryContainer,
+        inversePrimary = darkPrimaryInverse,
+        secondary = darkSecondary,
+        onSecondary = darkOnSecondary,
+        secondaryContainer = darkSecondaryContainer,
+        onSecondaryContainer = darkOnSecondaryContainer,
+        tertiary = darkTertiary,
+        onTertiary = darkOnTertiary,
+        tertiaryContainer = darkTertiaryContainer,
+        onTertiaryContainer = darkOnTertiaryContainer,
+        error = darkError,
+        onError = darkOnError,
+        errorContainer = darkErrorContainer,
+        onErrorContainer = darkOnErrorContainer,
+        background = darkBackground,
+        onBackground = darkOnBackground,
+        surface = darkSurface,
+        onSurface = darkOnSurface,
+        inverseSurface = darkInverseSurface,
+        inverseOnSurface = darkInverseOnSurface,
+        surfaceVariant = darkSurfaceVariant,
+        onSurfaceVariant = darkOnSurfaceVariant,
+        outline = darkOutline,
+        scrim = scrimColor,
+    )
 
 /**
  * Light default gradient colors
  */
-val LightDefaultGradientColors = GradientColors(
-    primary = lightPrimary,
-    secondary = lightSecondary,
-    tertiary = lightTertiary,
-    neutral = lightOnPrimary
-)
+val LightDefaultGradientColors =
+    GradientColors(
+        primary = lightPrimary,
+        secondary = lightSecondary,
+        tertiary = lightTertiary,
+        neutral = lightOnPrimary,
+    )
 
 /**
  * Now in Android theme.
  *
  * @param darkTheme Whether the theme should use a dark color scheme (follows system by default).
  */
+@Suppress("FunctionName")
 @Composable
 fun MultiplatformKickstarterTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -115,30 +118,32 @@ fun MultiplatformKickstarterTheme(
 internal fun MultiplatformKickstarterTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     disableDynamicTheming: Boolean,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = if (darkTheme) DarkDefaultColorScheme else LightDefaultColorScheme
 
     val defaultGradientColors = GradientColors()
-    val gradientColors = if (!disableDynamicTheming) {
-        defaultGradientColors
-    } else {
-        if (darkTheme) defaultGradientColors else LightDefaultGradientColors
-    }
+    val gradientColors =
+        if (!disableDynamicTheming) {
+            defaultGradientColors
+        } else {
+            if (darkTheme) defaultGradientColors else LightDefaultGradientColors
+        }
 
-    val defaultBackgroundTheme = BackgroundTheme(
-        color = colorScheme.surface,
-        tonalElevation = 2.dp
-    )
+    val defaultBackgroundTheme =
+        BackgroundTheme(
+            color = colorScheme.surface,
+            tonalElevation = 2.dp,
+        )
 
     CompositionLocalProvider(
         LocalGradientColors provides gradientColors,
-        LocalBackgroundTheme provides defaultBackgroundTheme
+        LocalBackgroundTheme provides defaultBackgroundTheme,
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
             typography = Typography.get(),
-            content = content
+            content = content,
         )
     }
 }

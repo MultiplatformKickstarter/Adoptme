@@ -24,7 +24,7 @@ fun Modifier.shimmerLoadingAnimation(
     isLightModeActive: Boolean = true,
     widthOfShadowBrush: Int = 500,
     angleOfAxisY: Float = 270f,
-    durationMillis: Int = 1000
+    durationMillis: Int = 1000,
 ): Modifier {
     if (isLoadingCompleted) {
         return this
@@ -34,18 +34,19 @@ fun Modifier.shimmerLoadingAnimation(
 
             val transition = rememberInfiniteTransition(label = "")
 
-            val translateAnimation = transition.animateFloat(
-                initialValue = 0f,
-                targetValue = (durationMillis + widthOfShadowBrush).toFloat(),
-                animationSpec = infiniteRepeatable(
-                    animation = tween(
-                        durationMillis = durationMillis,
-                        easing = LinearEasing
+            val translateAnimation =
+                transition.animateFloat(
+                    initialValue = 0f,
+                    targetValue = (durationMillis + widthOfShadowBrush).toFloat(),
+                    animationSpec = infiniteRepeatable(
+                        animation = tween(
+                            durationMillis = durationMillis,
+                            easing = LinearEasing
+                        ),
+                        repeatMode = RepeatMode.Restart
                     ),
-                    repeatMode = RepeatMode.Restart
-                ),
-                label = "Shimmer loading animation"
-            )
+                    label = "Shimmer loading animation",
+                )
 
             this.background(
                 brush = Brush.linearGradient(

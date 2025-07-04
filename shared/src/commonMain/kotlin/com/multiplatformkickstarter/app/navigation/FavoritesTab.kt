@@ -10,7 +10,6 @@ import com.multiplatformkickstarter.app.ui.icon.MultiplatformKickstarterIcons
 import com.multiplatformkickstarter.app.ui.screens.ProTemplateFeature
 
 internal object FavoritesTab : Tab {
-
     override val options: TabOptions
         @Composable
         get() {
@@ -20,7 +19,7 @@ internal object FavoritesTab : Tab {
                 TabOptions(
                     index = 1u,
                     title = getCurrentLocalization().favorites,
-                    icon = icon
+                    icon = icon,
                 )
             }
         }

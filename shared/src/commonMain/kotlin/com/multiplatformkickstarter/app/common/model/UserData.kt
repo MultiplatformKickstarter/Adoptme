@@ -8,5 +8,5 @@ data class UserData(
     val followedTopics: Set<String>,
     val followedAuthors: Set<String>,
     val themeBrand: ThemeBrand,
-    val darkThemeConfig: DarkThemeConfig
+    val darkThemeConfig: DarkThemeConfig,
 )

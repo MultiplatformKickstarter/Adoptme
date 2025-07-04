@@ -57,7 +57,15 @@ class SearchListingScreen(
         val navigator = LocalNavigator.currentOrThrow
 
         val viewModel = koinScreenModel<SearchListingViewModel>(
-            parameters = { ParametersHolder(listOf(searchId, petCategory, navigator).toMutableList(), false) }
+            parameters = {
+                ParametersHolder(
+                    listOf(
+                        searchId,
+                        petCategory,
+                        navigator
+                    ).toMutableList(), false
+                )
+            }
         )
 
         DisposableEffect(key) {
@@ -74,7 +82,11 @@ class SearchListingScreen(
     }
 
     @Composable
-    private fun SetupSideEffects(viewModel: SearchListingViewModel, snackbarHostState: SnackbarHostState, localization: Localization) {
+    private fun SetupSideEffects(
+        viewModel: SearchListingViewModel,
+        snackbarHostState: SnackbarHostState,
+        localization: Localization
+    ) {
         val coroutineScope = rememberCoroutineScope()
         val sideEffects = viewModel.sideEffects.collectAsState(SearchListingSideEffects.Initial)
         sideEffects.value.apply {
@@ -86,6 +98,7 @@ class SearchListingScreen(
                         snackbarHostState.showSnackbar(localization.genericFailedDefaultMessage)
                     }
                 }
+
                 SearchListingSideEffects.OnNoResults -> {}
             }
         }
@@ -109,37 +122,39 @@ class SearchListingScreen(
                         IconButton(onClick = { onClose.invoke() }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = localization.backButton
+                                contentDescription = localization.backButton,
                             )
                         }
                     },
                     title = {
                         Text(
                             text = topBarTitle,
-                            style = Typography.get().titleMedium
+                            style = Typography.get().titleMedium,
                         )
                     },
-                    colors = TopAppBarDefaults.mediumTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background
-                    ),
+                    colors =
+                        TopAppBarDefaults.mediumTopAppBarColors(
+                            containerColor = MaterialTheme.colorScheme.background,
+                        ),
                     actions = {
                         IconButton(onClick = { }) {
                             Icon(
                                 imageVector = MultiplatformKickstarterIcons.Filter,
-                                contentDescription = localization.backLabel
+                                contentDescription = localization.backLabel,
                             )
                         }
-                    }
+                    },
                 )
             }
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(it)
-                    .padding(bottom = 16.dp)
-                    .verticalScroll(scrollState)
-                    .background(MaterialTheme.colorScheme.background)
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(it)
+                        .padding(bottom = 16.dp)
+                        .verticalScroll(scrollState)
+                        .background(MaterialTheme.colorScheme.background),
             ) {
                 if (state.pets.isNotEmpty()) {
                     state.pets.map { petModel ->

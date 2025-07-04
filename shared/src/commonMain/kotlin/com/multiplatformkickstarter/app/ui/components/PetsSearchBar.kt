@@ -34,7 +34,7 @@ import com.multiplatformkickstarter.app.ui.icon.MultiplatformKickstarterIcons
 @Composable
 fun PetsSearchBar(
     modifier: Modifier = Modifier,
-    localization: Localization
+    localization: Localization,
 ) {
     var query by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }

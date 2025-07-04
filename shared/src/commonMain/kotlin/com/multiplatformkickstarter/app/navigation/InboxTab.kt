@@ -10,7 +10,6 @@ import com.multiplatformkickstarter.app.ui.icon.MultiplatformKickstarterIcons
 import com.multiplatformkickstarter.app.ui.screens.ProTemplateFeature
 
 internal object InboxTab : Tab {
-
     override val options: TabOptions
         @Composable
         get() {
