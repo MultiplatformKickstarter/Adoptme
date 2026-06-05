@@ -116,7 +116,7 @@ class ProfileTabScreen : Screen {
                 )
             } else {
                 KamelImage(
-                    resource = asyncPainterResource(data = state.image),
+                    resource = { asyncPainterResource(data = state.image) },
                     contentDescription = "profile image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

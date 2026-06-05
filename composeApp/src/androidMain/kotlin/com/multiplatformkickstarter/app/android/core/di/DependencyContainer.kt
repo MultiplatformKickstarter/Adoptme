@@ -2,7 +2,7 @@ package com.multiplatformkickstarter.app.android.core.di
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting
-import com.google.firebase.ktx.BuildConfig
+import com.multiplatformkickstarter.app.android.BuildConfig
 import com.multiplatformkickstarter.app.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

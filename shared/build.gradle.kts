@@ -35,7 +35,6 @@ kotlin {
     jvm()
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64(),
     ).forEach {
@@ -54,7 +53,6 @@ kotlin {
             }
         }
         commonMain.dependencies {
-            implementation(libs.skiko)
             implementation(compose.ui)
             implementation(compose.foundation)
             implementation(compose.material)

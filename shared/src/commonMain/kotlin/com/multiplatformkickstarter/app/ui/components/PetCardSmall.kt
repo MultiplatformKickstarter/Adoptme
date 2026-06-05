@@ -56,7 +56,7 @@ fun PetCardSmall(
     ) {
         Column {
             KamelImage(
-                resource = asyncPainterResource(data = item.images[0]),
+                resource = { asyncPainterResource(data = item.images[0]) },
                 contentDescription = "image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

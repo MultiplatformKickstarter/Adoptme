@@ -53,7 +53,7 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 # Android
-compose-bom = "androidx.compose:compose-bom:2026.06.00"
+compose-bom = "androidx.compose:compose-bom:2026.05.01"
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
 androidx-core-ktx = "androidx.core:core-ktx:1.19.0"
@@ -73,7 +73,7 @@ androidx-material3-window-size = { module = "androidx.compose.material3:material
 androidx-ui = { module = "androidx.compose.ui:ui" }
 androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics" }
 
 # iOS
 stately-common = { module = "co.touchlab:stately-common", version.ref = "touchlab" }

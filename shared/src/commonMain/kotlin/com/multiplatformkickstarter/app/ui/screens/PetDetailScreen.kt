@@ -88,7 +88,7 @@ fun PetDetailView(petModel: PetModel, onClose: () -> Unit) {
                 .background(MaterialTheme.colorScheme.background)
         ) {
             KamelImage(
-                resource = asyncPainterResource(data = petModel.images[0]),
+                resource = { asyncPainterResource(data = petModel.images[0]) },
                 contentDescription = petModel.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxWidth().height(250.dp),

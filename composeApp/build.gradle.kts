@@ -33,7 +33,6 @@ kotlin {
     }
     jvm("desktop")
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64(),
     ).forEach { iosTarget ->
@@ -143,6 +142,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     dependencies {
         implementation(project(":shared"))
@@ -191,7 +191,6 @@ compose.desktop {
 
     dependencies {
         implementation(compose.desktop.currentOs)
-        implementation(libs.skiko)
         implementation(compose.ui)
         implementation(compose.foundation)
         implementation(compose.material)
@@ -200,7 +199,6 @@ compose.desktop {
         implementation(compose.materialIconsExtended)
         @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         implementation(compose.components.resources)
-        implementation(libs.skiko.macos.arm64)
         implementation(project(":shared"))
 
         implementation(libs.androidx.compose.ui.util)
