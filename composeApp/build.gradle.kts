@@ -88,6 +88,7 @@ kotlin {
 
             // Kamel for image loading
             implementation(libs.kamel)
+            implementation(libs.kamel.decoder.image.bitmap)
 
             // Voyager for Navigation
             implementation(libs.voyager.navigator)
@@ -160,8 +161,6 @@ android {
         implementation(libs.androidx.ui.tooling.preview)
 
         implementation(libs.androidx.activity.compose)
-        implementation(libs.accompanist.systemuicontroller)
-
         implementation(libs.koin.core)
         implementation(libs.koin.android)
 
@@ -214,6 +213,7 @@ compose.desktop {
 
         // Kamel for image loading
         implementation(libs.kamel)
+        implementation(libs.kamel.decoder.image.bitmap)
 
         // Voyager for Navigation
         implementation(libs.voyager.navigator)

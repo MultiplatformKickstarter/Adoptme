@@ -70,6 +70,7 @@ kotlin {
 
             // Kamel for image loading
             implementation(libs.kamel)
+            implementation(libs.kamel.decoder.image.bitmap)
 
             // Voyager for Navigation
             implementation(libs.voyager.navigator)
