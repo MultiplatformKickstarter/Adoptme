@@ -118,9 +118,9 @@ kotlin {
 
 android {
     namespace = "com.multiplatformkickstarter.app"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = 36
     defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
+        minSdk = 26
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21

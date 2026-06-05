@@ -15,6 +15,9 @@ val versionMajor = properties["multiplatformkickstarter.version.major"].toString
 val versionMinor = properties["multiplatformkickstarter.version.minor"].toString().toInt()
 val versionPatch = properties["multiplatformkickstarter.version.patch"].toString().toInt()
 
+val minSdkVersion = 26
+val sdkVersion = 37
+
 fun versionCode(): Int {
     versionNum?.let {
         return (versionMajor * 1000000) + (versionMinor * 1000) + it.toInt()
@@ -22,22 +25,6 @@ fun versionCode(): Int {
 }
 
 kotlin {
-    /*@OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "composeApp"
-        browser {
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }*/
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -127,7 +114,7 @@ kotlin {
 
 android {
     namespace = "com.multiplatformkickstarter.app.android"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = sdkVersion
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
@@ -135,8 +122,8 @@ android {
 
     defaultConfig {
         applicationId = "com.multiplatformkickstarter.app.android"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
+        minSdk = minSdkVersion
+        targetSdk = sdkVersion
         versionCode = versionCode()
         versionName = "$versionMajor.$versionMinor.$versionPatch"
     }
