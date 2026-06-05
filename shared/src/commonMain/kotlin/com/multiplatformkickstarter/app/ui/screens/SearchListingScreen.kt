@@ -158,7 +158,11 @@ class SearchListingScreen(
             ) {
                 if (state.pets.isNotEmpty()) {
                     state.pets.map { petModel ->
-                        PetCardBig(item = petModel) {
+                        PetCardBig(
+                            item = petModel,
+                            isFavorite = state.favoriteIds.contains(petModel.id),
+                            onFavoriteToggled = { viewModel.onFavoriteToggled(petModel.id) },
+                        ) {
                             viewModel.onPetClicked(petModel.id)
                         }
                     }

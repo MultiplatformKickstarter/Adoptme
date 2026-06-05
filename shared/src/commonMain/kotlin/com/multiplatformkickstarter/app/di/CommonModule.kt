@@ -13,6 +13,9 @@ import com.multiplatformkickstarter.app.data.usecases.GetNearMeAdsUseCase
 import com.multiplatformkickstarter.app.data.usecases.GetSearchUseCase
 import com.multiplatformkickstarter.app.feature.debugmenu.repositories.GlobalAppSettingsRepository
 import com.multiplatformkickstarter.app.feature.debugmenu.viewmodel.DebugMenuViewModel
+import com.multiplatformkickstarter.app.feature.favorites.repositories.FavoritesRepository
+import com.multiplatformkickstarter.app.feature.favorites.viewmodels.FavoritesViewModel
+import com.multiplatformkickstarter.app.ui.screens.viewmodel.PetDetailViewModel
 import com.multiplatformkickstarter.app.feature.petupload.repositories.PetUploadPublishRepository
 import com.multiplatformkickstarter.app.feature.petupload.usecases.PetUploadUseCase
 import com.multiplatformkickstarter.app.feature.petupload.viewmodel.PetUploadViewModel
@@ -34,7 +37,7 @@ import org.koin.dsl.module
 
 val commonModule = module {
     factory { (navigator: Navigator) ->
-        HomeScreenViewModel(navigator, get(), get(), get(), get(), get(), get(), get(), get(), get())
+        HomeScreenViewModel(navigator, get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
     factory {
         PetUploadViewModel(get(), get(), get(), get())
@@ -48,7 +51,15 @@ val commonModule = module {
     }
 
     factory { (searchId: Int?, petCategory: PetCategory?, navigator: Navigator) ->
-        SearchListingViewModel(searchId, petCategory, get(), navigator)
+        SearchListingViewModel(searchId, petCategory, get(), navigator, get())
+    }
+
+    factory { (navigator: Navigator) ->
+        FavoritesViewModel(navigator, get())
+    }
+
+    factory { (petId: Int) ->
+        PetDetailViewModel(petId, get(), get())
     }
 
     factory {
@@ -77,6 +88,7 @@ val commonModule = module {
     singleOf(::PetsFromSearchRepository)
     factoryOf(::GetLastSearchUseCase)
 
+    singleOf(::FavoritesRepository)
     singleOf(::SessionRepository)
     singleOf(::ProfileRepository)
     singleOf(::Settings)

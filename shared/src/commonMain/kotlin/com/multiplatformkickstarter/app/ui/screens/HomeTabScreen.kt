@@ -274,8 +274,15 @@ class HomeTabScreen : Screen {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 items(state.lastSearchAds.size) { index ->
-                    PetCardSmall(state.lastSearchAds[index], 160.dp, 180.dp) {
-                        viewModel.onPetDetailClicked(state.lastSearchAds[index].id)
+                    val pet = state.lastSearchAds[index]
+                    PetCardSmall(
+                        item = pet,
+                        width = 160.dp,
+                        height = 180.dp,
+                        isFavorite = state.favoriteIds.contains(pet.id),
+                        onFavoriteToggled = { viewModel.onFavoriteToggled(pet.id) },
+                    ) {
+                        viewModel.onPetDetailClicked(pet.id)
                     }
                     if (index == state.lastSearchAds.size - 1) {
                         Spacer(modifier = Modifier.size(16.dp))
@@ -304,7 +311,13 @@ class HomeTabScreen : Screen {
                 maxItemsInEachRow = 2
             ) {
                 state.nearMeAds.map { item ->
-                    PetCardSmall(item = item, itemSize, itemSize) {
+                    PetCardSmall(
+                        item = item,
+                        width = itemSize,
+                        height = itemSize,
+                        isFavorite = state.favoriteIds.contains(item.id),
+                        onFavoriteToggled = { viewModel.onFavoriteToggled(item.id) },
+                    ) {
                         viewModel.onPetDetailClicked(item.id)
                     }
                 }

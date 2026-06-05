@@ -55,8 +55,14 @@ internal object DeutschLocalization : Localization {
     override val start = "LASST UNS BEGINNEN!"
     override val insertAdBannerTrait = "Lassen Sie uns Ihnen helfen, eine Familie für Ihr Haustier zu finden. Wenn Ihre Katze gerade kleine Welpen bekommen hat, können Sie unsere Plattform nutzen, um die richtige Person für die Adoption zu finden. Es ist wirklich einfach!"
 
-    override val proFeatureScreenTitle = "Bildschirm im Aufbau"
-    override val proFeatureScreenDescription = "Dieser Bildschirm ist noch im Aufbau. Diese Vorlage hilft Ihnen dabei, Multiplattform-Apps im Handumdrehen zu erstellen."
+    override val favoritesEmptyTitle = "Noch keine Favoriten"
+    override val favoritesEmptyDescription = "Tiere, die Sie als Favoriten markieren, werden hier angezeigt. Tippen Sie auf das Herz bei einem Tier, um es zu speichern."
+
+    override val inboxEmptyTitle = "Noch keine Nachrichten"
+    override val inboxEmptyDescription = "Wenn Sie Kontakt mit einem Tierbesitzer aufnehmen, erscheinen Ihre Gespräche hier."
+
+    override val detailFavorite = "Zu Favoriten hinzufügen"
+    override val detailUnfavorite = "Aus Favoriten entfernen"
     override val homeFeaturedViewAll = "Alle anzeigen >"
     override val homePetsNearYou = "Haustiere in Ihrer Nähe"
     override val homeMyLastSearch = "Meine letzte Suche"
@@ -145,11 +151,11 @@ internal object DeutschLocalization : Localization {
 
     override val debugMenuTitle = "Debug-Menü"
 
-    override val onboardingPromoTitle1 = "Multiplatform Kickstarter"
-    override val onboardingPromoTitle2 = "Merkmale"
-    override val onboardingPromoTitle3 = "PRO Template"
+    override val onboardingPromoTitle1 = "Willkommen bei Adoptme"
+    override val onboardingPromoTitle2 = "Finde dein Tier"
+    override val onboardingPromoTitle3 = "Gib ein Zuhause"
 
-    override val onboardingPromoLine1 = "Willkommen zu Multiplatform Kickstarter! Dies ist die Onboarding-Komponente, die alle Funktionen dieser Anwendung vorstellt."
-    override val onboardingPromoLine2 = "Diese Vorlage enthält alles, was Sie benötigen, um Ihre eigenen Anwendungen im Handumdrehen zu starten. Von der Navigation über die Abhängigkeitsinjektion bis zur Server-API."
-    override val onboardingPromoLine3 = "Wenn Sie mehr benötigen, wie gespeicherte Suchen, Geolokalisierung, Follower, Bewertungen oder einen Marktplatz, müssen Sie nur unsere Pro-Vorlage herunterladen, die Sie unter multiplatformkickstarter.com finden."
+    override val onboardingPromoLine1 = "! Die App, die dir hilft, das perfekte Tier zur Adoption zu finden oder dein Tier mit einer liebevollen Familie zu verbinden."
+    override val onboardingPromoLine2 = "Durchsuche Hunderte von Tieren in deiner Nähe, filtere nach Kategorie, Alter, Größe und mehr. Speichere deine Favoriten und kontaktiere Tierheime und Besitzer direkt."
+    override val onboardingPromoLine3 = "Jedes Tier verdient ein liebevolles Zuhause. Starte heute deine Adoptionsreise und mache einen Unterschied im Leben eines Tieres."
 }

@@ -15,6 +15,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +37,8 @@ import io.kamel.image.asyncPainterResource
 @Composable
 fun PetCardBig(
     item: PetModel,
+    isFavorite: Boolean = false,
+    onFavoriteToggled: (() -> Unit)? = null,
     onClick: () -> Unit,
 ) {
     val imageHeight = 120.dp
@@ -54,42 +57,61 @@ fun PetCardBig(
         interactionSource = remember { MutableInteractionSource() },
     ) {
         Column {
-            KamelImage(
-                resource = { asyncPainterResource(data = item.images[0]) },
-                contentDescription = "image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(roundedCornerSize))
-                    .height(imageHeight),
-                onLoading = {
-                    Box(
-                        modifier = Modifier
-                            .clip(shape = RoundedCornerShape(roundedCornerSize))
-                            .background(color = MaterialTheme.colorScheme.primaryContainer)
-                            .height(imageHeight)
-                            .fillMaxWidth()
-                            .shimmerLoadingAnimation(isLoadingCompleted = false),
-                    )
-                },
-                onFailure = {
-                    Box(
-                        modifier = Modifier
-                            .clip(shape = RoundedCornerShape(roundedCornerSize))
-                            .background(color = MaterialTheme.colorScheme.primaryContainer)
-                            .height(imageHeight)
-                            .fillMaxWidth(),
-                        contentAlignment = Alignment.Center,
+            Box {
+                KamelImage(
+                    resource = { asyncPainterResource(data = item.images[0]) },
+                    contentDescription = "image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(roundedCornerSize))
+                        .height(imageHeight),
+                    onLoading = {
+                        Box(
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(roundedCornerSize))
+                                .background(color = MaterialTheme.colorScheme.primaryContainer)
+                                .height(imageHeight)
+                                .fillMaxWidth()
+                                .shimmerLoadingAnimation(isLoadingCompleted = false),
+                        )
+                    },
+                    onFailure = {
+                        Box(
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(roundedCornerSize))
+                                .background(color = MaterialTheme.colorScheme.primaryContainer)
+                                .height(imageHeight)
+                                .fillMaxWidth(),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(48.dp),
+                                imageVector = MultiplatformKickstarterIcons.BrokenImage,
+                                contentDescription = "image",
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            )
+                        }
+                    }
+                )
+                if (onFavoriteToggled != null) {
+                    IconButton(
+                        onClick = onFavoriteToggled,
+                        modifier = Modifier.align(Alignment.TopEnd).size(40.dp),
                     ) {
                         Icon(
-                            modifier = Modifier.size(48.dp),
-                            imageVector = MultiplatformKickstarterIcons.BrokenImage,
-                            contentDescription = "image",
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            imageVector = if (isFavorite) {
+                                MultiplatformKickstarterIcons.Favorite
+                            } else {
+                                MultiplatformKickstarterIcons.FavoriteOutlined
+                            },
+                            contentDescription = null,
+                            tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimary,
+                            modifier = Modifier.size(22.dp),
                         )
                     }
                 }
-            )
+            }
             Text(
                 text = item.title,
                 style = Typography.get().headlineMedium,
