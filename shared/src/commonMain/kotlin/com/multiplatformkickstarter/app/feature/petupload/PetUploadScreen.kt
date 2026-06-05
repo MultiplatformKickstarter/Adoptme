@@ -77,7 +77,7 @@ import kotlin.enums.EnumEntries
 
 class PetUploadScreen : Screen {
     private lateinit var showingModal: MutableState<Boolean>
-    private val rootSnackbarHostStateRepository = getRootSnackbarHostState()
+    private val rootSnackbarHostStateRepository by lazy { getRootSnackbarHostState() }
 
     @Composable
     override fun Content() {

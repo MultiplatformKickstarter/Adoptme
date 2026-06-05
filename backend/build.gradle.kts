@@ -19,7 +19,8 @@ dependencies {
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.auth)
     implementation(libs.ktor.server.auth.jwt)
-    implementation(libs.ktor.server.locations)
+    implementation(libs.ktor.resources)
+    implementation(libs.ktor.server.resources)
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.status.pages)
     implementation(libs.ktor.server.catching.headers)
@@ -48,6 +49,6 @@ dependencies {
     implementation(libs.hikariCP)
     implementation(libs.swagger.codegen)
 
-    testImplementation(libs.ktor.server.tests.jvm)
+    testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 }

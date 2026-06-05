@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.statusBarsPadding
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -85,7 +86,7 @@ class ProfileTabScreen : Screen {
     ) {
         val scrollState = rememberScrollState()
         MultiplatformKickstarterTheme {
-            Column(modifier = Modifier.padding(bottom = 80.dp).verticalScroll(scrollState)) {
+            Column(modifier = Modifier.statusBarsPadding().padding(bottom = 80.dp).verticalScroll(scrollState)) {
                 UserProfileData(state, viewModel)
                 OptionsList(localization, viewModel)
             }

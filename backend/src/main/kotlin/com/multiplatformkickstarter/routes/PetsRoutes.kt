@@ -11,12 +11,11 @@ import io.ktor.http.Parameters
 import io.ktor.server.application.call
 import io.ktor.server.application.log
 import io.ktor.server.auth.authenticate
-import io.ktor.server.locations.KtorExperimentalLocationsAPI
-import io.ktor.server.locations.Location
-import io.ktor.server.locations.delete
-import io.ktor.server.locations.get
-import io.ktor.server.locations.patch
-import io.ktor.server.locations.post
+import io.ktor.resources.Resource
+import io.ktor.server.resources.delete
+import io.ktor.server.resources.get
+import io.ktor.server.resources.patch
+import io.ktor.server.resources.post
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
@@ -34,28 +33,22 @@ const val PETS_GET_ONE = "$PETS/pet"
 const val PETS_UPDATE_ONE = "$PETS/pet/update"
 const val PETS_DELETE = "$PETS/delete"
 
-@KtorExperimentalLocationsAPI
-@Location(PETS_CREATE)
+@Resource(PETS_CREATE)
 class PetsCreateRoute
 
-@KtorExperimentalLocationsAPI
-@Location(PETS_LIST)
+@Resource(PETS_LIST)
 class PetsListRoute
 
-@KtorExperimentalLocationsAPI
-@Location(PETS_GET_ONE)
+@Resource(PETS_GET_ONE)
 class PetsGetOneRoute
 
-@KtorExperimentalLocationsAPI
-@Location(PETS_UPDATE_ONE)
+@Resource(PETS_UPDATE_ONE)
 class PetsUpdateOneRoute
 
-@KtorExperimentalLocationsAPI
-@Location(PETS_DELETE)
+@Resource(PETS_DELETE)
 class PetsDeleteRoute
 
 @Suppress("LongMethod", "TooGenericExceptionCaught", "CyclomaticComplexMethod")
-@KtorExperimentalLocationsAPI
 fun Route.pets(
     petsRepository: PetsRepository,
     userRepository: UserRepository,
