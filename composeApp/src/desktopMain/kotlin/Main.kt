@@ -1,4 +1,6 @@
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPlacement
+import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import com.multiplatformkickstarter.app.MainApp
 import com.multiplatformkickstarter.app.di.commonModule
@@ -10,7 +12,11 @@ fun main() =
         startKoin {
             modules(commonModule)
         }
-        Window(onCloseRequest = ::exitApplication) {
+        Window(
+            onCloseRequest = ::exitApplication,
+            state = WindowState(placement = WindowPlacement.Maximized),
+            title = "Adoptme",
+        ) {
             MultiplatformKickstarterTheme {
                 MainApp()
             }

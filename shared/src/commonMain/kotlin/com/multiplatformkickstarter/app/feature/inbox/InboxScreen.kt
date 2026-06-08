@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -58,34 +60,36 @@ class InboxScreen : Screen {
                     )
                 },
             ) { paddingValues ->
-                if (state.error != null) {
-                    Box(modifier = Modifier.padding(paddingValues).fillMaxSize()) {
-                        EmptyLayout(
-                            title = localization.inboxEmptyTitle,
-                            description = state.error ?: localization.inboxEmptyDescription,
-                            localization = localization,
-                        ) { viewModel.loadConversations() }
-                    }
-                } else if (state.conversations.isEmpty()) {
-                    Box(modifier = Modifier.padding(paddingValues).fillMaxSize()) {
-                        EmptyLayout(
-                            title = localization.inboxEmptyTitle,
-                            description = localization.inboxEmptyDescription,
-                            localization = localization,
-                        ) {}
-                    }
-                } else {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(paddingValues),
-                    ) {
-                        items(state.conversations, key = { it.id }) { conversation ->
-                            ConversationItem(
-                                conversation = conversation,
-                                onClick = { viewModel.onConversationClicked(conversation) },
-                                onDelete = { viewModel.onDeleteConversation(conversation.id) },
-                            )
+                Box(modifier = Modifier.fillMaxSize().padding(paddingValues), contentAlignment = Alignment.TopCenter) {
+                    if (state.error != null) {
+                        Box(modifier = Modifier.widthIn(max = 600.dp).fillMaxSize()) {
+                            EmptyLayout(
+                                title = localization.inboxEmptyTitle,
+                                description = state.error ?: localization.inboxEmptyDescription,
+                                localization = localization,
+                            ) { viewModel.loadConversations() }
+                        }
+                    } else if (state.conversations.isEmpty()) {
+                        Box(modifier = Modifier.widthIn(max = 600.dp).fillMaxSize()) {
+                            EmptyLayout(
+                                title = localization.inboxEmptyTitle,
+                                description = localization.inboxEmptyDescription,
+                                localization = localization,
+                            ) {}
+                        }
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier
+                                .widthIn(max = 600.dp)
+                                .fillMaxSize(),
+                        ) {
+                            items(state.conversations, key = { it.id }) { conversation ->
+                                ConversationItem(
+                                    conversation = conversation,
+                                    onClick = { viewModel.onConversationClicked(conversation) },
+                                    onDelete = { viewModel.onDeleteConversation(conversation.id) },
+                                )
+                            }
                         }
                     }
                 }
