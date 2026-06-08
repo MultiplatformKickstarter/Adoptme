@@ -18,6 +18,7 @@ import com.multiplatformkickstarter.repository.chat.MessagesRepository
 import com.multiplatformkickstarter.repository.favorites.FavoritesRepository
 import com.multiplatformkickstarter.repository.pets.PetsRepository
 import com.multiplatformkickstarter.repository.user.UserRepository
+import com.multiplatformkickstarter.plugins.configureSerialization
 import com.multiplatformkickstarter.routes.chat
 import com.multiplatformkickstarter.routes.favorites
 import com.multiplatformkickstarter.routes.pets
@@ -88,7 +89,18 @@ class FakePetsRepository : PetsRepository {
         gender: String?, size: String?, color: String?, status: String?, shelterId: Int?,
     ): PetModel? {
         val idx = pets.indexOfFirst { it.id == petId }.takeIf { it >= 0 } ?: return null
-        val updated = pets[idx].copy(title = title ?: pets[idx].title)
+        val old = pets[idx]
+        val updated = PetModel(
+            id = old.id, userId = old.userId, title = title ?: old.title,
+            description = description ?: old.description, images = old.images,
+            category = old.category, location = old.location, published = old.published,
+            modified = modified ?: old.modified, breed = breed ?: old.breed,
+            age = if (age != null) PetAge.valueOf(age) else old.age,
+            gender = if (gender != null) PetGender.valueOf(gender) else old.gender,
+            size = if (size != null) PetSize.valueOf(size) else old.size,
+            color = color ?: old.color, status = if (status != null) PetStatus.valueOf(status) else old.status,
+            shelterId = shelterId ?: old.shelterId,
+        )
         pets[idx] = updated
         return updated
     }
