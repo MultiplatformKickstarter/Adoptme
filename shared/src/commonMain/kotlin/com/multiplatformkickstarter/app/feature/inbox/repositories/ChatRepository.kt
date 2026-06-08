@@ -25,16 +25,30 @@ private val mockConversations = listOf(
     ChatConversation(id = 2, petId = 2, petName = "Luna", buyerUserId = 3, sellerUserId = -1, createdAt = 1717862400000L),
 )
 
-private val mockMessages = mapOf(
-    1 to listOf(
+private val mockAutoReplies = listOf(
+    "That sounds great!",
+    "Sure, when would you like to meet?",
+    "He/She is very friendly and loves cuddles.",
+    "The adoption fee is already included.",
+    "Yes, all vaccinations are up to date!",
+    "Feel free to come by this weekend.",
+    "I'll send you more photos shortly.",
+    "We'd love for them to find a good home!",
+    "Let me know if you have any other questions.",
+    "They get along well with other pets too.",
+)
+
+private val mockMessageStore: MutableMap<Int, MutableList<ChatMessage>> = mutableMapOf(
+    1 to mutableListOf(
         ChatMessage(id = 1, conversationId = 1, senderUserId = 2, content = "Hi! Is Buddy still available?", sentAt = 1717776000000L),
         ChatMessage(id = 2, conversationId = 1, senderUserId = -1, content = "Yes, come meet him anytime!", sentAt = 1717779600000L),
     ),
-    2 to listOf(
+    2 to mutableListOf(
         ChatMessage(id = 3, conversationId = 2, senderUserId = -1, content = "I'm interested in Luna.", sentAt = 1717862400000L),
         ChatMessage(id = 4, conversationId = 2, senderUserId = 3, content = "She's wonderful, very calm.", sentAt = 1717866000000L),
     ),
 )
+private var mockNextId = 100
 
 class ChatRepository(
     private val service: ServiceClient,
@@ -101,7 +115,7 @@ class ChatRepository(
 
     suspend fun getMessages(conversationId: Int): List<ChatMessage> {
         if (globalAppSettingsRepository.isMockedContentEnabled()) {
-            return mockMessages[conversationId] ?: emptyList()
+            return mockMessageStore.getOrPut(conversationId) { mutableListOf() }.toList()
         }
         return try {
             val response = service.httpClient.get("$baseUrl/$MESSAGES_PATH") {
@@ -119,7 +133,12 @@ class ChatRepository(
 
     suspend fun sendMessage(conversationId: Int, content: String): ChatMessage? {
         if (globalAppSettingsRepository.isMockedContentEnabled()) {
-            return ChatMessage(id = 0, conversationId = conversationId, senderUserId = -1, content = content, sentAt = 0L)
+            val store = mockMessageStore.getOrPut(conversationId) { mutableListOf() }
+            val sent = ChatMessage(id = mockNextId++, conversationId = conversationId, senderUserId = -1, content = content, sentAt = 0L)
+            store.add(sent)
+            val reply = ChatMessage(id = mockNextId++, conversationId = conversationId, senderUserId = 2, content = mockAutoReplies[(store.size) % mockAutoReplies.size], sentAt = 0L)
+            store.add(reply)
+            return sent
         }
         return try {
             val response = service.httpClient.submitForm(

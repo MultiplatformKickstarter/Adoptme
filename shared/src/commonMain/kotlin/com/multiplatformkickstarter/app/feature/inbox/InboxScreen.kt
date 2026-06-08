@@ -27,25 +27,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import com.multiplatformkickstarter.app.common.model.ChatConversation
 import com.multiplatformkickstarter.app.localization.getCurrentLocalization
 import com.multiplatformkickstarter.app.ui.components.EmptyLayout
 import com.multiplatformkickstarter.app.ui.icon.MultiplatformKickstarterIcons
 import com.multiplatformkickstarter.app.ui.theme.MultiplatformKickstarterTheme
 import com.multiplatformkickstarter.app.ui.theme.Typography
-import org.koin.core.parameter.ParametersHolder
 
 class InboxScreen : Screen {
 
     @Composable
     override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
         val localization = getCurrentLocalization()
-        val viewModel = koinScreenModel<InboxViewModel>(
-            parameters = { ParametersHolder(listOf(navigator).toMutableList(), false) }
-        )
+        val viewModel = koinScreenModel<InboxViewModel>()
         val state by viewModel.state.collectAsState()
 
         MultiplatformKickstarterTheme {

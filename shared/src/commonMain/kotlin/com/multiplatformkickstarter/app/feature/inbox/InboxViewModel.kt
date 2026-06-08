@@ -2,17 +2,17 @@ package com.multiplatformkickstarter.app.feature.inbox
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import cafe.adriel.voyager.navigator.Navigator
 import com.multiplatformkickstarter.app.common.model.ChatConversation
 import com.multiplatformkickstarter.app.feature.inbox.repositories.ChatRepository
+import com.multiplatformkickstarter.app.platform.RootNavigatorRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class InboxViewModel(
-    private val navigator: Navigator,
     private val chatRepository: ChatRepository,
+    private val rootNavigatorRepository: RootNavigatorRepository,
 ) : ScreenModel {
 
     private val _state = MutableStateFlow(InboxState())
@@ -35,7 +35,7 @@ class InboxViewModel(
     }
 
     fun onConversationClicked(conversation: ChatConversation) {
-        navigator.push(ChatScreen(conversation))
+        rootNavigatorRepository.navigator.push(ChatScreen(conversation))
     }
 
     fun onDeleteConversation(conversationId: Int) {

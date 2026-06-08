@@ -66,8 +66,8 @@ val commonModule = module {
         PetDetailViewModel(petId, navigator, get(), get(), get())
     }
 
-    factory { (navigator: Navigator) ->
-        InboxViewModel(navigator, get())
+    factory {
+        InboxViewModel(get(), get())
     }
 
     factory { (conversation: ChatConversation, navigator: Navigator) ->
