@@ -57,8 +57,7 @@ fun Route.favorites(
         delete<FavoritesRemoveRoute> {
             val user = call.principal<DatabaseUser>()
                 ?: return@delete call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
-            val params = call.receive<Parameters>()
-            val petId = params["petId"]?.toIntOrNull()
+            val petId = call.request.queryParameters["petId"]?.toIntOrNull()
                 ?: return@delete call.respond(HttpStatusCode.BadRequest, "Missing petId")
             val removed = favoritesRepository.removeFavorite(user.userId, petId)
             call.respond(if (removed) HttpStatusCode.OK else HttpStatusCode.NotFound)
