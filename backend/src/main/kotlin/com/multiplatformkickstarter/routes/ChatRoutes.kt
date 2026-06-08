@@ -6,19 +6,19 @@ import com.multiplatformkickstarter.auth.UserSession
 import com.multiplatformkickstarter.repository.chat.ConversationsRepository
 import com.multiplatformkickstarter.repository.chat.MessagesRepository
 import com.multiplatformkickstarter.repository.user.UserRepository
+import com.multiplatformkickstarter.models.DatabaseUser
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.Parameters
 import io.ktor.resources.Resource
 import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
+import io.ktor.server.auth.principal
 import io.ktor.server.request.receive
 import io.ktor.server.resources.delete
 import io.ktor.server.resources.get
 import io.ktor.server.resources.post
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
-import io.ktor.server.sessions.get
-import io.ktor.server.sessions.sessions
 
 const val CHAT = "$API_VERSION/chat"
 const val CHAT_CONVERSATIONS = "$CHAT/conversations"
@@ -42,29 +42,29 @@ class ChatMessagesRoute
 @Resource(CHAT_MESSAGES_SEND)
 class ChatMessagesSendRoute
 
+@Suppress("UnusedParameter")
 fun Route.chat(
     conversationsRepository: ConversationsRepository,
     messagesRepository: MessagesRepository,
     userRepository: UserRepository,
 ) {
     authenticate(JWT_CONFIGURATION) {
-        chatConversationRoutes(conversationsRepository, userRepository)
-        chatMessageRoutes(messagesRepository, userRepository)
+        chatConversationRoutes(conversationsRepository)
+        chatMessageRoutes(messagesRepository)
     }
 }
 
 private fun Route.chatConversationRoutes(
     conversationsRepository: ConversationsRepository,
-    userRepository: UserRepository,
 ) {
     get<ChatConversationsRoute> {
-        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+        val user = call.principal<DatabaseUser>()
             ?: return@get call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
         call.respond(HttpStatusCode.OK, conversationsRepository.getConversationsForUser(user.userId))
     }
 
     post<ChatConversationCreateRoute> {
-        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+        val user = call.principal<DatabaseUser>()
             ?: return@post call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
         val params = call.receive<Parameters>()
         val petId = params["petId"]?.toIntOrNull()
@@ -82,10 +82,9 @@ private fun Route.chatConversationRoutes(
     }
 
     delete<ChatConversationDeleteRoute> {
-        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+        val user = call.principal<DatabaseUser>()
             ?: return@delete call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
-        val params = call.receive<Parameters>()
-        val conversationId = params["conversationId"]?.toIntOrNull()
+        val conversationId = call.request.queryParameters["conversationId"]?.toIntOrNull()
             ?: return@delete call.respond(HttpStatusCode.BadRequest, "Missing conversationId")
         val deleted = conversationsRepository.deleteConversation(conversationId, user.userId)
         call.respond(if (deleted) HttpStatusCode.OK else HttpStatusCode.NotFound)
@@ -94,19 +93,17 @@ private fun Route.chatConversationRoutes(
 
 private fun Route.chatMessageRoutes(
     messagesRepository: MessagesRepository,
-    userRepository: UserRepository,
 ) {
     get<ChatMessagesRoute> {
-        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+        call.principal<DatabaseUser>()
             ?: return@get call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
-        val params = call.receive<Parameters>()
-        val conversationId = params["conversationId"]?.toIntOrNull()
+        val conversationId = call.request.queryParameters["conversationId"]?.toIntOrNull()
             ?: return@get call.respond(HttpStatusCode.BadRequest, "Missing conversationId")
         call.respond(HttpStatusCode.OK, messagesRepository.getMessages(conversationId))
     }
 
     post<ChatMessagesSendRoute> {
-        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+        val user = call.principal<DatabaseUser>()
             ?: return@post call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
         val params = call.receive<Parameters>()
         val conversationId = params["conversationId"]?.toIntOrNull()

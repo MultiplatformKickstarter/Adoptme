@@ -48,13 +48,15 @@ fun Route.users(
         val hash = hashFunction(password)
         try {
             val newUser = userRepository.addUser(email, name, hash)
-            newUser?.userId?.let {
-                call.sessions.set(UserSession(it))
-                call.respondText(
-                    jwtService.generateToken(newUser),
-                    status = HttpStatusCode.Created,
-                )
+            if (newUser == null) {
+                call.respond(HttpStatusCode.BadRequest, "Email already in use")
+                return@post
             }
+            call.sessions.set(UserSession(newUser.userId))
+            call.respondText(
+                jwtService.generateToken(newUser),
+                status = HttpStatusCode.Created,
+            )
         } catch (e: Throwable) {
             this@users.application.log.error("Failed to register user", e)
             call.respond(HttpStatusCode.BadRequest, "Problems creating User")
