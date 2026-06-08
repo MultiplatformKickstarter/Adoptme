@@ -3,6 +3,7 @@ package com.multiplatformkickstarter.app.di
 import androidx.compose.material3.SnackbarHostState
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.multiplatformkickstarter.app.common.model.ChatConversation
 import com.multiplatformkickstarter.app.common.model.PetCategory
 import com.multiplatformkickstarter.app.data.repositories.LastSearchAdsMockRepository
 import com.multiplatformkickstarter.app.data.repositories.NearMeAdsMockRepository
@@ -15,6 +16,9 @@ import com.multiplatformkickstarter.app.feature.debugmenu.repositories.GlobalApp
 import com.multiplatformkickstarter.app.feature.debugmenu.viewmodel.DebugMenuViewModel
 import com.multiplatformkickstarter.app.feature.favorites.repositories.FavoritesRepository
 import com.multiplatformkickstarter.app.feature.favorites.viewmodels.FavoritesViewModel
+import com.multiplatformkickstarter.app.feature.inbox.ChatViewModel
+import com.multiplatformkickstarter.app.feature.inbox.InboxViewModel
+import com.multiplatformkickstarter.app.feature.inbox.repositories.ChatRepository
 import com.multiplatformkickstarter.app.ui.screens.viewmodel.PetDetailViewModel
 import com.multiplatformkickstarter.app.feature.petupload.repositories.PetUploadPublishRepository
 import com.multiplatformkickstarter.app.feature.petupload.usecases.PetUploadUseCase
@@ -58,8 +62,16 @@ val commonModule = module {
         FavoritesViewModel(navigator, get())
     }
 
-    factory { (petId: Int) ->
-        PetDetailViewModel(petId, get(), get())
+    factory { (petId: Int, navigator: Navigator) ->
+        PetDetailViewModel(petId, navigator, get(), get(), get())
+    }
+
+    factory { (navigator: Navigator) ->
+        InboxViewModel(navigator, get())
+    }
+
+    factory { (conversation: ChatConversation, navigator: Navigator) ->
+        ChatViewModel(conversation, navigator, get(), get())
     }
 
     factory {
@@ -89,6 +101,7 @@ val commonModule = module {
     factoryOf(::GetLastSearchUseCase)
 
     singleOf(::FavoritesRepository)
+    single { ChatRepository(get(), get(), get()) }
     singleOf(::SessionRepository)
     singleOf(::ProfileRepository)
     singleOf(::Settings)

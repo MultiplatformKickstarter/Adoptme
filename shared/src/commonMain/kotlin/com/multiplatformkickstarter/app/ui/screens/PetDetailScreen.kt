@@ -52,7 +52,7 @@ class PetDetailScreen(private val petId: Int) : Screen {
     override fun Content() {
         val currentNavigator = LocalNavigator.currentOrThrow
         val viewModel = koinScreenModel<PetDetailViewModel>(
-            parameters = { ParametersHolder(listOf(petId).toMutableList(), false) }
+            parameters = { ParametersHolder(listOf(petId, currentNavigator).toMutableList(), false) }
         )
         val state by viewModel.state.collectAsState()
 
@@ -63,6 +63,7 @@ class PetDetailScreen(private val petId: Int) : Screen {
                 petImageUrl = pet.images[0],
                 isFavorite = state.isFavorite,
                 onFavoriteToggled = { viewModel.onFavoriteToggled() },
+                onAdoptClicked = { viewModel.onAdoptClicked() },
                 onClose = { currentNavigator.pop() },
             )
         }
@@ -76,6 +77,7 @@ fun PetDetailView(
     petImageUrl: String,
     isFavorite: Boolean,
     onFavoriteToggled: () -> Unit,
+    onAdoptClicked: () -> Unit,
     onClose: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
@@ -169,7 +171,7 @@ fun PetDetailView(
                 )
             }
             Button(
-                onClick = {},
+                onClick = onAdoptClicked,
                 colors = ButtonDefaults.buttonColors(),
                 modifier = Modifier
                     .fillMaxWidth()

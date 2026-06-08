@@ -4,9 +4,14 @@ import com.multiplatformkickstarter.auth.JWT_CONFIGURATION
 import com.multiplatformkickstarter.auth.JwtService
 import com.multiplatformkickstarter.auth.hash
 import com.multiplatformkickstarter.repository.DatabaseFactory
+import com.multiplatformkickstarter.repository.chat.ConversationsRepositoryImpl
+import com.multiplatformkickstarter.repository.chat.MessagesRepositoryImpl
+import com.multiplatformkickstarter.repository.favorites.FavoritesRepositoryImpl
 import com.multiplatformkickstarter.repository.pets.PetsRepositoryImp
 import com.multiplatformkickstarter.repository.profile.ProfileRepositoryImpl
 import com.multiplatformkickstarter.repository.user.UserRepositoryImp
+import com.multiplatformkickstarter.routes.chat
+import com.multiplatformkickstarter.routes.favorites
 import com.multiplatformkickstarter.routes.pets
 import com.multiplatformkickstarter.routes.profiles
 import com.multiplatformkickstarter.routes.users
@@ -21,6 +26,9 @@ fun Application.configureAuthentication() {
     val userRepository = UserRepositoryImp()
     val petRepository = PetsRepositoryImp()
     val profileRepository = ProfileRepositoryImpl()
+    val favoritesRepository = FavoritesRepositoryImpl()
+    val conversationsRepository = ConversationsRepositoryImpl()
+    val messagesRepository = MessagesRepositoryImpl()
     val jwtService = JwtService()
     val hashFunction = { s: String -> hash(s) }
 
@@ -42,5 +50,7 @@ fun Application.configureAuthentication() {
         users(userRepository, jwtService, hashFunction)
         pets(petRepository, userRepository)
         profiles(profileRepository, userRepository)
+        favorites(favoritesRepository, userRepository)
+        chat(conversationsRepository, messagesRepository, userRepository)
     }
 }

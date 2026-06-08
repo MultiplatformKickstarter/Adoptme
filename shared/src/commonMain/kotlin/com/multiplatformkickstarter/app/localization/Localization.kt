@@ -66,6 +66,12 @@ interface Localization {
     val inboxEmptyTitle: String
     val inboxEmptyDescription: String
 
+    val inboxConversationWith: String
+    val chatSendMessage: String
+    val chatDeleteConversation: String
+    val chatMessageHint: String
+    val chatStartedFor: String
+
     val detailFavorite: String
     val detailUnfavorite: String
     val homeFeaturedViewAll: String

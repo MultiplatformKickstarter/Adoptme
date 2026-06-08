@@ -61,6 +61,12 @@ internal object DeutschLocalization : Localization {
     override val inboxEmptyTitle = "Noch keine Nachrichten"
     override val inboxEmptyDescription = "Wenn Sie Kontakt mit einem Tierbesitzer aufnehmen, erscheinen Ihre Gespräche hier."
 
+    override val inboxConversationWith = "Chat über"
+    override val chatSendMessage = "Senden"
+    override val chatDeleteConversation = "Gespräch löschen"
+    override val chatMessageHint = "Nachricht eingeben..."
+    override val chatStartedFor = "Gespräch gestartet für"
+
     override val detailFavorite = "Zu Favoriten hinzufügen"
     override val detailUnfavorite = "Aus Favoriten entfernen"
     override val homeFeaturedViewAll = "Alle anzeigen >"

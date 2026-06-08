@@ -1,5 +1,8 @@
 package com.multiplatformkickstarter.repository
 
+import com.multiplatformkickstarter.repository.chat.Conversations
+import com.multiplatformkickstarter.repository.chat.Messages
+import com.multiplatformkickstarter.repository.favorites.Favorites
 import com.multiplatformkickstarter.repository.pets.Pets
 import com.multiplatformkickstarter.repository.profile.Profiles
 import com.multiplatformkickstarter.repository.user.Users
@@ -21,6 +24,9 @@ object DatabaseFactory {
             SchemaUtils.create(Users)
             SchemaUtils.create(Pets)
             SchemaUtils.create(Profiles)
+            SchemaUtils.create(Favorites)
+            SchemaUtils.create(Conversations)
+            SchemaUtils.create(Messages)
         }
     }
 
