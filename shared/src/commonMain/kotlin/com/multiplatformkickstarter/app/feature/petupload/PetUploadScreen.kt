@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -77,7 +78,7 @@ import kotlin.enums.EnumEntries
 
 class PetUploadScreen : Screen {
     private lateinit var showingModal: MutableState<Boolean>
-    private val rootSnackbarHostStateRepository = getRootSnackbarHostState()
+    private val rootSnackbarHostStateRepository by lazy { getRootSnackbarHostState() }
 
     @Composable
     override fun Content() {
@@ -196,8 +197,11 @@ class PetUploadScreen : Screen {
             ) {
                 val scrollState = rememberScrollState()
 
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
                 Column(
                     modifier = Modifier
+                        .widthIn(max = 600.dp)
+                        .fillMaxSize()
                         .padding(it).padding(bottom = 46.dp)
                         .background(MaterialTheme.colorScheme.background)
                         .verticalScroll(scrollState)
@@ -220,6 +224,7 @@ class PetUploadScreen : Screen {
 
                 Box(
                     modifier = Modifier
+                        .widthIn(max = 600.dp)
                         .fillMaxSize()
                 ) {
                     Box(
@@ -259,6 +264,7 @@ class PetUploadScreen : Screen {
                             )
                         }
                     }
+                }
                 }
             }
             if (showingModal.value) {

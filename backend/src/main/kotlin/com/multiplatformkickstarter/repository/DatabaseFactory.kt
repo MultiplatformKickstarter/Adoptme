@@ -1,5 +1,8 @@
 package com.multiplatformkickstarter.repository
 
+import com.multiplatformkickstarter.repository.chat.Conversations
+import com.multiplatformkickstarter.repository.chat.Messages
+import com.multiplatformkickstarter.repository.favorites.Favorites
 import com.multiplatformkickstarter.repository.pets.Pets
 import com.multiplatformkickstarter.repository.profile.Profiles
 import com.multiplatformkickstarter.repository.user.Users
@@ -7,9 +10,9 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.v1.jdbc.Database
+import org.jetbrains.exposed.v1.jdbc.SchemaUtils
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 private const val MAX_POOL_SIZE = 3
 
@@ -21,6 +24,9 @@ object DatabaseFactory {
             SchemaUtils.create(Users)
             SchemaUtils.create(Pets)
             SchemaUtils.create(Profiles)
+            SchemaUtils.create(Favorites)
+            SchemaUtils.create(Conversations)
+            SchemaUtils.create(Messages)
         }
     }
 

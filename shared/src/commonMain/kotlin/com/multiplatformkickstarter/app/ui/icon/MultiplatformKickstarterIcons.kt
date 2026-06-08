@@ -8,6 +8,7 @@ import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.rounded.TextSnippet
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.BrokenImage
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Create
@@ -40,6 +41,7 @@ object MultiplatformKickstarterIcons {
     val Create = Icons.Rounded.Create
     val Inbox = Icons.Rounded.Email
     val Favorite = Icons.Rounded.Favorite
+    val FavoriteOutlined = Icons.Rounded.FavoriteBorder
     val Exit = Icons.AutoMirrored.Rounded.ExitToApp
     val ArrowRight = Icons.AutoMirrored.Rounded.KeyboardArrowRight
     val Email = Icons.Rounded.Email

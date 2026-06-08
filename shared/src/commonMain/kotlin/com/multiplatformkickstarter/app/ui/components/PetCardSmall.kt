@@ -15,6 +15,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,6 +40,8 @@ fun PetCardSmall(
     item: PetModel,
     width: Dp,
     height: Dp,
+    isFavorite: Boolean = false,
+    onFavoriteToggled: (() -> Unit)? = null,
     onClick: () -> Unit,
 ) {
     val imageHeight = 70.dp
@@ -55,42 +58,61 @@ fun PetCardSmall(
         interactionSource = remember { MutableInteractionSource() },
     ) {
         Column {
-            KamelImage(
-                resource = asyncPainterResource(data = item.images[0]),
-                contentDescription = "image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(roundedCornerSize))
-                    .height(imageHeight),
-                onLoading = {
-                    Box(
-                        modifier = Modifier
-                            .clip(shape = RoundedCornerShape(roundedCornerSize))
-                            .background(color = MaterialTheme.colorScheme.primaryContainer)
-                            .height(imageHeight)
-                            .fillMaxWidth()
-                            .shimmerLoadingAnimation(isLoadingCompleted = false),
-                    )
-                },
-                onFailure = {
-                    Box(
-                        modifier = Modifier
-                            .clip(shape = RoundedCornerShape(roundedCornerSize))
-                            .background(color = MaterialTheme.colorScheme.primaryContainer)
-                            .height(imageHeight)
-                            .fillMaxWidth(),
-                        contentAlignment = Alignment.Center,
+            Box {
+                KamelImage(
+                    resource = { asyncPainterResource(data = item.images[0]) },
+                    contentDescription = "image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(roundedCornerSize))
+                        .height(imageHeight),
+                    onLoading = {
+                        Box(
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(roundedCornerSize))
+                                .background(color = MaterialTheme.colorScheme.primaryContainer)
+                                .height(imageHeight)
+                                .fillMaxWidth()
+                                .shimmerLoadingAnimation(isLoadingCompleted = false),
+                        )
+                    },
+                    onFailure = {
+                        Box(
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(roundedCornerSize))
+                                .background(color = MaterialTheme.colorScheme.primaryContainer)
+                                .height(imageHeight)
+                                .fillMaxWidth(),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(36.dp),
+                                imageVector = MultiplatformKickstarterIcons.BrokenImage,
+                                contentDescription = "image",
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            )
+                        }
+                    }
+                )
+                if (onFavoriteToggled != null) {
+                    IconButton(
+                        onClick = onFavoriteToggled,
+                        modifier = Modifier.align(Alignment.TopEnd).size(32.dp),
                     ) {
                         Icon(
-                            modifier = Modifier.size(36.dp),
-                            imageVector = MultiplatformKickstarterIcons.BrokenImage,
-                            contentDescription = "image",
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            imageVector = if (isFavorite) {
+                                MultiplatformKickstarterIcons.Favorite
+                            } else {
+                                MultiplatformKickstarterIcons.FavoriteOutlined
+                            },
+                            contentDescription = null,
+                            tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimary,
+                            modifier = Modifier.size(18.dp),
                         )
                     }
                 }
-            )
+            }
             Text(
                 modifier = Modifier.padding(top = 6.dp),
                 text = item.title,

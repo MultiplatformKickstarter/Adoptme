@@ -1,8 +1,8 @@
 package com.multiplatformkickstarter.repository.profile
 
 import com.multiplatformkickstarter.repository.user.Users
-import org.jetbrains.exposed.sql.Column
-import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.v1.core.Column
+import org.jetbrains.exposed.v1.core.Table
 
 @Suppress("MagicNumber")
 object Profiles : Table() {

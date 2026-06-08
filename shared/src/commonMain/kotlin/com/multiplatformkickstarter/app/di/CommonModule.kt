@@ -3,6 +3,7 @@ package com.multiplatformkickstarter.app.di
 import androidx.compose.material3.SnackbarHostState
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.multiplatformkickstarter.app.common.model.ChatConversation
 import com.multiplatformkickstarter.app.common.model.PetCategory
 import com.multiplatformkickstarter.app.data.repositories.LastSearchAdsMockRepository
 import com.multiplatformkickstarter.app.data.repositories.NearMeAdsMockRepository
@@ -13,6 +14,12 @@ import com.multiplatformkickstarter.app.data.usecases.GetNearMeAdsUseCase
 import com.multiplatformkickstarter.app.data.usecases.GetSearchUseCase
 import com.multiplatformkickstarter.app.feature.debugmenu.repositories.GlobalAppSettingsRepository
 import com.multiplatformkickstarter.app.feature.debugmenu.viewmodel.DebugMenuViewModel
+import com.multiplatformkickstarter.app.feature.favorites.repositories.FavoritesRepository
+import com.multiplatformkickstarter.app.feature.favorites.viewmodels.FavoritesViewModel
+import com.multiplatformkickstarter.app.feature.inbox.ChatViewModel
+import com.multiplatformkickstarter.app.feature.inbox.InboxViewModel
+import com.multiplatformkickstarter.app.feature.inbox.repositories.ChatRepository
+import com.multiplatformkickstarter.app.ui.screens.viewmodel.PetDetailViewModel
 import com.multiplatformkickstarter.app.feature.petupload.repositories.PetUploadPublishRepository
 import com.multiplatformkickstarter.app.feature.petupload.usecases.PetUploadUseCase
 import com.multiplatformkickstarter.app.feature.petupload.viewmodel.PetUploadViewModel
@@ -34,7 +41,7 @@ import org.koin.dsl.module
 
 val commonModule = module {
     factory { (navigator: Navigator) ->
-        HomeScreenViewModel(navigator, get(), get(), get(), get(), get(), get(), get(), get(), get())
+        HomeScreenViewModel(navigator, get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
     factory {
         PetUploadViewModel(get(), get(), get(), get())
@@ -48,7 +55,23 @@ val commonModule = module {
     }
 
     factory { (searchId: Int?, petCategory: PetCategory?, navigator: Navigator) ->
-        SearchListingViewModel(searchId, petCategory, get(), navigator)
+        SearchListingViewModel(searchId, petCategory, get(), navigator, get())
+    }
+
+    factory { (navigator: Navigator) ->
+        FavoritesViewModel(navigator, get())
+    }
+
+    factory { (petId: Int, navigator: Navigator) ->
+        PetDetailViewModel(petId, navigator, get(), get(), get())
+    }
+
+    factory {
+        InboxViewModel(get(), get())
+    }
+
+    factory { (conversation: ChatConversation, navigator: Navigator) ->
+        ChatViewModel(conversation, navigator, get(), get())
     }
 
     factory {
@@ -77,6 +100,8 @@ val commonModule = module {
     singleOf(::PetsFromSearchRepository)
     factoryOf(::GetLastSearchUseCase)
 
+    singleOf(::FavoritesRepository)
+    single { ChatRepository(get(), get(), get()) }
     singleOf(::SessionRepository)
     singleOf(::ProfileRepository)
     singleOf(::Settings)

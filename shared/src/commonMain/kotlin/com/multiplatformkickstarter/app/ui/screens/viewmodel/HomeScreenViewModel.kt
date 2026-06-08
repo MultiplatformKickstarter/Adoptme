@@ -12,6 +12,7 @@ import com.multiplatformkickstarter.app.data.repositories.ProfileRepository
 import com.multiplatformkickstarter.app.data.repositories.SessionRepository
 import com.multiplatformkickstarter.app.data.usecases.GetLastSearchUseCase
 import com.multiplatformkickstarter.app.data.usecases.GetNearMeAdsUseCase
+import com.multiplatformkickstarter.app.feature.favorites.repositories.FavoritesRepository
 import com.multiplatformkickstarter.app.feature.debugmenu.DebugMenuScreen
 import com.multiplatformkickstarter.app.feature.debugmenu.getDebug
 import com.multiplatformkickstarter.app.feature.debugmenu.repositories.GlobalAppSettingsRepository
@@ -30,6 +31,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.TimeZone
@@ -50,6 +53,7 @@ class HomeScreenViewModel(
     private val lastSearchesRepository: LastSearchesRepository,
     private val globalAppSettingsRepository: GlobalAppSettingsRepository,
     private val settings: Settings,
+    private val favoritesRepository: FavoritesRepository,
 ) : ScreenModel {
     private val _sideEffects = Channel<HomeScreenSideEffects>()
     val sideEffects: Flow<HomeScreenSideEffects> = _sideEffects.receiveAsFlow()
@@ -62,10 +66,17 @@ class HomeScreenViewModel(
                 nearMeAds = emptyList(),
                 lastSearchAds = emptyList(),
                 currentLanguage = AvailableLanguages.EN,
+                favoriteIds = emptySet(),
             )
         )
     val state: StateFlow<HomeScreenState> = _state.asStateFlow()
     private val debugComponent = getDebug()
+
+    init {
+        favoritesRepository.favoriteIds
+            .onEach { _state.value = _state.value.copy(favoriteIds = it) }
+            .launchIn(screenModelScope)
+    }
 
     init {
         if (!debugComponent.isDebug) {
@@ -151,6 +162,10 @@ class HomeScreenViewModel(
     fun onUploadPetClicked() {
         rootNavigatorRepository.navigator.push(PetUploadScreen())
     }
+
+    fun onFavoriteToggled(petId: Int) {
+        favoritesRepository.toggleFavorite(petId)
+    }
 }
 
 data class HomeScreenState(
@@ -160,6 +175,7 @@ data class HomeScreenState(
     val nearMeAds: List<PetModel>,
     val lastSearchAds: List<PetModel>,
     val currentLanguage: AvailableLanguages,
+    val favoriteIds: Set<Int>,
 )
 
 sealed class HomeScreenSideEffects

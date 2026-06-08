@@ -2,9 +2,11 @@ package com.multiplatformkickstarter.repository.user
 
 import com.multiplatformkickstarter.models.DatabaseUser
 import com.multiplatformkickstarter.repository.DatabaseFactory.dbQuery
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.statements.InsertStatement
+import org.jetbrains.exposed.v1.core.ResultRow
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.core.statements.InsertStatement
+import org.jetbrains.exposed.v1.jdbc.insert
+import org.jetbrains.exposed.v1.jdbc.select
 
 class UserRepositoryImp : UserRepository {
     override suspend fun addUser(

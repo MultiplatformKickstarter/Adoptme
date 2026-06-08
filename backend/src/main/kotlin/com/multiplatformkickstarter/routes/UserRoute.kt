@@ -8,9 +8,8 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.Parameters
 import io.ktor.server.application.call
 import io.ktor.server.application.log
-import io.ktor.server.locations.KtorExperimentalLocationsAPI
-import io.ktor.server.locations.Location
-import io.ktor.server.locations.post
+import io.ktor.resources.Resource
+import io.ktor.server.resources.post
 import io.ktor.server.request.receive
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
@@ -26,20 +25,16 @@ const val USER_LOGIN = "$USERS/login"
 const val USER_CREATE = "$USERS/create"
 const val USER_LOGOUT = "$USERS/logout"
 
-@KtorExperimentalLocationsAPI
-@Location(USER_LOGIN)
+@Resource(USER_LOGIN)
 class UserLoginRoute
 
-@KtorExperimentalLocationsAPI
-@Location(USER_CREATE)
+@Resource(USER_CREATE)
 class UserCreateRoute
 
-@KtorExperimentalLocationsAPI
-@Location(USER_LOGOUT)
+@Resource(USER_LOGOUT)
 class UserLogoutRoute
 
 @Suppress("TooGenericExceptionCaught")
-@KtorExperimentalLocationsAPI
 fun Route.users(
     userRepository: UserRepository,
     jwtService: JwtService,
@@ -53,13 +48,15 @@ fun Route.users(
         val hash = hashFunction(password)
         try {
             val newUser = userRepository.addUser(email, name, hash)
-            newUser?.userId?.let {
-                call.sessions.set(UserSession(it))
-                call.respondText(
-                    jwtService.generateToken(newUser),
-                    status = HttpStatusCode.Created,
-                )
+            if (newUser == null) {
+                call.respond(HttpStatusCode.BadRequest, "Email already in use")
+                return@post
             }
+            call.sessions.set(UserSession(newUser.userId))
+            call.respondText(
+                jwtService.generateToken(newUser),
+                status = HttpStatusCode.Created,
+            )
         } catch (e: Throwable) {
             this@users.application.log.error("Failed to register user", e)
             call.respond(HttpStatusCode.BadRequest, "Problems creating User")

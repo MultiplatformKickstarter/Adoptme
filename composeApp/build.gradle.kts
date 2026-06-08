@@ -15,6 +15,9 @@ val versionMajor = properties["multiplatformkickstarter.version.major"].toString
 val versionMinor = properties["multiplatformkickstarter.version.minor"].toString().toInt()
 val versionPatch = properties["multiplatformkickstarter.version.patch"].toString().toInt()
 
+val minSdkVersion = 26
+val sdkVersion = 37
+
 fun versionCode(): Int {
     versionNum?.let {
         return (versionMajor * 1000000) + (versionMinor * 1000) + it.toInt()
@@ -22,22 +25,6 @@ fun versionCode(): Int {
 }
 
 kotlin {
-    /*@OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "composeApp"
-        browser {
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }*/
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -46,7 +33,6 @@ kotlin {
     }
     jvm("desktop")
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64(),
     ).forEach { iosTarget ->
@@ -78,7 +64,6 @@ kotlin {
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-            implementation(libs.skiko)
             implementation(compose.ui)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -87,7 +72,6 @@ kotlin {
             implementation(compose.materialIconsExtended)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
-            implementation(libs.skiko.macos.arm64)
 
             implementation(libs.androidx.compose.ui.util)
 
@@ -102,6 +86,7 @@ kotlin {
 
             // Kamel for image loading
             implementation(libs.kamel)
+            implementation(libs.kamel.decoder.image.bitmap)
 
             // Voyager for Navigation
             implementation(libs.voyager.navigator)
@@ -127,7 +112,7 @@ kotlin {
 
 android {
     namespace = "com.multiplatformkickstarter.app.android"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = sdkVersion
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
@@ -135,8 +120,8 @@ android {
 
     defaultConfig {
         applicationId = "com.multiplatformkickstarter.app.android"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
+        minSdk = minSdkVersion
+        targetSdk = sdkVersion
         versionCode = versionCode()
         versionName = "$versionMajor.$versionMinor.$versionPatch"
     }
@@ -156,6 +141,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     dependencies {
         implementation(project(":shared"))
@@ -173,8 +159,6 @@ android {
         implementation(libs.androidx.ui.tooling.preview)
 
         implementation(libs.androidx.activity.compose)
-        implementation(libs.accompanist.systemuicontroller)
-
         implementation(libs.koin.core)
         implementation(libs.koin.android)
 
@@ -204,7 +188,6 @@ compose.desktop {
 
     dependencies {
         implementation(compose.desktop.currentOs)
-        implementation(libs.skiko)
         implementation(compose.ui)
         implementation(compose.foundation)
         implementation(compose.material)
@@ -213,7 +196,6 @@ compose.desktop {
         implementation(compose.materialIconsExtended)
         @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         implementation(compose.components.resources)
-        implementation(libs.skiko.macos.arm64)
         implementation(project(":shared"))
 
         implementation(libs.androidx.compose.ui.util)
@@ -229,6 +211,7 @@ compose.desktop {
 
         // Kamel for image loading
         implementation(libs.kamel)
+        implementation(libs.kamel.decoder.image.bitmap)
 
         // Voyager for Navigation
         implementation(libs.voyager.navigator)

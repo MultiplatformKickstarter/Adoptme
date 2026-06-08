@@ -55,8 +55,20 @@ internal object ItalianLocalization : Localization {
     override val start = "INIZIAMO!"
     override val insertAdBannerTrait = "Facciamo in modo di aiutarti a trovare una famiglia per il tuo animale domestico. Se il tuo gatto ha appena avuto cuccioli, puoi utilizzare la nostra piattaforma per trovare la persona giusta per adottarli. È davvero facile!"
 
-    override val proFeatureScreenTitle = "Schermo in costruzione"
-    override val proFeatureScreenDescription = "Questo schermo è ancora in costruzione. Questo modello ti aiuterà a creare app multi-piattaforma in poco tempo."
+    override val favoritesEmptyTitle = "Nessun preferito ancora"
+    override val favoritesEmptyDescription = "Gli animali che aggiungi ai preferiti appariranno qui. Tocca il cuore su qualsiasi animale per salvarlo."
+
+    override val inboxEmptyTitle = "Nessun messaggio ancora"
+    override val inboxEmptyDescription = "Quando contatti il proprietario di un animale, le conversazioni appariranno qui."
+
+    override val inboxConversationWith = "Chat su"
+    override val chatSendMessage = "Invia"
+    override val chatDeleteConversation = "Elimina conversazione"
+    override val chatMessageHint = "Scrivi un messaggio..."
+    override val chatStartedFor = "Conversazione avviata per"
+
+    override val detailFavorite = "Aggiungi ai preferiti"
+    override val detailUnfavorite = "Rimuovi dai preferiti"
     override val homeFeaturedViewAll = "Vedi tutto >"
     override val homePetsNearYou = "Animali domestici vicino a te"
     override val homeMyLastSearch = "La mia ultima ricerca"
@@ -145,11 +157,11 @@ internal object ItalianLocalization : Localization {
 
     override val debugMenuTitle = "Menu di debug"
 
-    override val onboardingPromoTitle1 = "Multiplatform Kickstarter"
-    override val onboardingPromoTitle2 = "Caratteristiche"
-    override val onboardingPromoTitle3 = "Pro Template"
+    override val onboardingPromoTitle1 = "Benvenuto su Adoptme"
+    override val onboardingPromoTitle2 = "Trova il tuo animale"
+    override val onboardingPromoTitle3 = "Dai una casa"
 
-    override val onboardingPromoLine1 = "Benvenuto a Multiplatform Kickstarter! Questo è il componente di onboarding che mostrerà tutte le funzionalità che troverai in questa applicazione."
-    override val onboardingPromoLine2 = "Questo modello ha tutto il necessario per avviare le tue applicazioni in pochissimo tempo. Dalla navigazione all'inserimento delle dipendenze all'API del server."
-    override val onboardingPromoLine3 = "Se hai bisogno di altro, come ricerche salvate, geolocalizzazione, follower, valutazione o un marketplace, devi solo scaricare il nostro modello Pro che troverai su multiplatformkickstarter.com"
+    override val onboardingPromoLine1 = "! L'app che ti aiuta a trovare l'animale domestico perfetto da adottare o a connettere il tuo animale con una famiglia amorevole."
+    override val onboardingPromoLine2 = "Sfoglia centinaia di animali vicino a te, filtra per categoria, età, taglia e altro ancora. Salva i tuoi preferiti e contatta direttamente rifugi e proprietari."
+    override val onboardingPromoLine3 = "Ogni animale merita una casa piena d'amore. Inizia il tuo percorso di adozione oggi e fai la differenza nella vita di un animale."
 }

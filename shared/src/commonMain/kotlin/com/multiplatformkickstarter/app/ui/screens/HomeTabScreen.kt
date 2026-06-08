@@ -14,9 +14,11 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
@@ -135,27 +137,29 @@ class HomeTabScreen : Screen {
                 )
             }
         ) { paddingValues ->
-            BoxWithConstraints(Modifier.fillMaxSize().padding(paddingValues), propagateMinConstraints = true) {
-                val maxWidth = this.maxWidth
+            Box(Modifier.fillMaxSize().padding(paddingValues), contentAlignment = Alignment.TopCenter) {
+                BoxWithConstraints(Modifier.widthIn(max = 600.dp).fillMaxHeight(), propagateMinConstraints = true) {
+                    val maxWidth = this.maxWidth
 
-                Column(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    PetsSearchBar(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp),
-                        localization = localization
-                    )
                     Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .verticalScroll(scrollState)
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        BannerHeader(viewModel, localization)
-                        CategoriesCarousel(viewModel, localization)
-                        LastSearchCarousel(viewModel, localization, state)
-                        NearMeListView(viewModel, state, localization, maxWidth)
+                        PetsSearchBar(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp),
+                            localization = localization
+                        )
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .verticalScroll(scrollState)
+                        ) {
+                            BannerHeader(viewModel, localization)
+                            CategoriesCarousel(viewModel, localization)
+                            LastSearchCarousel(viewModel, localization, state)
+                            NearMeListView(viewModel, state, localization, maxWidth)
+                        }
                     }
                 }
             }
@@ -274,8 +278,15 @@ class HomeTabScreen : Screen {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 items(state.lastSearchAds.size) { index ->
-                    PetCardSmall(state.lastSearchAds[index], 160.dp, 180.dp) {
-                        viewModel.onPetDetailClicked(state.lastSearchAds[index].id)
+                    val pet = state.lastSearchAds[index]
+                    PetCardSmall(
+                        item = pet,
+                        width = 160.dp,
+                        height = 180.dp,
+                        isFavorite = state.favoriteIds.contains(pet.id),
+                        onFavoriteToggled = { viewModel.onFavoriteToggled(pet.id) },
+                    ) {
+                        viewModel.onPetDetailClicked(pet.id)
                     }
                     if (index == state.lastSearchAds.size - 1) {
                         Spacer(modifier = Modifier.size(16.dp))
@@ -304,7 +315,13 @@ class HomeTabScreen : Screen {
                 maxItemsInEachRow = 2
             ) {
                 state.nearMeAds.map { item ->
-                    PetCardSmall(item = item, itemSize, itemSize) {
+                    PetCardSmall(
+                        item = item,
+                        width = itemSize,
+                        height = itemSize,
+                        isFavorite = state.favoriteIds.contains(item.id),
+                        onFavoriteToggled = { viewModel.onFavoriteToggled(item.id) },
+                    ) {
                         viewModel.onPetDetailClicked(item.id)
                     }
                 }

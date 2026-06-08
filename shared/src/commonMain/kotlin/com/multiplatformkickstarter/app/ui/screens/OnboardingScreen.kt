@@ -2,10 +2,11 @@ package com.multiplatformkickstarter.app.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -30,14 +31,7 @@ class OnboardingScreen : Screen {
                         append(localization.onboardingPromoTitle1)
                     }
                 }
-            val onboardingPromoLine1 =
-                buildAnnotatedString {
-                    append("Welcome to ")
-                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append("Multiplatform Kickstarter")
-                    }
-                    append(localization.onboardingPromoLine1)
-                }
+            val onboardingPromoLine1 = localization.onboardingPromoLine1.toAnnotatedString()
 
             val onboardingPromoTitle2 =
                 buildAnnotatedString {
@@ -53,13 +47,7 @@ class OnboardingScreen : Screen {
                     }
                 }
 
-            val onboardingPromoLine3 =
-                buildAnnotatedString {
-                    append(localization.onboardingPromoLine3)
-                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append("multiplatformkickstarter.com")
-                    }
-                }
+            val onboardingPromoLine3 = localization.onboardingPromoLine3.toAnnotatedString()
 
             val carouselItems: List<CarouselItem> =
                 listOf(

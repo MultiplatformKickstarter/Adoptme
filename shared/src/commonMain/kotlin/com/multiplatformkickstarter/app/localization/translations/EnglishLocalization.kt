@@ -55,8 +55,20 @@ internal object EnglishLocalization : Localization {
     override val start = "LET\'S START!"
     override val insertAdBannerTrait = "Let us help you find a family for your pet. If your cat have just got little puppies you can use our platform to find the right person to adopt them. It\'s really easy!"
 
-    override val proFeatureScreenTitle = "PRO Template Feature"
-    override val proFeatureScreenDescription = "This screen is available on the **Pro Template**. Find more information about the features at "
+    override val favoritesEmptyTitle = "No favorites yet"
+    override val favoritesEmptyDescription = "Pets you favorite will appear here. Tap the heart on any pet to save it."
+
+    override val inboxEmptyTitle = "No messages yet"
+    override val inboxEmptyDescription = "When you contact a pet owner, your conversations will appear here."
+
+    override val inboxConversationWith = "Chat about"
+    override val chatSendMessage = "Send"
+    override val chatDeleteConversation = "Delete conversation"
+    override val chatMessageHint = "Type a message..."
+    override val chatStartedFor = "Conversation started for"
+
+    override val detailFavorite = "Add to favorites"
+    override val detailUnfavorite = "Remove from favorites"
     override val homeFeaturedViewAll = "See all >"
     override val homePetsNearYou = "Pets near you"
     override val homeMyLastSearch = "My last search"
@@ -145,11 +157,11 @@ internal object EnglishLocalization : Localization {
 
     override val debugMenuTitle = "Debug Menu"
 
-    override val onboardingPromoTitle1 = "Multiplatform Kickstarter"
-    override val onboardingPromoTitle2 = "Features"
-    override val onboardingPromoTitle3 = "PRO Template"
+    override val onboardingPromoTitle1 = "Welcome to Adoptme"
+    override val onboardingPromoTitle2 = "Find your pet"
+    override val onboardingPromoTitle3 = "Give a home"
 
-    override val onboardingPromoLine1 = "! This is the onboarding component that showcases all the features you'll find in this application."
-    override val onboardingPromoLine2 = "This template has all the needed to kickstart your own applications for Android, iOS and Desktop in no time. From Navigation, Compose components to Dependency Injection and even a Server with Login/SignUp and CRUD API built in."
-    override val onboardingPromoLine3 = "If you need more features like Saved Searches, Geolocation, Followers, Rating or Marketplace functionality you only need to download our **Pro Template** you'll find at "
+    override val onboardingPromoLine1 = "! The app that helps you find the perfect pet to adopt or connect your pet with a loving family."
+    override val onboardingPromoLine2 = "Browse hundreds of pets near you, filter by category, age, size and more. Save your favorites and get in touch with shelters and owners directly."
+    override val onboardingPromoLine3 = "Every pet deserves a loving home. Start your adoption journey today and make a difference in a pet's life."
 }

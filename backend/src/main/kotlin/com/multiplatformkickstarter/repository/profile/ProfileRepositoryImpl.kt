@@ -3,11 +3,12 @@ package com.multiplatformkickstarter.repository.profile
 import com.multiplatformkickstarter.app.common.model.GeoLocation
 import com.multiplatformkickstarter.app.common.model.Profile
 import com.multiplatformkickstarter.repository.DatabaseFactory.dbQuery
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.statements.InsertStatement
-import org.jetbrains.exposed.sql.update
+import org.jetbrains.exposed.v1.core.ResultRow
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.core.statements.InsertStatement
+import org.jetbrains.exposed.v1.jdbc.insert
+import org.jetbrains.exposed.v1.jdbc.select
+import org.jetbrains.exposed.v1.jdbc.update
 
 class ProfileRepositoryImpl : ProfileRepository {
     override suspend fun addProfile(

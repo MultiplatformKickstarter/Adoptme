@@ -35,7 +35,6 @@ kotlin {
     jvm()
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64(),
     ).forEach {
@@ -54,7 +53,6 @@ kotlin {
             }
         }
         commonMain.dependencies {
-            implementation(libs.skiko)
             implementation(compose.ui)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -72,6 +70,7 @@ kotlin {
 
             // Kamel for image loading
             implementation(libs.kamel)
+            implementation(libs.kamel.decoder.image.bitmap)
 
             // Voyager for Navigation
             implementation(libs.voyager.navigator)
@@ -108,6 +107,7 @@ kotlin {
         }
 
         commonTest.dependencies {
+            implementation(kotlin("test"))
             implementation(libs.koin.test)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.coroutines.test)
@@ -118,9 +118,9 @@ kotlin {
 
 android {
     namespace = "com.multiplatformkickstarter.app"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = 36
     defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
+        minSdk = 26
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21

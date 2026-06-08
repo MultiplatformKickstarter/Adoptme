@@ -60,8 +60,20 @@ interface Localization {
     val start: String
     val insertAdBannerTrait: String
 
-    val proFeatureScreenTitle: String
-    val proFeatureScreenDescription: String
+    val favoritesEmptyTitle: String
+    val favoritesEmptyDescription: String
+
+    val inboxEmptyTitle: String
+    val inboxEmptyDescription: String
+
+    val inboxConversationWith: String
+    val chatSendMessage: String
+    val chatDeleteConversation: String
+    val chatMessageHint: String
+    val chatStartedFor: String
+
+    val detailFavorite: String
+    val detailUnfavorite: String
     val homeFeaturedViewAll: String
     val homePetsNearYou: String
     val homeMyLastSearch: String
