@@ -52,3 +52,7 @@ dependencies {
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 }
+
+tasks.withType<Test> {
+    environment("JWT_SECRET", System.getenv("JWT_SECRET") ?: "test-secret-for-local-dev")
+}

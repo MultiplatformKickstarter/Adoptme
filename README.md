@@ -49,8 +49,9 @@ Use it as a launchpad for your own KMP application.
 - ✅ **Home** — pet listings with "Near Me" grid and "Last Search" carousel
 - ✅ **Search Listing** — filterable pet list by category
 - ✅ **Pet Detail** — full pet profile with favorite toggle
-- ✅ **Favorites** — lists all favorited pets with unfavorite action
-- ✅ **Inbox** — empty-state messages screen ready to extend
+- ✅ **Favorites** — lists all favorited pets with unfavorite action, backed by a real API
+- ✅ **Inbox** — conversation list with per-conversation chat screen, message bubbles, and send input
+- ✅ **Chat** — real-time-style messaging per conversation with auto-reply in debug/mock mode
 - ✅ **Pet Upload** — form to submit a new pet listing
 - ✅ **Profile** — logged-in user profile with ratings and options
 - ✅ **Profile Detail** — public user profile with their listings
@@ -82,6 +83,7 @@ Use it as a launchpad for your own KMP application.
 - ✅ **Kermit** — multiplatform logging
 - ✅ **Detekt** — static code analysis
 - ✅ **Ktlint** — code style linter
+- ✅ **Automated tests** — backend route tests (Ktor `testApplication`) + shared KMP unit tests
 - ✅ **Version Catalogs** (`libs.versions.toml`)
 - ✅ **Firebase Analytics** (Android)
 - ✅ **Ktor Backend** — PostgreSQL + Tomcat + OpenAPI / Swagger
@@ -93,7 +95,7 @@ Use it as a launchpad for your own KMP application.
 - ✅ Accessibility + color-accessible themes
 - ✅ Edge-to-edge display with `enableEdgeToEdge()`
 - ✅ Favorites powered by `StateFlow<Set<Int>>` — reactive across the whole app
-- ✅ Basic CI (GitHub Actions)
+- ✅ CI (GitHub Actions) — build, lint, detekt, backend tests, shared KMP tests, test report upload
 
 ---
 
@@ -153,10 +155,21 @@ Open `iosApp/iosApp.xcodeproj` in Xcode and run on a simulator or device.
 ### 5. Run the Backend
 
 ```bash
-./gradlew :backend:run
+JWT_SECRET=your-secret ./gradlew :backend:run
 ```
 
 > Requires a running PostgreSQL instance. Configure the connection in `backend/src/main/resources/application.conf`.
+> `JWT_SECRET` must be set as an environment variable. For local tests it defaults to a safe fallback automatically.
+
+### 6. Run Tests
+
+```bash
+# Backend route tests
+./gradlew :backend:test
+
+# Shared KMP unit tests (JVM)
+./gradlew :shared:jvmTest
+```
 
 ---
 
@@ -177,6 +190,14 @@ The Ktor backend exposes a REST API secured with **JWT authentication**:
 | `GET` | `/v1/profile` | Get current user profile |
 | `POST` | `/v1/profile/create` | Create user profile |
 | `PATCH` | `/v1/profile/update` | Update user profile |
+| `GET` | `/v1/favorites` | List favorited pet IDs |
+| `POST` | `/v1/favorites/add` | Add a pet to favorites |
+| `DELETE` | `/v1/favorites/remove` | Remove a pet from favorites |
+| `GET` | `/v1/chat/conversations` | List conversations for current user |
+| `POST` | `/v1/chat/conversations/create` | Create a new conversation |
+| `DELETE` | `/v1/chat/conversations/delete` | Delete a conversation |
+| `GET` | `/v1/chat/messages` | Get messages for a conversation |
+| `POST` | `/v1/chat/messages/send` | Send a message |
 
 OpenAPI docs available at `/openapi` when the server is running.
 
