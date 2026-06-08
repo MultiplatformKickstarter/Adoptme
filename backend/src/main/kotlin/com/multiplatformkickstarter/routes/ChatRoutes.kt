@@ -48,89 +48,76 @@ fun Route.chat(
     userRepository: UserRepository,
 ) {
     authenticate(JWT_CONFIGURATION) {
-        get<ChatConversationsRoute> {
-            val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
-            if (user == null) {
-                call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
-                return@get
-            }
-            val conversations = conversationsRepository.getConversationsForUser(user.userId)
-            call.respond(HttpStatusCode.OK, conversations)
+        chatConversationRoutes(conversationsRepository, userRepository)
+        chatMessageRoutes(messagesRepository, userRepository)
+    }
+}
+
+private fun Route.chatConversationRoutes(
+    conversationsRepository: ConversationsRepository,
+    userRepository: UserRepository,
+) {
+    get<ChatConversationsRoute> {
+        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+            ?: return@get call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
+        call.respond(HttpStatusCode.OK, conversationsRepository.getConversationsForUser(user.userId))
+    }
+
+    post<ChatConversationCreateRoute> {
+        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+            ?: return@post call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
+        val params = call.receive<Parameters>()
+        val petId = params["petId"]?.toIntOrNull()
+            ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing petId")
+        val petName = params["petName"]
+            ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing petName")
+        val sellerUserId = params["sellerUserId"]?.toIntOrNull()
+            ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing sellerUserId")
+        val conversation = conversationsRepository.createConversation(petId, petName, user.userId, sellerUserId)
+        if (conversation != null) {
+            call.respond(HttpStatusCode.Created, conversation)
+        } else {
+            call.respond(HttpStatusCode.InternalServerError, "Failed to create conversation")
         }
+    }
 
-        post<ChatConversationCreateRoute> {
-            val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
-            if (user == null) {
-                call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
-                return@post
-            }
-            val params = call.receive<Parameters>()
-            val petId = params["petId"]?.toIntOrNull()
-                ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing petId")
-            val petName = params["petName"]
-                ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing petName")
-            val sellerUserId = params["sellerUserId"]?.toIntOrNull()
-                ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing sellerUserId")
+    delete<ChatConversationDeleteRoute> {
+        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+            ?: return@delete call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
+        val params = call.receive<Parameters>()
+        val conversationId = params["conversationId"]?.toIntOrNull()
+            ?: return@delete call.respond(HttpStatusCode.BadRequest, "Missing conversationId")
+        val deleted = conversationsRepository.deleteConversation(conversationId, user.userId)
+        call.respond(if (deleted) HttpStatusCode.OK else HttpStatusCode.NotFound)
+    }
+}
 
-            val conversation = conversationsRepository.createConversation(
-                petId = petId,
-                petName = petName,
-                buyerUserId = user.userId,
-                sellerUserId = sellerUserId,
-            )
-            if (conversation != null) {
-                call.respond(HttpStatusCode.Created, conversation)
-            } else {
-                call.respond(HttpStatusCode.InternalServerError, "Failed to create conversation")
-            }
-        }
+private fun Route.chatMessageRoutes(
+    messagesRepository: MessagesRepository,
+    userRepository: UserRepository,
+) {
+    get<ChatMessagesRoute> {
+        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+            ?: return@get call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
+        val params = call.receive<Parameters>()
+        val conversationId = params["conversationId"]?.toIntOrNull()
+            ?: return@get call.respond(HttpStatusCode.BadRequest, "Missing conversationId")
+        call.respond(HttpStatusCode.OK, messagesRepository.getMessages(conversationId))
+    }
 
-        delete<ChatConversationDeleteRoute> {
-            val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
-            if (user == null) {
-                call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
-                return@delete
-            }
-            val params = call.receive<Parameters>()
-            val conversationId = params["conversationId"]?.toIntOrNull()
-                ?: return@delete call.respond(HttpStatusCode.BadRequest, "Missing conversationId")
-
-            val deleted = conversationsRepository.deleteConversation(conversationId, user.userId)
-            call.respond(if (deleted) HttpStatusCode.OK else HttpStatusCode.NotFound)
-        }
-
-        get<ChatMessagesRoute> {
-            val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
-            if (user == null) {
-                call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
-                return@get
-            }
-            val params = call.receive<Parameters>()
-            val conversationId = params["conversationId"]?.toIntOrNull()
-                ?: return@get call.respond(HttpStatusCode.BadRequest, "Missing conversationId")
-
-            val messages = messagesRepository.getMessages(conversationId)
-            call.respond(HttpStatusCode.OK, messages)
-        }
-
-        post<ChatMessagesSendRoute> {
-            val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
-            if (user == null) {
-                call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
-                return@post
-            }
-            val params = call.receive<Parameters>()
-            val conversationId = params["conversationId"]?.toIntOrNull()
-                ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing conversationId")
-            val content = params["content"]
-                ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing content")
-
-            val message = messagesRepository.sendMessage(conversationId, user.userId, content)
-            if (message != null) {
-                call.respond(HttpStatusCode.Created, message)
-            } else {
-                call.respond(HttpStatusCode.InternalServerError, "Failed to send message")
-            }
+    post<ChatMessagesSendRoute> {
+        val user = call.sessions.get<UserSession>()?.let { userRepository.findUser(it.userId) }
+            ?: return@post call.respond(HttpStatusCode.Unauthorized, "Problems retrieving User")
+        val params = call.receive<Parameters>()
+        val conversationId = params["conversationId"]?.toIntOrNull()
+            ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing conversationId")
+        val content = params["content"]
+            ?: return@post call.respond(HttpStatusCode.BadRequest, "Missing content")
+        val message = messagesRepository.sendMessage(conversationId, user.userId, content)
+        if (message != null) {
+            call.respond(HttpStatusCode.Created, message)
+        } else {
+            call.respond(HttpStatusCode.InternalServerError, "Failed to send message")
         }
     }
 }
