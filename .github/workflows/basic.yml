@@ -43,11 +43,3 @@ jobs:
             backend/build/reports/tests/
             shared/build/reports/tests/
           retention-days: 7
-
-      - name: Publish test results
-        if: always()
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        with:
-          files: |
-            backend/build/test-results/**/*.xml
-            shared/build/test-results/**/*.xml
